@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--version="1.1"-->
+<xs:schema elementFormDefault="qualified" targetNamespace="urn:bvmf.237.01.xsd" xmlns="urn:bvmf.237.01.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Document" type="Document" />
+  <xs:complexType name="Document">
+    <xs:sequence>
+      <xs:element name="OTCFxdIncmBrkrDealrStsAdvc" type="OTCFixedIncomeBrokerDealerStatusAdvice" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OTCFixedIncomeBrokerDealerStatusAdvice">
+    <xs:sequence>
+      <xs:element name="Id" minOccurs="1" maxOccurs="1" type="TransactiontIdentification4" />
+      <xs:element name="PtyId" minOccurs="1" maxOccurs="1" type="PartyIdentification2Choice" />
+      <xs:element name="BrkrDealrInf" minOccurs="1" maxOccurs="1" type="EarlySettlementDetailsBVMF20" />
+      <xs:element name="TradLegDtls" minOccurs="1" maxOccurs="2" type="OrderBVMF47" />
+      <xs:element name="BrkrDealrSts" minOccurs="1" maxOccurs="1" type="StatusAndReason10" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransactiontIdentification4">
+    <xs:sequence>
+      <xs:element name="TxId" minOccurs="1" maxOccurs="1" type="Max35Text" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PartyIdentification2Choice">
+    <xs:sequence>
+      <xs:element name="PrtryId" minOccurs="1" maxOccurs="1" type="GenericIdentification1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GenericIdentification1">
+    <xs:sequence>
+      <xs:element name="Id" minOccurs="1" maxOccurs="1" type="Max35Text" />
+      <xs:element name="Issr" minOccurs="1" maxOccurs="1" type="Max35Text" />
+      <xs:element name="SchmeNm" minOccurs="1" maxOccurs="1" type="Max35Text" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EarlySettlementDetailsBVMF20">
+    <xs:sequence>
+      <xs:element name="AcctId" minOccurs="1" maxOccurs="1" type="AccountIdentification1" />
+      <xs:element name="BrkrDealrOTCReqTp" minOccurs="1" maxOccurs="1" type="ExternalAllocationRequestTypeCode" />
+      <xs:element name="ConfReqTp" minOccurs="1" maxOccurs="1" type="ExternalFinalAllocationStatusCode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AccountIdentification1">
+    <xs:sequence>
+      <xs:element name="Prtry" minOccurs="1" maxOccurs="1" type="SimpleIdentificationInformation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SimpleIdentificationInformation">
+    <xs:sequence>
+      <xs:element name="Id" minOccurs="1" maxOccurs="1" type="Max35Text" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OrderBVMF47">
+    <xs:sequence>
+      <xs:element name="TradId" minOccurs="1" maxOccurs="1" type="Max35Text" />
+      <xs:element name="Sd" minOccurs="1" maxOccurs="1" type="Side3Code" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StatusAndReason10">
+    <xs:sequence>
+      <xs:element name="AffirmSts" minOccurs="1" maxOccurs="1" type="AffirmationStatus7Choice" />
+      <xs:element name="AddtlRsnInf" minOccurs="0" maxOccurs="1" type="Max210Text" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AffirmationStatus7Choice">
+    <xs:sequence>
+      <xs:element name="Cd" minOccurs="1" maxOccurs="1" type="AffirmationStatus1Code" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AffirmationStatus1Code">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AFFI" />
+      <xs:enumeration value="NAFI" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ExternalAllocationRequestTypeCode">
+    <xs:restriction base="xs:int"></xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ExternalFinalAllocationStatusCode">
+    <xs:restriction base="xs:int"></xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Max210Text">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="210" />
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Max35Text">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="35" />
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Side3Code">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BUYI" />
+      <xs:enumeration value="SELL" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

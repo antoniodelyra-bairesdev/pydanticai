@@ -1,0 +1,8 @@
+__pycache__
+.ash_history
+application/site-packages
+application/storage
+application/files/**
+!application/files/**/
+!application/files/**/.gitkeep
+!application/files/models/**

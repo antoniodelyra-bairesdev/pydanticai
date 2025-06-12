@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boleto</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        b {
+            font-weight: 900;
+        }
+
+        html {
+            width: 1077px;
+            height: 762px;
+        }
+
+        body {
+            font-family: sans-serif;
+            width: 1077px;
+            height: 762px;
+        }
+
+        header {
+            padding: 8px 12px 0 8px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border-bottom: 1px solid lightgray;
+            align-items: center;
+        }
+
+        main {
+            flex: 1
+        }
+
+        footer {
+            min-height: 72px;
+            padding: 8px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        .codigo-daycoval {
+            margin-left: 60px;
+            padding: 4px;
+            border-left: 4px solid black;
+            border-right: 4px solid black;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .linha-digitavel {
+            font-weight: 700;
+            font-size: 16px;
+            /* font-family: monospace; */
+            text-align: right;
+        }
+
+        .parcial {
+            border-radius: 4px;
+            background-color: #ededed;
+            color: #a0a0a0
+        }
+
+        .conteudo {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 1077px;
+            height: 762px;
+            overflow: hidden;
+            background-color: #FFFFFF;
+            border: 1px solid #DFDFDF;
+        }
+
+        .gestoras {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .daycoval {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+        }
+
+        table {
+            width: 100%;
+            height: calc(100% - 66px);
+        }
+
+        td {
+            padding: 4px;
+            border: 1px solid lightgray;
+            font-size: 12px;
+        }
+
+        td>div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .space {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+            border-bottom: 1px solid lightgray;
+            margin-bottom: 1px;
+            padding: 0 8px 0 0;
+            font-size: 24px;
+            font-weight: 700;
+            font-family: monospace;
+            color: white;
+        }
+
+        .grul11 {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background-color: #1b3157;
+            padding-left: 16px;
+        }
+
+        .codigo-barras-conteiner {
+            height: 72px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0;
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        .codigo-barras {
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            gap: 0;
+        }
+
+        .barra {
+            height: 100%;
+        }
+
+        .fina {
+            width: 2px;
+        }
+
+        .larga {
+            width: 6px;
+        }
+
+        .branca {
+            background-color: transparent;
+        }
+
+        .preta {
+            background-color: black;
+        }
+
+        .caixa {
+            width: 64px;
+            height: 100%;
+        }
+
+        .azul_2 {
+            background-color: #0d6696;
+        }
+
+        .azul_3 {
+            background-color: #2e96bf;
+        }
+
+        .azul_4 {
+            background-color: #00badb;
+        }
+
+        .cinza {
+            background-color: lightgray;
+        }
+
+        .verde {
+            color: #5eba47
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        const fmtCNPJ = cnpj => {
+            const stripped = cnpj.match(/[0-9]/g) ?? [];
+            return (
+                stripped.splice(0, 2).join("") +
+                "." +
+                stripped.splice(0, 3).join("") +
+                "." +
+                stripped.splice(0, 3).join("") +
+                "/" +
+                stripped.splice(0, 4).join("") +
+                "-" +
+                stripped.splice(0, 2).join("")
+            );
+        }
+
+        const params = new URLSearchParams(window.location.search)
+        const agencia = '0001'
+        const carteira = '112'
+        const conta_corrente = '001511134-4'
+
+        const vencimento = params.get('vencimento')?.trim() ?? ''
+        const data_documento = params.get('data_documento')?.trim() ?? ''
+        const numero_documento = params.get('numero_documento')?.trim() ?? ''
+        const data_processamento = params.get('data_processamento')?.trim() ?? ''
+        const nosso_numero = params.get('nosso_numero')?.trim() ?? ''
+        const uso_banco = params.get('uso_banco')?.trim() ?? ''
+        const valor_documento = params.get('valor_documento')?.trim() ?? ''
+        const instrucoes = params.get('instrucoes')?.trim() ?? ''
+        const pagador = params.get('pagador')?.trim() ?? ''
+        const cnpj_pagador = params.get('cnpj_pagador')?.trim() ?? ''
+        const fator_vencimento = params.get('fator_vencimento')?.trim() ?? ''
+        const valor_x_100 = Math.round(Number(valor_documento) * 100).toString().split('.')[0].padStart(10, '0')
+    </script>
+    <script>
+        const codigo = `7079${fator_vencimento}${valor_x_100}0001112${uso_banco}${nosso_numero}`
+        let mult = 0
+        let peso = 4
+        for (let i = 0; i < codigo.length; i++) {
+            const d = Number(codigo[i])
+            mult += d * peso
+            if (--peso < 2) {
+                peso = 9
+            }
+        }
+        const dv = 11 - mult % 11
+        const codigo_com_dv = codigo.slice(0, 4) + dv + codigo.slice(4)
+    </script>
+    <script>
+        const dv_campos = campo => {
+            let variacao_peso = 1
+            let soma = 0
+            for (let i = campo.length - 1; i >= 0; i--) {
+                const d = Number(campo[i])
+                const peso = 1 + i % 2
+                let soma_parcial = d * peso
+                if (soma_parcial > 9) {
+                    soma_parcial = 1 + soma_parcial % 10
+                }
+                soma += soma_parcial
+            }
+            return (soma * 9) % 10
+        }
+
+        const campo_livre = codigo.slice(18)
+
+        const dv_campo1 = dv_campos('0' + codigo.slice(0, 4) + campo_livre.slice(0, 5))
+        const dv_campo2 = dv_campos(campo_livre.slice(5, 15))
+        const dv_campo3 = dv_campos(campo_livre.slice(15, 25))
+
+        const codigo_formatado = `${codigo.slice(0, 4)}${codigo.slice(18, 19)}.${codigo.slice(19, 23)}${dv_campo1} ${codigo.slice(23, 28)}.${codigo.slice(28, 33)}${dv_campo2} ${codigo.slice(33, 38)}.${codigo.slice(38, 43)}${dv_campo3} ${dv} ${codigo.slice(4, 18)}`
+    </script>
+    <div class="conteudo">
+        <header>
+            <div class="daycoval">
+                <img src="./daycoval.jpg" width="310" height="66">
+                <p class="codigo-daycoval">707-2</p>
+            </div>
+            <script>
+                if (nosso_numero && uso_banco) {
+                    document.write(`<div class="linha-digitavel"><p>${codigo_formatado}</p></div>`)
+                } else {
+                    document.write(`<div class="linha-digitavel parcial">
+                        <p style="margin: 12px 24px; font-weight: 900">
+                            Aguardando dados de retorno
+                        </p>
+                    </div>`)
+                }
+            </script>
+        </header>
+        <main>
+            <div class="space">
+                <div class="grul11">
+                    <p style="flex: 1">GRU Logístico - GRUL11</p>
+                    <div class="caixa azul_2"></div>
+                    <div class="caixa azul_3"></div>
+                    <div class="caixa azul_4"></div>
+                    <div class="caixa cinza"></div>
+                </div>
+                <div class="gestoras">
+                    <img src="./vanguarda.png" width="314" height="66">
+                    <img src="./dojo.png" width="140" height="50">
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <td colspan="5">
+                        <div>
+                            <p>Beneficiário</p>
+                            <b>ICATU VAN GRU LOG FII RL</b>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>Vencimento</p>
+                            <script>document.write(`<b>${vencimento}</b>`)</script>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <div>
+                            <p>Endereço do Beneficiário</p>
+                            <b>AVENIDA PAULISTA 1793 BELA VISTA - SAO PAULO/SP 01311-200</b>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>Agência/Código Beneficiário</p>
+                            <script>
+                                document.write(`
+                                    <b>0001/${conta_corrente}</b>
+                                `)
+                            </script>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <p>Data Documento</p>
+                            <script>document.write(`<b>${data_documento}</b>`)</script>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>Nº Documento</p>
+                            <script>document.write(`<b>${numero_documento}</b>`)</script>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>Espécie Documento</p>
+                            <b>OU</b>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>Aceite</p>
+                            <b>N</b>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>Data Processamento</p>
+                            <script>document.write(`<b>${data_processamento}</b>`)</script>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>Nosso número</p>
+                            <script>
+                                if (nosso_numero) {
+                                    document.write(`<b>${agencia}/${carteira}/${nosso_numero.slice(0, nosso_numero.length - 1)}-${nosso_numero[nosso_numero.length - 1]}</b>`)
+                                } else {
+                                    document.write(`<b class='parcial' style="padding: 2px">Aguardando dados de retorno</b>`)
+                                }
+                            </script>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <p>Uso do Banco</p>
+                            <script>
+                                if (nosso_numero) {
+                                    document.write(`<b>${uso_banco}</b>`)
+                                } else {
+                                    document.write(`<b class='parcial' style="padding: 2px">Aguardando dados de retorno</b>`)
+                                }
+                            </script>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>Carteira</p>
+                            <b>112</b>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>Espécie</p>
+                            <b>REAIS</b>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>Quantidade</p>
+                            <b></b>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>Valor</p>
+                            <b></b>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>(=) Valor do Documento</p>
+                            <script>document.write(`<b class="verde">R$ ${Number(valor_documento).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</b>`)</script>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="5" colspan="5">
+                        <div>
+                            <p>Informações de responsabilidade do beneficiário</p>
+                            <script>document.write(`${instrucoes}`)</script>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p>(-) Desconto/Abatimento</p>
+                            <b></b>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <p>(-) Outras Deduções</p>
+                            <b></b>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <p>(+) Mora/Multa</p>
+                            <b></b>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <p>(+) Outros acréscimos</p>
+                            <b></b>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <p>(=) Valor Cobrado</p>
+                            <b></b>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div>
+                            <p>Pagador</p>
+                            <script>document.write(`<b>${pagador}</b>`)</script>
+                        </div>
+                    </td>
+                    <td colspan="2">
+                        <div>
+                            <p>CNPJ/CPF</p>
+                            <script>document.write(`<b>${fmtCNPJ(cnpj_pagador)}</b>`)</script>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div>
+                            <p>Sacador/Avalista</p>
+                            <b></b>
+                        </div>
+                    </td>
+                    <td colspan="2">
+                        <div>
+                            <p>CNPJ/CPF</p>
+                            <b></b>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </main>
+        <footer>
+            <div class="codigo-barras-conteiner">
+                <div class="codigo-barras">
+                    <script>
+                        if (nosso_numero && uso_banco) {
+                            // https://en.wikipedia.org/wiki/Interleaved_2_of_5#Encoding_scheme
+                            const padroes = {
+                                '0': 'nnWWn',
+                                '1': 'WnnnW',
+                                '2': 'nWnnW',
+                                '3': 'WWnnn',
+                                '4': 'nnWnW',
+                                '5': 'WnWnn',
+                                '6': 'nWWnn',
+                                '7': 'nnnWW',
+                                '8': 'WnnWn',
+                                '9': 'nWnWn',
+                            }
+
+                            // Garantindo pares de caracteres: caso quantidade de algarismos seja ímpar, incluir zero à esquerda
+                            const inputPares = codigo_com_dv.length % 2 ? '0' + codigo_com_dv : codigo_com_dv
+
+                            // Início
+                            document.write(`<div class="barra preta fina"></div>`)
+                            document.write(`<div class="barra branca fina"></div>`)
+                            document.write(`<div class="barra preta fina"></div>`)
+                            document.write(`<div class="barra branca fina"></div>`)
+                            for (let i = 0; i < inputPares.length; i += 2) {
+                                const alg1 = inputPares[i]
+                                const alg2 = inputPares[i + 1]
+                                const pad1 = padroes[alg1]
+                                const pad2 = padroes[alg2]
+
+                                for (let p = 0; p < 5; p++) {
+                                    const bar1 = pad1[p]
+                                    const bar2 = pad2[p]
+
+                                    document.write(`<div class="barra preta ${bar1 === 'W' ? 'larga' : 'fina'}"></div>`)
+                                    document.write(`<div class="barra branca ${bar2 === 'W' ? 'larga' : 'fina'}"></div>`)
+                                }
+                            }
+                            // Fim
+                            document.write(`<div class="barra preta larga"></div>`)
+                            document.write(`<div class="barra branca fina"></div>`)
+                            document.write(`<div class="barra preta fina"></div>`)
+                        } else {
+                            document.write(`<div class="linha-digitavel parcial" style="display: flex; flex-direction: row; align-items: center">
+                                <p style="margin: 12px 24px; font-weight: 900">
+                                    Aguardando dados de retorno
+                                </p>
+                            </div>`)
+                        }
+                    </script>
+                </div>
+                <p style="align-self: flex-start; margin-left: 8px;">Autenticação Mecânica / Ficha de compensação</p>
+            </div>
+        </footer>
+        <script>
+            if (!nosso_numero || !uso_banco) {
+                document.write(`
+                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <p style="font-size: 60px; font-weight: bold; transform: rotate(-30deg); border: 8px solid #f04f6f; color: #f04f6f; padding: 8px; border-radius: 32px; opacity: 0.25;">
+                            INFORMAÇÕES INCOMPLETAS
+                        </p>
+                    </div>
+                `)
+            }
+        </script>
+    </div>
+</body>
+
+</html>

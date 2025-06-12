@@ -1,0 +1,28 @@
+FROM python:3.11.12-bullseye
+
+WORKDIR /tmp/python
+
+USER root
+
+RUN apt update
+RUN apt -y install netcat net-tools
+
+RUN addgroup --gid 1000 host_group; \
+    adduser --disabled-password --gecos 'Host User' --uid 1000 --ingroup host_group host_user;
+RUN chown -R host_user /tmp/python
+
+USER host_user
+
+RUN mkdir /home/host_user/.cache
+COPY requirements.txt .
+COPY lib/quickfix-1.15.1.20240724.tar.gz .
+RUN pip install --target=./site-packages -r requirements.txt
+RUN pip install --target=./site-packages quickfix-1.15.1.20240724.tar.gz
+
+USER root
+
+RUN PYTHONPATH="/tmp/python/site-packages" python -m playwright install chromium --with-deps
+RUN mv /root/.cache/ms-playwright /home/host_user/.cache/ms-playwright
+RUN chown -R host_user /home/host_user/.cache/ms-playwright
+
+USER host_user

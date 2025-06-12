@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--version="2.0"-->
+<xs:schema elementFormDefault="qualified" targetNamespace="urn:bvmf.235.02.xsd" xmlns="urn:bvmf.235.02.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="Document" type="Document"/>
+<xs:complexType name="Document">
+<xs:sequence>
+<xs:element name="OTCFxdIncmRcncltnAllcnReq" type="OTCFixedIncomeReconciliationAllocationRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="OTCFixedIncomeReconciliationAllocationRequest">
+<xs:sequence>
+<xs:element  name="Id"  minOccurs="1"  maxOccurs="1"  type="TransactiontIdentification4"  />
+<xs:choice> 
+<xs:element  name="PtyId"  minOccurs="1"  maxOccurs="1"  type="PartyIdentification2Choice"  />
+<xs:element  name="CtdnId"  minOccurs="1"  maxOccurs="1"  type="PartyIdentification2Choice"  />
+</xs:choice>
+<xs:element  name="FinInstrmAttrbts"  minOccurs="1"  maxOccurs="1"  type="FinancialInstrumentAttributesBVMF32"  />
+<xs:element  name="TradDt"  minOccurs="1"  maxOccurs="1"  type="DateAndDateTimeChoice"  />
+<xs:element  name="TradLegDtls"  minOccurs="0"  maxOccurs="1"  type="OrderBVMF46"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="TransactiontIdentification4">
+<xs:sequence>
+<xs:element  name="TxId"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="PartyIdentification2Choice">
+<xs:sequence>
+<xs:element  name="PrtryId"  minOccurs="1"  maxOccurs="1"  type="GenericIdentification1"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="GenericIdentification1">
+<xs:sequence>
+<xs:element  name="Id"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+<xs:element  name="Issr"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+<xs:element  name="SchmeNm"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="FinancialInstrumentAttributesBVMF32">
+<xs:sequence>
+<xs:element  name="Sgmt"  minOccurs="1"  maxOccurs="1"  type="ExternalSegmentCode"  />
+<xs:element  name="Mkt"  minOccurs="1"  maxOccurs="1"  type="ExternalMarketCode"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DateAndDateTimeChoice">
+<xs:sequence>
+<xs:element  name="Dt"  minOccurs="1"  maxOccurs="1"  type="ISODate"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="OrderBVMF46">
+<xs:sequence>
+<xs:element  name="TradId"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="ExternalMarketCode">
+<xs:restriction base="xs:int">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ExternalSegmentCode">
+<xs:restriction base="xs:int">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ISODate">
+<xs:restriction base="xs:date">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="Max35Text">
+<xs:restriction base="xs:string">
+<xs:maxLength value="35"/>
+<xs:minLength value="1"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>

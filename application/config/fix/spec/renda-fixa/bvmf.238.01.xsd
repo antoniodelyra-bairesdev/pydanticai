@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--version="1.5"-->
+<xs:schema elementFormDefault="qualified" targetNamespace="urn:bvmf.238.01.xsd" xmlns="urn:bvmf.238.01.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="Document" type="Document"/>
+<xs:complexType name="Document">
+<xs:sequence>
+<xs:element name="OTCFxdIncmAllcnDtlsRpt" type="OTCFixedIncomeAllocationDetailsReport"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="OTCFixedIncomeAllocationDetailsReport">
+<xs:sequence>
+<xs:element  name="RptParams"  minOccurs="0"  maxOccurs="1"  type="ReportParameters1"  />
+<xs:element  name="Id"  minOccurs="0"  maxOccurs="1"  type="TransactiontIdentification4"  />
+<xs:choice> 
+<xs:element  name="PtyId"  minOccurs="1"  maxOccurs="1"  type="PartyIdentification1Choice"  />
+<xs:element  name="CtdnId"  minOccurs="1"  maxOccurs="1"  type="PartyIdentification1Choice"  />
+</xs:choice>
+<xs:element  name="FinInstrmId"  minOccurs="1"  maxOccurs="1"  type="SecurityIdentificationBVMF4"  />
+<xs:element  name="FinInstrmAttrbtsInf"  minOccurs="1"  maxOccurs="1"  type="FinancialInstrumentAttributesBVMF63"  />
+<xs:element  name="UndrlygFinInstrmId"  minOccurs="1"  maxOccurs="1"  type="SecurityIdentificationBVMF4"  />
+<xs:element  name="UndrlygSctyId"  minOccurs="1"  maxOccurs="1"  type="SecurityIdentificationBVMF21"  />
+<xs:element  name="UndrlygFinInstrmAttrbts"  minOccurs="0"  maxOccurs="1"  type="FinancialInstrumentAttributesBVMF7"  />
+<xs:element  name="TradLegDtls"  minOccurs="1"  maxOccurs="1"  type="TradeLegBVMF14"  />
+<xs:element  name="AllcnPtcpsId"  minOccurs="1"  maxOccurs="1"  type="AllocationBVMF25"  />
+<xs:element  name="AllcnInf"  minOccurs="1"  maxOccurs="1"  type="AllocationBVMF26"  />
+<xs:element  name="AllcnDtls"  minOccurs="0"  maxOccurs="unbounded"  type="AllocationBVMF28"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ReportParameters1">
+<xs:sequence>
+<xs:element  name="Frqcy"  minOccurs="1"  maxOccurs="1"  type="EventFrequency6Code"  />
+<xs:element  name="RptNb"  minOccurs="0"  maxOccurs="1"  type="Exact5NumericText"  />
+<xs:element  name="RptDtAndTm"  minOccurs="1"  maxOccurs="1"  type="DateAndDateTimeChoice"  />
+<xs:element  name="ActvtyInd"  minOccurs="1"  maxOccurs="1"  type="YesNoIndicator"  default="true" />
+<xs:element  name="NetPosId"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  default="XXXX" />
+<xs:element  name="UpdTp"  minOccurs="1"  maxOccurs="1"  type="StatementUpdateType1Code"  default="COMP" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DateAndDateTimeChoice">
+<xs:sequence>
+<xs:element  name="Dt"  minOccurs="1"  maxOccurs="1"  type="ISODate"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="TransactiontIdentification4">
+<xs:sequence>
+<xs:element  name="TxId"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="PartyIdentification1Choice">
+<xs:sequence>
+<xs:element  name="PrtryId"  minOccurs="1"  maxOccurs="1"  type="GenericIdentification1"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="GenericIdentification1">
+<xs:sequence>
+<xs:element  name="Id"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+<xs:element  name="Issr"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+<xs:element  name="SchmeNm"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="SecurityIdentificationBVMF4">
+<xs:sequence>
+<xs:element  name="OthrId"  minOccurs="1"  maxOccurs="1"  type="OtherIdentification1"  />
+<xs:element  name="PlcOfListg"  minOccurs="1"  maxOccurs="1"  type="MarketIdentification3Choice"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="OtherIdentification1">
+<xs:sequence>
+<xs:element  name="Id"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+<xs:element  name="Tp"  minOccurs="1"  maxOccurs="1"  type="IdentificationSource3Choice"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="IdentificationSource3Choice">
+<xs:sequence>
+<xs:element  name="Prtry"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="MarketIdentification3Choice">
+<xs:sequence>
+<xs:element  name="MktIdrCd"  minOccurs="1"  maxOccurs="1"  type="MICIdentifier"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="FinancialInstrumentAttributesBVMF63">
+<xs:sequence>
+<xs:element  name="Sgmt"  minOccurs="1"  maxOccurs="1"  type="ExternalSegmentCode"  />
+<xs:element  name="Mkt"  minOccurs="1"  maxOccurs="1"  type="ExternalMarketCode"  />
+<xs:element  name="TckrSymb"  minOccurs="1"  maxOccurs="1"  type="TickerIdentifier"  />
+<xs:element  name="PmtTp"  minOccurs="1"  maxOccurs="1"  type="ExternalPaymentTypeCode"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="SecurityIdentificationBVMF21">
+<xs:sequence>
+<xs:element  name="ISIN"  minOccurs="0"  maxOccurs="1"  type="ISINIdentifier"  />
+<xs:element  name="TckrSymb"  minOccurs="1"  maxOccurs="1"  type="TickerIdentifier"  />
+<xs:element  name="SelicCd"  minOccurs="0"  maxOccurs="1"  type="Max6Text"  />
+<xs:element  name="MtrtyDt"  minOccurs="0"  maxOccurs="1"  type="ISODate"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="FinancialInstrumentAttributesBVMF7">
+<xs:sequence>
+<xs:element  name="DstrbtnId"  minOccurs="1"  maxOccurs="1"  type="int"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="TradeLegBVMF14">
+<xs:sequence>
+<xs:element  name="TradDt"  minOccurs="1"  maxOccurs="1"  type="DateFormat15Choice"  />
+<xs:element  name="SttlmDt"  minOccurs="0"  maxOccurs="1"  type="DateFormat15Choice"  />
+<xs:element  name="TradId"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+<xs:element  name="Sd"  minOccurs="1"  maxOccurs="1"  type="Side3Code"  />
+<xs:element  name="Qty"  minOccurs="0"  maxOccurs="1"  type="FinancialInstrumentQuantity1Choice"  />
+<xs:element  name="OrgnlQty"  minOccurs="0"  maxOccurs="1"  type="FinancialInstrumentQuantity1Choice"  />
+<xs:element  name="UnitVal"  minOccurs="0"  maxOccurs="1"  type="RestrictedBVMFActiveAnd6DecimalQuantity"  />
+<xs:element  name="TradRate"  minOccurs="0"  maxOccurs="1"  type="Rate2"  />
+<xs:element  name="DealPric"  minOccurs="0"  maxOccurs="1"  type="RestrictedBVMF2ActiveOrHistoricCurrencyAnd4DecimalAmount"  />
+<xs:element  name="CancTradId"  minOccurs="0"  maxOccurs="1"  type="Max35Text"  />
+<xs:element  name="TxDtTm"  minOccurs="0"  maxOccurs="1"  type="ISODateTime"  />
+<xs:element  name="InstrmRstrctnInd"  minOccurs="0"  maxOccurs="1"  type="YesNoIndicator"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DateFormat15Choice">
+<xs:sequence>
+<xs:element  name="Dt"  minOccurs="1"  maxOccurs="1"  type="ISODate"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="FinancialInstrumentQuantity1Choice">
+<xs:sequence>
+<xs:element  name="Unit"  minOccurs="1"  maxOccurs="1"  type="DecimalNumber"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Rate2">
+<xs:sequence>
+<xs:element  name="Rate"  minOccurs="1"  maxOccurs="1"  type="PercentageRate"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AllocationBVMF25">
+<xs:sequence>
+<xs:element  name="PtyId"  minOccurs="1"  maxOccurs="1"  type="PartyIdentification10Choice"  />
+<xs:element  name="PtyFrntFmlyId"  minOccurs="1"  maxOccurs="1"  type="AllocationBVMF27"  />
+<xs:element  name="OfferngPtyId"  minOccurs="0"  maxOccurs="1"  type="Max35Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="PartyIdentification10Choice">
+<xs:sequence>
+<xs:element  name="PrtryId"  minOccurs="1"  maxOccurs="1"  type="GenericIdentification19"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="GenericIdentification19">
+<xs:sequence>
+<xs:element  name="Id"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+<xs:element  name="Issr"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+<xs:element  name="SchmeNm"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AllocationBVMF27">
+<xs:sequence>
+<xs:element  name="FrntFmlyId"  minOccurs="1"  maxOccurs="1"  type="Max71Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AllocationBVMF26">
+<xs:sequence>
+<xs:element  name="TradRegnOrgn"  minOccurs="0"  maxOccurs="1"  type="Max50Text"  />
+<xs:element  name="TradExctnId"  minOccurs="0"  maxOccurs="1"  type="Max35Text"  />
+<xs:element  name="BrkrDealrId"  minOccurs="0"  maxOccurs="1"  type="Max35Text"  />
+<xs:element  name="slfAllcnInd"  minOccurs="1"  maxOccurs="1"  type="YesNoIndicator"  />
+<xs:element  name="TradLegStsCd"  minOccurs="1"  maxOccurs="1"  type="int"  />
+<xs:element  name="FnlAllcnSts"  minOccurs="1"  maxOccurs="1"  type="ExternalFinalAllocationStatusCode"  />
+<xs:element  name="CntrPtyId"  minOccurs="0"  maxOccurs="1"  type="PartyIdentification10Choice"  />
+<xs:element  name="CntrPtyFrntFmly"  minOccurs="0"  maxOccurs="1"  type="AllocationBVMF27"  />
+<xs:element  name="OfferngCntrPtyId"  minOccurs="0"  maxOccurs="1"  type="Max35Text"  />
+<xs:element  name="MtchdOprnIdr"  minOccurs="0"  maxOccurs="1"  type="Max35Text"  />
+<xs:element  name="TradrId"  minOccurs="0"  maxOccurs="1"  type="Max50Text"  />
+<xs:element  name="OpnFld"  minOccurs="0"  maxOccurs="4"  type="Max20Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AllocationBVMF33">
+<xs:sequence>
+<xs:element  name="CmonAllcnDtls"  minOccurs="1"  maxOccurs="1"  type="AllocationBVMF29"  />
+<xs:element  name="PrvdAllcnDtls"  minOccurs="0"  maxOccurs="1"  type="AllocationBVMF30"  />
+<xs:element  name="FnlInvstrDtls"  minOccurs="0"  maxOccurs="unbounded"  type="InvestorInformationBVMF1"  />
+<xs:element  name="FirmGrntInd"  minOccurs="0"  maxOccurs="1"  type="YesNoIndicator"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AllocationBVMF29">
+<xs:sequence>
+<xs:element  name="AcctId"  minOccurs="1"  maxOccurs="1"  type="AccountIdentification1"  />
+<xs:element  name="Qty"  minOccurs="1"  maxOccurs="1"  type="DecimalNumber"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AccountIdentification1">
+<xs:sequence>
+<xs:element  name="Prtry"  minOccurs="1"  maxOccurs="1"  type="SimpleIdentificationInformation"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="SimpleIdentificationInformation">
+<xs:sequence>
+<xs:element  name="Id"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AllocationBVMF30">
+<xs:sequence>
+<xs:element  name="AcctNm"  minOccurs="0"  maxOccurs="1"  type="Max100Text"  />
+<xs:element  name="OTCSctyAcctTp"  minOccurs="0"  maxOccurs="1"  type="ExternalOTCSecurityAccountTypeCode"  />
+<xs:element  name="CtdnId"  minOccurs="0"  maxOccurs="1"  type="PartyIdentification10Choice"  />
+<xs:element  name="OTCCtdnId"  minOccurs="0"  maxOccurs="1"  type="PartyIdentification10Choice"  />
+<xs:element  name="CtdnNm"  minOccurs="0"  maxOccurs="1"  type="PartyInformationBVMF2"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="PartyInformationBVMF2">
+<xs:sequence>
+<xs:element  name="ShrtNm"  minOccurs="1"  maxOccurs="1"  type="Max20Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AllocationBVMF34">
+<xs:sequence>
+<xs:element  name="SelicCtrlNb"  minOccurs="0"  maxOccurs="1"  type="int"  />
+<xs:element  name="BrkrDealrSelicCtrlNb"  minOccurs="0"  maxOccurs="1"  type="int"  />
+<xs:element  name="NoMeCtrlNb"  minOccurs="0"  maxOccurs="1"  type="int"  />
+<xs:element  name="BrkrDealrNoMeCtrlNb"  minOccurs="0"  maxOccurs="1"  type="int"  />
+<xs:element  name="Qty"  minOccurs="1"  maxOccurs="1"  type="FinancialInstrumentQuantity1Choice"  />
+<xs:element  name="StsCd"  minOccurs="1"  maxOccurs="1"  type="Max10Text"  />
+<xs:element  name="CntrPtyAcct"  minOccurs="0"  maxOccurs="1"  type="AccountIdentification1"  />
+<xs:element  name="OrgnlNoMeCtrlNb"  minOccurs="0"  maxOccurs="1"  type="int"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="InvestorInformationBVMF1">
+<xs:sequence>
+<xs:element  name="InvstrFnlDocId"  minOccurs="1"  maxOccurs="1"  type="GenericIdentificationBVMF10"  />
+<xs:element  name="Qty"  minOccurs="1"  maxOccurs="1"  type="FinancialInstrumentQuantity1Choice"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="GenericIdentificationBVMF10">
+<xs:sequence>
+<xs:element  name="Id"  minOccurs="1"  maxOccurs="1"  type="Max35Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AllocationBVMF28">
+<xs:sequence>
+<xs:element  name="CmonAllcnDtls"  minOccurs="1"  maxOccurs="1"  type="AllocationBVMF29"  />
+<xs:element  name="PrvdAllcnDtls"  minOccurs="0"  maxOccurs="1"  type="AllocationBVMF30"  />
+<xs:element  name="RcrdDtls"  minOccurs="0"  maxOccurs="unbounded"  type="AllocationBVMF31"  />
+<xs:element  name="FnlInvstrDtls"  minOccurs="0"  maxOccurs="unbounded"  type="InvestorInformationBVMF1"  />
+<xs:element  name="TechRsrvInf"  minOccurs="0"  maxOccurs="1"  type="TechnicalReserveBVMF1"  />
+<xs:element  name="CBIOInf"  minOccurs="0"  maxOccurs="1"  type="CBIOBVMF1"  />
+<xs:element  name="FirmGrntInd"  minOccurs="0"  maxOccurs="1"  type="YesNoIndicator"  />
+<xs:element  name="BlckdAsstInf"  minOccurs="0"  maxOccurs="1"  type="BlockedAssetBVMF1"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AllocationBVMF31">
+<xs:sequence>
+<xs:element  name="SelicCtrlNb"  minOccurs="0"  maxOccurs="1"  type="int"  />
+<xs:element  name="BrkrDealrSelicCtrlNb"  minOccurs="0"  maxOccurs="1"  type="int"  />
+<xs:element  name="NoMeCtrlNb"  minOccurs="0"  maxOccurs="1"  type="int"  />
+<xs:element  name="BrkrDealrNoMeCtrlNb"  minOccurs="0"  maxOccurs="1"  type="int"  />
+<xs:element  name="Qty"  minOccurs="1"  maxOccurs="1"  type="FinancialInstrumentQuantity1Choice"  />
+<xs:element  name="StsCd"  minOccurs="1"  maxOccurs="1"  type="Max10Text"  />
+<xs:element  name="OrgnlNoMeCtrlNb"  minOccurs="0"  maxOccurs="1"  type="int"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="TechnicalReserveBVMF1">
+<xs:sequence>
+<xs:element  name="TechRsrvInd"  minOccurs="0"  maxOccurs="1"  type="ExternalTechnicalReserveCode"  />
+<xs:element  name="OprnDt"  minOccurs="0"  maxOccurs="1"  type="ISODate"  />
+<xs:element  name="CETIPNb"  minOccurs="0"  maxOccurs="1"  type="Max64Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CBIOBVMF1">
+<xs:sequence>
+<xs:element  name="BuyrTpInd"  minOccurs="0"  maxOccurs="1"  type="ExternalBuyerTypeCode"  />
+<xs:element  name="AddtlDesc"  minOccurs="0"  maxOccurs="1"  type="Max128Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="BlockedAssetBVMF1">
+<xs:sequence>
+<xs:element  name="BlckdAsstInd"  minOccurs="0"  maxOccurs="1"  type="YesNoIndicator"  />
+<xs:element  name="CETIPNb"  minOccurs="0"  maxOccurs="1"  type="Max64Text"  />
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="DecimalNumber">
+<xs:restriction base="xs:decimal">
+<xs:fractionDigits value="17"/>
+<xs:totalDigits value="18"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="EventFrequency6Code">
+<xs:restriction base="xs:string">
+<xs:enumeration value="DAIL"/>
+<xs:enumeration value="ONDE"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="Exact5NumericText">
+<xs:restriction base="xs:string">
+<xs:pattern value="[0-9]{5}"/>
+</xs:restriction>
+</xs:simpleType>
+   <xs:simpleType name="ExternalTechnicalReserveCode">
+    <xs:restriction base="xs:int"></xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="ExternalBuyerTypeCode">
+    <xs:restriction base="xs:int"></xs:restriction>
+  </xs:simpleType>
+<xs:simpleType name="ExternalFinalAllocationStatusCode">
+<xs:restriction base="xs:int">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ExternalMarketCode">
+<xs:restriction base="xs:int">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ExternalOTCSecurityAccountTypeCode">
+<xs:restriction base="xs:int">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ExternalPaymentTypeCode">
+<xs:restriction base="xs:int">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ExternalSegmentCode">
+<xs:restriction base="xs:int">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="int">
+<xs:restriction base="xs:int">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ISINIdentifier">
+<xs:restriction base="xs:string">
+<xs:pattern value="[A-Z0-9]{12,12}"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ISODate">
+<xs:restriction base="xs:date">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ISODateTime">
+<xs:restriction base="xs:dateTime">
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="Max100Text">
+<xs:restriction base="xs:string">
+<xs:maxLength value="100"/>
+<xs:minLength value="0"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="Max10Text">
+<xs:restriction base="xs:string">
+<xs:maxLength value="10"/>
+<xs:minLength value="1"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="Max128Text">
+<xs:restriction base="xs:string">
+<xs:maxLength value="128"/>
+<xs:minLength value="1"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="Max20Text">
+<xs:restriction base="xs:string">
+<xs:maxLength value="20"/>
+<xs:minLength value="1"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="Max35Text">
+<xs:restriction base="xs:string">
+<xs:maxLength value="35"/>
+<xs:minLength value="1"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="Max50Text">
+<xs:restriction base="xs:string">
+<xs:minLength value="1"/>
+<xs:maxLength value="50"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="Max64Text">
+<xs:restriction base="xs:string">
+<xs:maxLength value="64"/>
+<xs:minLength value="1"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="Max6Text">
+<xs:restriction base="xs:string">
+<xs:minLength value="1"/>
+<xs:maxLength value="6"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="Max71Text">
+<xs:restriction base="xs:string">
+<xs:maxLength value="71"/>
+<xs:minLength value="1"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="MICIdentifier">
+<xs:restriction base="xs:string">
+<xs:pattern value="[A-Z0-9]{4,4}"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="PercentageRate">
+<xs:restriction base="xs:decimal">
+<xs:fractionDigits value="10"/>
+<xs:totalDigits value="11"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ActiveOrHistoricCurrencyCode">
+<xs:restriction base="xs:string">
+<xs:pattern value="[A-Z]{3,3}"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:complexType name="RestrictedBVMF2ActiveOrHistoricCurrencyAnd4DecimalAmount">
+<xs:simpleContent>
+<xs:extension base="RestrictedBVMF2ActiveOrHistoricCurrencyAnd4DecimalAmount_SimpleType">
+<xs:attribute name="Ccy" type="ActiveOrHistoricCurrencyCode" use="required"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+<xs:simpleType name="RestrictedBVMF2ActiveOrHistoricCurrencyAnd4DecimalAmount_SimpleType">
+<xs:restriction base="xs:decimal">
+<xs:fractionDigits value="4"/>
+<xs:totalDigits value="19"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="RestrictedBVMFActiveAnd6DecimalQuantity">
+<xs:restriction base="xs:decimal">
+<xs:totalDigits value="19"/>
+<xs:fractionDigits value="6"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="Side3Code">
+<xs:restriction base="xs:string">
+<xs:enumeration value="BUYI"/>
+<xs:enumeration value="SELL"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="StatementUpdateType1Code">
+<xs:restriction base="xs:string">
+<xs:enumeration value="COMP"/>
+<xs:enumeration value="DELT"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="TickerIdentifier">
+<xs:restriction base="xs:string">
+<xs:maxLength value="35"/>
+<xs:minLength value="1"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="YesNoIndicator">
+<xs:restriction base="xs:boolean">
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>

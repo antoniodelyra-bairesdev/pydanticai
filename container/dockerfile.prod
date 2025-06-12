@@ -1,0 +1,42 @@
+FROM crvanguarda.azurecr.io/iv-back-sistema-v2-lib:latest
+
+WORKDIR /home/host_user/app
+
+USER root
+
+RUN chown -R host_user /home/host_user/app
+
+# https://learn.microsoft.com/en-us/azure/app-service/configure-custom-container?tabs=debian&pivots=container-linux#enable-ssh
+RUN apt update \
+    && apt-get install -y --no-install-recommends dialog \
+    && apt-get install -y --no-install-recommends openssh-server \
+    && echo "root:Docker!" | chpasswd
+
+COPY sshd_config /etc/ssh
+
+RUN cp -R /tmp/python/site-packages .
+
+USER host_user
+
+ENV TZ='America/Sao_Paulo'
+ENV PYTHONPATH="/home/host_user/app/site-packages"
+
+COPY config ./config
+COPY modules ./modules
+COPY __init__.py ./__init__.py
+COPY healthcheck.py ./healthcheck.py
+COPY main.py ./main.py
+COPY alembic.ini ./alembic.ini
+COPY alembic ./alembic
+COPY generated ./generated
+COPY public ./public
+COPY files ./files
+
+COPY entrypoint.sh .
+
+USER root
+
+EXPOSE 2222
+
+SHELL ["/bin/bash", "-c"]
+ENTRYPOINT ./entrypoint.sh
