@@ -10,7 +10,9 @@ from sqlalchemy import (
     Boolean,
     UniqueConstraint,
     TIMESTAMP,
+    DateTime,
 )
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import (
     Mapped,
     mapped_column,
@@ -20,6 +22,7 @@ from sqlalchemy.orm import (
 from config.database import Model, SchemaIcatu
 
 
+# --- Model Definition for 'client_ia_tb' ---
 class ClientIa(Model, SchemaIcatu):
     """
     Mapeia a tabela 'client_ia_tb'.
@@ -31,10 +34,9 @@ class ClientIa(Model, SchemaIcatu):
 
     client_id: Mapped[int] = mapped_column(primary_key=True)
     client_nm: Mapped[str] = mapped_column(String(50), unique=True)
+    client_abrev: Mapped[str] = mapped_column(String(10), unique=True)
 
-    models: Mapped[list["ClientModel"]] = relationship(
-        back_populates="client_ia"
-    )
+    models: Mapped[list["ClientModel"]] = relationship(back_populates="client_ia")
 
 
 # --- Model Definition for 'client_model_tb' ---
@@ -49,7 +51,7 @@ class ClientModel(Model, SchemaIcatu):
 
     client_model_id: Mapped[int] = mapped_column(primary_key=True)
 
-    client_id: Mapped[int] = mapped_column(ForeignKey("client_ia_tb.client_id"))
+    client_id: Mapped[int] = mapped_column(ForeignKey("icatu.client_ia_tb.client_id"))
 
     model_nm: Mapped[str] = mapped_column(String(200), unique=True)
     descricao: Mapped[Optional[str]] = mapped_column(Text)
@@ -57,28 +59,24 @@ class ClientModel(Model, SchemaIcatu):
     ordenacao: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
 
     # Relacionamento: Vários Modelos (ClientModel) pertencem a um Cliente de IA (ClientIa).
-    client_ia: Mapped["ClientIa"] = relationship(
-        back_populates="models", lazy="joined"
-    )
+    client_ia: Mapped["ClientIa"] = relationship(back_populates="models", lazy="joined")
 
     # Relacionamento: Um Modelo (ClientModel) pode ser usado em vários Prompts.
-    prompts: Mapped[list["Prompt"]] = relationship(
-        back_populates="client_model"
-    )
+    prompts: Mapped[list["Prompt"]] = relationship(back_populates="client_model")
 
 
 class ModelSchema(Model, SchemaIcatu):
     """
     Mapeia a tabela 'model_schema_tb'.
     """
+
     __tablename__ = "model_schema_tb"
-    
+
     model_schema_id: Mapped[int] = mapped_column(primary_key=True)
     model_nm: Mapped[str] = mapped_column(String(200), unique=True)
+    model_schema: Mapped[Optional[dict]] = mapped_column(JSONB)
 
-    prompts: Mapped[list["Prompt"]] = relationship(
-        back_populates="model_schema"
-    )
+    prompts: Mapped[list["Prompt"]] = relationship(back_populates="model_schema")
 
 
 # --- Model Definition for 'prompt_tb' ---
@@ -95,23 +93,25 @@ class Prompt(Model, SchemaIcatu):
 
     # Corrigindo o nome da coluna de 'client_model_id ' para 'client_model_id'
     client_model_id: Mapped[Optional[int]] = mapped_column(
-        ForeignKey("client_model_tb.client_model_id")
+        ForeignKey("icatu.client_model_tb.client_model_id")
     )
 
-    mesa_id: Mapped[Optional[int]] = mapped_column(ForeignKey("icatu.mesa.id"))
+    mesa_id: Mapped[Optional[int]] = mapped_column(ForeignKey("icatu.mesas.id"))
     codigo_ativo: Mapped[Optional[str]] = mapped_column(
         String(11), ForeignKey("icatu.ativos.codigo")
     )
 
     temperatura: Mapped[Optional[float]] = mapped_column(Float)
-    max_tokes: Mapped[Optional[int]] = mapped_column(Integer)  # Conforme DDL
+    max_tokens: Mapped[Optional[int]] = mapped_column(Integer)
     prompt_sistema: Mapped[str] = mapped_column(Text, nullable=False)
     prompt_usuario: Mapped[str] = mapped_column(Text, nullable=False)
-    model_schema_id: Mapped[Optional[int]] = mapped_column(ForeignKey("icatu.model_schema_tb.model_schema_id"))
-    data_criacao: Mapped[Optional[datetime]] = mapped_column(
-        TIMESTAMP(timezone=False),
-        default=datetime.now
+    model_schema_id: Mapped[Optional[int]] = mapped_column(
+        ForeignKey("icatu.model_schema_tb.model_schema_id")
     )
+    data_criacao: Mapped[Optional[datetime]] = mapped_column(
+        TIMESTAMP(timezone=False), default=datetime.now
+    )
+    is_image: Mapped[bool] = mapped_column(Boolean, server_default="FALSE")
     ativo: Mapped[bool] = mapped_column(Boolean, server_default="TRUE")
     descricao: Mapped[Optional[str]] = mapped_column(Text)
 
@@ -122,7 +122,5 @@ class Prompt(Model, SchemaIcatu):
 
     # Define a restrição de unicidade composta.
     __table_args__ = (
-        UniqueConstraint(
-            "client_model_id", "codigo_ativo", "data_criacao", name="prompt_un"
-        ),
+        UniqueConstraint("client_model_id", "codigo_ativo", "data_criacao", name="prompt_un"),
     )

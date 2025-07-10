@@ -79,3 +79,88 @@ class RelatorioFIDCValoraAlion(ValidatedModel):
         if not v:
             raise ValueError("A lista de indicadores de fechamento não pode estar vazia.")
         return v
+
+
+# --- Modelo para o Graficos ---
+class IndicadorComLimite(ValidatedModel):
+    """Representa um indicador de acompanhamento do fundo com seu respectivo limite e valor apurado."""
+    indicador: str = Field(..., description="Nome do indicador monitorado, como 'Razão de Garantia' ou 'Atraso F30'.")
+    limite: str = Field(..., description="O limite de referência para o indicador (ex: '<18%').")
+    valor: float = Field(..., description="Valor percentual apurado para o indicador no período.")
+
+
+class QuantidadeDeDevedores(ValidatedModel):
+    """Representa a evolução mensal da quantidade de devedores na carteira do fundo."""
+    ano: int = Field(..., description="Ano de referência da medição.")
+    mes: str = Field(..., description="Mês de referência da medição.")
+    valor: int = Field(..., description="Quantidade total de devedores no período.")
+
+    @field_validator("valor")
+    @classmethod
+    def validate_valor_not_negative(cls, v: int) -> int:
+        """Valida que o valor não seja negativo."""
+        if v < 0:
+            raise ValueError("A quantidade de devedores não pode ser negativa.")
+        return v
+
+class PrazoMedioDaCarteiraMeses(ValidatedModel):
+    """Representa a evolução do prazo médio da carteira, em meses."""
+    ano: int = Field(..., description="Ano de referência da medição.")
+    mes: str = Field(..., description="Mês de referência da medição.")
+    valor: float = Field(..., description="Prazo médio da carteira em meses.")
+
+    @field_validator("valor")
+    @classmethod
+    def validate_valor_not_negative(cls, v: float) -> float:
+        """Valida que o valor não seja negativo."""
+        if v < 0:
+            raise ValueError("O prazo médio da carteira não pode ser negativo.")
+        return v
+
+
+class CreditoVencidoNaoPagoAcumulado(ValidatedModel):
+    """Representa o valor acumulado de crédito vencido e não pago, em R$ mil."""
+    ano: int = Field(..., description="Ano de referência da medição.")
+    mes: str = Field(..., description="Mês de referência da medição.")
+    valor: float = Field(..., description="Valor acumulado de crédito vencido e não pago (em R$ mil).")
+
+    @field_validator("valor")
+    @classmethod
+    def validate_valor_not_negative(cls, v: float) -> float:
+        """Valida que o valor não seja negativo."""
+        if v < 0:
+            raise ValueError("O valor de crédito vencido não pago não pode ser negativo.")
+        return v
+
+class CreditoVencidoNaoPagoXVencimentoHistoricoAcumulado(ValidatedModel):
+    """Representa a relação entre o volume vencido e o percentual de crédito não pago."""
+    ano: int = Field(..., description="Ano de referência da medição.")
+    mes: str = Field(..., description="Mês de referência da medição.")
+    volume_vencido: float = Field(..., description="Volume total vencido no histórico (em R$ mil).")
+    credito_vencido_nao_pago: float = Field(..., description="Percentual de crédito vencido e não pago em relação ao volume vencido.")
+
+
+class PDDxDC(ValidatedModel):
+    """Representa a relação percentual entre a Provisão para Devedores Duvidosos (PDD) e os Direitos Creditórios (DC)."""
+    ano: int = Field(..., description="Ano de referência da medição.")
+    mes: str = Field(..., description="Mês de referência da medição.")
+    valor: float = Field(..., description="Percentual da PDD em relação ao total de Direitos Creditórios.")
+
+
+class PDDxPatrimonioLiquido(ValidatedModel):
+    """Representa a evolução do Patrimônio Líquido e a relação percentual da PDD sobre ele."""
+    ano: int = Field(..., description="Ano de referência da medição.")
+    mes: str = Field(..., description="Mês de referência da medição.")
+    patrimonio_liquido: float = Field(..., description="Valor do Patrimônio Líquido (PL) do fundo (em R$ mil).")
+    pdd_pl: float = Field(..., description="Percentual da PDD em relação ao Patrimônio Líquido.")
+
+
+class RelatorioFIDCValoraAlionIIImage(ValidatedModel):
+    """Modelo raiz que agrega os componentes do relatório do FIDC Valora Alion II."""
+    indicadores_com_limites: list[IndicadorComLimite]
+    quantidade_de_devedores: list[QuantidadeDeDevedores]
+    prazo_medio_da_carteira_meses: list[PrazoMedioDaCarteiraMeses]
+    credito_vencido_nao_pago_acumulado: list[CreditoVencidoNaoPagoAcumulado]
+    credito_vencido_nao_pago_x_vencimento_historico_acumulado: list[CreditoVencidoNaoPagoXVencimentoHistoricoAcumulado]
+    pdd_x_dc: list[PDDxDC]
+    pdd_x_patrimonio_liquido: list[PDDxPatrimonioLiquido]

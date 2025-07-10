@@ -13,8 +13,92 @@
 # Estas classes são usadas como response_model no FastAPI para garantir
 # a tipagem, validação e documentação automática dos dados da API.
 
+from typing import Union
+
 from pydantic import Field, field_validator
 from modules.util.validators import ValidatedModel
+
+
+class IndicadorComLimite(ValidatedModel):
+    """
+    Representa um indicador de acompanhamento do fundo que possui um limite
+    regulamentar ou de benchmark associado.
+    """
+
+    indicador: str = Field(
+        ..., description="Nome do indicador monitorado, como 'Razão de Garantia' ou 'Atraso F30'."
+    )
+    limite: str = Field(
+        ..., description="O limite de referência para o indicador (ex: '<15%', '25,00%')."
+    )
+    valor: Union[str, float] = Field(
+        ...,
+        description="Valor apurado para o indicador no período, que pode ser numérico ou textual (ex: 'Enquadrado').",
+    )
+
+
+class FechamentoUltimoMes(ValidatedModel):
+    """
+    Representa os valores de fechamento de um determinado indicador no último mês,
+    normalmente expressos em milhares ou milhões de reais.
+    """
+
+    indicador: str = Field(
+        ..., description="Nome da métrica de fechamento (ex: 'Direitos Creditórios', 'PL')."
+    )
+    valor: float = Field(
+        ..., description="Valor financeiro do indicador no fechamento do mês (em R$ mil)."
+    )
+
+
+class DadosCadastrais(ValidatedModel):
+    """
+    Agrega as informações cadastrais e características gerais do fundo.
+    """
+
+    nome_do_fundo: str = Field(
+        ..., description="Nome completo do Fundo de Investimento em Direitos Creditórios."
+    )
+    data_do_relatorio: str = Field(
+        ..., description="Mês e ano de referência do relatório (ex: 'Março/25')."
+    )
+    data_de_inicio_do_fundo: str = Field(
+        ..., description="Data de início das atividades do fundo no formato 'dd/mm/yyyy'."
+    )
+    administrador: str = Field(
+        ..., description="Instituição responsável pela administração do fundo."
+    )
+    gestor: str = Field(
+        ..., description="Instituição responsável pela gestão da carteira do fundo."
+    )
+    custodiante: str = Field(
+        ..., description="Instituição responsável pela custódia dos ativos do fundo."
+    )
+    objetivo_resumido_do_fundo: str = Field(
+        ..., description="Breve descrição do objetivo de investimento do fundo."
+    )
+
+
+class RelatorioFIDCValoraNoto(ValidatedModel):
+    """
+    Modelo raiz que agrega todos os componentes do relatório textual do FIDC Valora Noto.
+    Esta é a classe principal a ser usada como response_model na API.
+    """
+
+    dados_cadastrais: DadosCadastrais
+    indicadores_com_limites: list[IndicadorComLimite]
+    fechamento_ultimo_mes: list[FechamentoUltimoMes]
+
+    @field_validator("dados_cadastrais", "indicadores_com_limites", "fechamento_ultimo_mes")
+    @classmethod
+    def validate_lists_not_empty(cls, v: list) -> list:
+        """Valida que as listas não estejam vazias."""
+        if not v:
+            raise ValueError("As listas não podem estar vazias.")
+        return v
+
+
+# --- Modelo para o Graficos ---
 
 
 # --- Seção: Quantidade de Devedores ---
@@ -146,7 +230,7 @@ class PDDxPatrimonioLiquido(ValidatedModel):
 
 
 # --- Modelo Principal: Estrutura Completa do Relatório ---
-class RelatorioFIDCNoto(ValidatedModel):
+class RelatorioFIDCNotoImage(ValidatedModel):
     """
     Modelo raiz que agrega todos os componentes do relatório do FIDC Valora Noto.
     Esta é a classe principal a ser usada como response_model na API.

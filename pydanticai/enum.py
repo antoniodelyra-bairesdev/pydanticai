@@ -11,11 +11,11 @@ from pydantic import BaseModel
 # Importar as classes principais de cada schema
 from .schema.fidc.bemol import RelatorioFIDCBemol
 from .schema.fidc.brz_consignados_v import RelatorioFIDCBRZConsignadosV
-from .schema.fidc.icred import RelatorioFIDCICred
+from .schema.fidc.icred import RelatorioFIDCICredImage
 from .schema.fidc.sol_agora_iii import RelatorioFIDCSolAgoraIII
 from .schema.fidc.somacred import RelatorioCompletoSomacred
 from .schema.fidc.valora_alion_ii import RelatorioFIDCValoraAlion
-from .schema.fidc.valora_noto import RelatorioFIDCNoto
+from .schema.fidc.valora_noto import RelatorioFIDCValoraNoto
 from .schema.fidc.verde_card import RelatorioFIDCVerdeCard
 
 
@@ -38,11 +38,11 @@ class ModelSchemaEnum(Enum):
     # Mapeamento principal usando nomes dos arquivos em minúsculo
     bemol = RelatorioFIDCBemol
     brz_consignados_v = RelatorioFIDCBRZConsignadosV
-    icred = RelatorioFIDCICred
+    icred = RelatorioFIDCICredImage
     sol_agora_iii = RelatorioFIDCSolAgoraIII
     somacred = RelatorioCompletoSomacred
     valora_alion_ii = RelatorioFIDCValoraAlion
-    valora_noto = RelatorioFIDCNoto
+    valora_noto = RelatorioFIDCValoraNoto
     verde_card = RelatorioFIDCVerdeCard
 
     @classmethod

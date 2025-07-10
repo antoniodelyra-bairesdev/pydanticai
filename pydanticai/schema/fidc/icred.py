@@ -13,11 +13,77 @@
 # a tipagem, validação e documentação automática dos dados da API.
 
 from typing import Optional
+import re
+
 from pydantic import Field, field_validator
 
 from modules.util.validators import ValidatedModel
 
 
+class DadosCadastrais(ValidatedModel):
+    """Informações cadastrais e características gerais do fundo."""
+
+    cnpj: str = Field(..., description="CNPJ do fundo no formato XX.XXX.XXX/XXXX-XX.")
+    classificacao_anbima: str = Field(..., description="Classificação do fundo segundo a ANBIMA.")
+    forma_constituicao: str = Field(
+        ..., description="Forma de constituição do fundo (ex: Condomínio Fechado)."
+    )
+    inicio_classe: str = Field(..., description="Data de início da classe de cotas.")
+    prazo_classe: str = Field(..., description="Prazo de duração da classe de cotas.")
+    taxa_administracao: str = Field(..., description="Descrição da taxa de administração.")
+    taxa_gestao: str = Field(..., description="Descrição da taxa de gestão.")
+    administrador: str = Field(..., description="Nome do administrador do fundo.")
+    custodiante: str = Field(..., description="Nome do custodiante do fundo.")
+    gestor: str = Field(..., description="Nome do gestor do fundo.")
+    originador: str = Field(..., description="Nome do originador dos direitos creditórios.")
+    coobrigacao_originador: str = Field(
+        ..., description="Indica se há coobrigação por parte do originador."
+    )
+    devedores: str = Field(
+        ..., description="Tipo de devedor dos direitos creditórios (ex: Pessoas Físicas)."
+    )
+    patrimonio_liquido_total: float = Field(
+        ..., description="Patrimônio líquido total do fundo em milhões."
+    )
+
+    @field_validator("cnpj")
+    @classmethod
+    def validate_cnpj_format(cls, v: str) -> str:
+        """Valida se o CNPJ segue o formato padrão."""
+        if not re.match(r"\d{2}[.\s]?\d{3}[.\s]?\d{3}/\d{4}-\d{2}", v.strip()):
+            raise ValueError("Formato de CNPJ inválido. Use XX.XXX.XXX/XXXX-XX.")
+        return v
+
+    @field_validator("patrimonio_liquido_total")
+    @classmethod
+    def validate_pl_positive(cls, v: float) -> float:
+        """Valida que o patrimônio líquido seja um valor positivo."""
+        if v < 0:
+            raise ValueError("O patrimônio líquido não pode ser negativo.")
+        return v
+
+
+class IndiceAcompanhamento(ValidatedModel):
+    """Estrutura para os índices de acompanhamento do fundo, com seus limites e valores."""
+
+    indice_de_acompanhamento: str = Field(
+        ..., alias="Índice de Acompanhamento", description="Nome do índice monitorado."
+    )
+    limite: str = Field(..., description="Limite regulamentar ou de benchmark para o índice.")
+    valor: float = Field(..., description="Valor percentual apurado para o índice no período.")
+
+
+class RelatorioFIDCICred(ValidatedModel):
+    """
+    Modelo raiz que agrega todos os componentes textuais do relatório do FIDC ICRED FGTS.
+    Esta é a classe principal a ser usada como response_model na API.
+    """
+
+    dados_cadastrais: DadosCadastrais
+    indices_acompanhamento: list[IndiceAcompanhamento]
+
+
+# --- Modelo para o Graficos ---
 # --- Seção: Fluxo de Caixa dos Direitos Creditórios ---
 class FluxoDeCaixaItem(ValidatedModel):
     """Movimentação mensal de aquisições e liquidações de direitos creditórios."""
@@ -127,7 +193,7 @@ class ContratosQuantidadeItem(ValidatedModel):
 
 
 # --- Modelo Principal: Estrutura Completa do Relatório ---
-class RelatorioFIDCICred(ValidatedModel):
+class RelatorioFIDCICredImage(ValidatedModel):
     """
     Modelo raiz que agrega todos os componentes do relatório do FIDC ICRED FGTS.
     Esta é a classe principal a ser usada como response_model na API.
