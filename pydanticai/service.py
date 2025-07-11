@@ -26,7 +26,7 @@ from pydantic_ai import Agent, RunContext
 
 from .repository import PydanticAIRepository
 from .schema.api import ConsultaResponseSchema, ModeloDisponivelSchema
-from .enum import ModelSchemaEnum
+from .enum_modules import ModelSchemaEnum
 
 # Carregar variáveis de ambiente do arquivo .env
 load_dotenv()

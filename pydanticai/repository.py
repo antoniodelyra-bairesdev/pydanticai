@@ -39,7 +39,13 @@ class PydanticAIRepository:
         Returns:
             Sequence[ClientModel]: Lista de modelos disponíveis
         """
-        query = select(ClientModel).order_by(ClientModel.ordenacao, ClientModel.model_nm)
+        from .model import ClientIa
+        
+        query = (
+            select(ClientModel)
+            .join(ClientIa, ClientModel.client_id == ClientIa.client_id)
+            .order_by(ClientIa.client_nm, ClientModel.ordenacao)
+        )
 
         result = await self.__base_repository_client_model.get_db_session().execute(query)
         return result.unique().scalars().all()

@@ -6,88 +6,84 @@ gera o JSON simplificado de cada modelo usando o método .simplify(),
 e insere os dados na tabela model_schema_tb.
 """
 
-import json
 import asyncio
-from typing import Dict, Any
 
-from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import text
 
-from config.database import async_session
-from modules.repository import BaseRepositoryImpl
-from .enum import ModelSchemaEnum
+from config.database import async_session, engine
+from modules.repository import BaseRepository, BaseRepositoryImpl
+from .enum_modules import ModelSchemaEnum
 from .model import ModelSchema
 
 
-async def load_model_schemas():
+async def load_model_schemas(repository: BaseRepository[ModelSchema]):
     """
     Carrega todos os modelos do ModelSchemaEnum na tabela ModelSchema.
-    
+
+    Args:
+        repository: BaseRepository para ModelSchema
+
     Para cada modelo no enum:
     1. Obtém a classe do schema
     2. Gera o JSON simplificado usando .simplify()
     3. Insere na tabela model_schema_tb
     4. Em caso de conflito (model_nm já existe), ignora a inserção
     """
-    
-    # Obter engine e criar sessão
-    engine = get_engine()
-    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-    
-    async with engine.begin() as conn:
-        # Preparar dados para inserção
-        model_data = []
-        
-        print("Iniciando carregamento dos modelos de schema...")
-        
-        # Iterar sobre todos os modelos no enum
-        for enum_member in ModelSchemaEnum:
-            model_name = enum_member.name
-            schema_class = enum_member.value
-            
-            try:
-                # Gerar instância da classe e obter JSON simplificado
-                schema_instance = schema_class
-                simplified_schema = schema_instance.simplify()
-                
-                # Preparar dados para inserção
-                model_data.append({
-                    "model_nm": model_name,
-                    "model_schema": simplified_schema
-                })
-                
-                print(f"✓ Processado: {model_name}")
-                
-            except Exception as e:
-                print(f"✗ Erro ao processar {model_name}: {str(e)}")
-                continue
-        
-        if not model_data:
-            print("Nenhum modelo foi processado com sucesso.")
-            return
-        
-        # Inserir dados na tabela
-        print(f"\nInserindo {len(model_data)} modelos na tabela...")
-        
+
+    print("Iniciando carregamento dos modelos de schema...")
+
+    # Preparar dados para inserção
+    model_data = []
+
+    # Iterar sobre todos os modelos no enum
+    for enum_member in ModelSchemaEnum:
+        model_name = enum_member.name
+        schema_class = enum_member.value
+
         try:
-            # Query de inserção com tratamento de conflito
-            insert_query = (
-                insert(ModelSchema)
-                .on_conflict_do_nothing(index_elements=["model_nm"])
-                .values(model_data)
-            )
-            
-            result = await conn.execute(insert_query)
-            
-            # Verificar quantos registros foram inseridos
-            inserted_count = result.rowcount
-            print(f"✓ Inseridos {inserted_count} novos modelos")
-            
+            # Gerar JSON simplificado usando o método .simplify()
+            simplified_schema = schema_class.simplify()
+
+            # Preparar dados para inserção
+            model_data.append({"model_nm": model_name, "model_schema": simplified_schema})
+
+            print(f"✓ Processado: {model_name}")
+
         except Exception as e:
-            print(f"✗ Erro ao inserir dados: {str(e)}")
-            raise
-    
+            print(f"✗ Erro ao processar {model_name}: {str(e)}")
+            continue
+
+    if not model_data:
+        print("Nenhum modelo foi processado com sucesso.")
+        return
+
+    # Inserir dados na tabela
+    print(f"\nInserindo {len(model_data)} modelos na tabela...")
+
+    try:
+        # Query de inserção com tratamento de conflito
+        insert_query = (
+            insert(ModelSchema)
+            .on_conflict_do_nothing(index_elements=["model_nm"])
+            .values(model_data)
+        )
+
+        result = await repository.get_db_session().execute(insert_query)
+
+        # Verificar quantos registros foram inseridos
+        inserted_count = result.rowcount
+        print(f"✓ Inseridos {inserted_count} novos modelos")
+
+        # Commit das alterações
+        await repository.get_db_session().commit()
+
+        return inserted_count
+
+    except Exception as e:
+        print(f"✗ Erro ao inserir dados: {str(e)}")
+        raise
+
     print("\nCarregamento de modelos concluído!")
 
 
@@ -96,9 +92,23 @@ async def main():
     Função principal que executa o carregamento dos modelos.
     """
     print("=== Carregador de Modelos de Schema ===")
-       
-    # Carregar novos modelos
-    await load_model_schemas()
+
+    inserted_count = 0
+
+    # Executar com repository configurado
+    async with async_session() as session:
+        repository = BaseRepositoryImpl[ModelSchema](db_session=session, model_class=ModelSchema)
+
+        inserted_count = await load_model_schemas(repository)
+
+    # Executar VACUUM ANALYZE completamente fora da transação
+    if inserted_count is not None and inserted_count > 0:
+        print("Executando VACUUM ANALYZE na tabela...")
+        autocommit_engine = engine.execution_options(isolation_level="AUTOCOMMIT")
+        async with async_session(bind=autocommit_engine) as session:
+            await session.execute(text("VACUUM ANALYZE icatu.model_schema_tb"))
+        print("✓ VACUUM ANALYZE executado com sucesso")
+
 
 if __name__ == "__main__":
     asyncio.run(main())

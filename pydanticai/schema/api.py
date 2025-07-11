@@ -59,7 +59,7 @@ class ConsultaRequestSchema(Schema):
     @classmethod
     def validate_schema_name(cls, v: str) -> str:
         """Valida que o schema name seja válido."""
-        from modules.pydanticai.enum import ModelSchemaEnum
+        from modules.pydanticai.enum_modules import ModelSchemaEnum
 
         try:
             ModelSchemaEnum.get_schema_class(v)

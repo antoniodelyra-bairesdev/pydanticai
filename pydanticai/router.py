@@ -151,7 +151,7 @@ async def listar_schemas_disponiveis() -> list[str]:
     Returns:
         SchemaDisponivelSchema: Lista de schemas disponíveis organizados por categoria
     """
-    from .enum import ModelSchemaEnum
+    from .enum_modules import ModelSchemaEnum
 
     return ModelSchemaEnum.get_available_schemas()
 
