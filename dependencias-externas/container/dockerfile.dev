@@ -1,0 +1,16 @@
+FROM crvanguarda.azurecr.io/iv-dependencias-externas-lib:latest
+
+WORKDIR /home/host_user/app
+
+USER host_user
+
+ENV TZ='America/Sao_Paulo'
+ENV PYTHONPATH="/home/host_user/app/site-packages"
+
+RUN pip install --target=/tmp/python/site-packages debugpy
+
+SHELL ["/bin/bash", "-c"]
+ENTRYPOINT \
+    rm -rf ./site-packages; \
+    cp -R /tmp/python/site-packages .; \
+    python -Xfrozen_modules=off -m debugpy --listen 0.0.0.0:5678 -m uvicorn main:app --reload --host=0.0.0.0 --port=$APP_PORT

@@ -1,0 +1,8 @@
+pydantic==2.11.5
+fastapi[all]==0.115.2
+aiohttp==3.12.11
+websockets==15.0.1
+playwright==1.52.0
+docling==2.41.0
+uvicorn==0.35.0
+python-multipart==0.0.20
