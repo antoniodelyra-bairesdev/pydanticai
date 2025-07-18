@@ -1,0 +1,81 @@
+[tool.poetry]
+name = "docling-pdf"
+version = "0.1.0"
+description = ""
+authors = ["Antonio <alyra@icatuvanguarda.com.br>"]
+readme = "README.md"
+packages = [{include = "docling_pdf", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+docling = "^2.41.0"
+ruff = "^0.12.4"
+fastapi = "^0.116.1"
+uvicorn = "^0.35.0"
+pydantic = "^2.11.7"
+python-multipart = "^0.0.20"
+httpx = "^0.28.1"
+python-dotenv = "^1.0.0"
+loguru = "^0.7.3"
+
+
+[build-system]
+requires = ["poetry-core", "setuptools"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+# Enable ruff format
+line-length = 99
+target-version = "py312" # Replace with your target Python version (e.g., py39, py310)
+exclude = ["src/docling_pdf/utils/ssl_config.py"]
+
+[tool.ruff.lint]
+# E501: line too long
+# E/F: pycodestyle/Pyflakes errors
+# W: pycodestyle warnings
+# C: complexity (McCabe)
+# I: isort
+# N: naming
+# D: pydocstyle
+# UP: pyupgrade
+# B: flake8-bugbear
+# PL: Pylint
+# RUF: Ruff-specific rules
+select = [
+    "E501",    # line length
+    "F401",    # imported but unused
+    "F841",    # local variable assigned but never used
+    "F811",    # redefined while unused
+    "Q",       # quotes
+    "I",       # isort
+    "PL",      # pylint
+    "W291",    # trailing whitespace
+    "W292",    # no newline at end of file
+    "W293",    # blank line contains whitespace
+]
+
+[tool.ruff.format]
+quote-style = "double"  # Optional: Use double quotes
+
+[tool.ruff.lint.isort]
+# Your project name
+known-first-party = ["docling_pdf"]
+
+# Ruff automatically detects third-party packages from poetry dependencies
+known-third-party = []
+
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+relative-imports-order = "closest-to-furthest"
+combine-as-imports = true
+split-on-trailing-comma = false
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+pytest = "^8.0.0"
+pytest-asyncio = "^0.24.0"
+pytest-cov = "^5.0.0"

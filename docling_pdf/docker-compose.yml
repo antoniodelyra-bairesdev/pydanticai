@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  pdf-to-markdown-api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./uploads:/app/uploads
+    environment:
+      - DEBUG=False
+      - LOG_LEVEL=INFO
+      - MAX_FILE_SIZE=52428800
+      - ALLOWED_EXTENSIONS=["pdf"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s 
