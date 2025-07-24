@@ -1,8 +1,12 @@
-pydantic==2.11.5
-fastapi[all]==0.115.2
 aiohttp==3.12.11
-websockets==15.0.1
-playwright==1.52.0
+autoregistry==1.1.2
 docling==2.41.0
-uvicorn==0.35.0
+docx2txt==0.9
+fastapi[all]==0.115.2
+loguru==0.7.3
+playwright==1.52.0
+pydantic==2.11.5
 python-multipart==0.0.20
+pypdf==5.8.0
+uvicorn==0.35.0
+websockets==15.0.1
