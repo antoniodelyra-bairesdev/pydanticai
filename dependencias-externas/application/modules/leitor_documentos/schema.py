@@ -73,4 +73,5 @@ class CleanupResponse(BaseModel):
 class FerramentaExtracaoEnum(str, Enum):
     docling = "docling"
     docx2txt = "docx2txt"
+    llmwhisperer = "llmwhisperer"
     pypdf = "pypdf"

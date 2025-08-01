@@ -13,11 +13,11 @@ from logger import leitor_logger as logger
 
 from .base import DocumentExtractor
 from .exceptions import DocumentExtractionException, ExtractorNotFoundException
-from .schema import ConversionMetadata, ExtractionResult
-from .utils import format_duration, format_file_size, get_file_extension
 
 # Import extractors to ensure they are registered
 from .impl import *
+from .schema import ConversionMetadata, ExtractionResult
+from .utils import format_duration, format_file_size, get_file_extension
 
 
 class LeitorDocumentosService:

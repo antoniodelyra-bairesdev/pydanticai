@@ -42,17 +42,12 @@ class PDFDoclingExtractor(DocumentExtractor):
             FileNotFoundException: Se o arquivo não for encontrado
             DocumentExtractionException: Se houver erro na extração
         """
-        logger.info("Iniciando extração de texto bruto: {}", file_path)
-
         if not file_path.exists():
             raise FileNotFoundException(f"Arquivo não encontrado: {file_path}")
 
         try:
             conv_result = self.converter.convert(str(file_path))
             text = ("\n").join(t.text for t in conv_result.document.texts)
-            logger.info(
-                "Extração concluída. Tamanho do texto: {} caracteres", len(text)
-            )
             return text
 
         except Exception as e:
@@ -73,17 +68,12 @@ class PDFDoclingExtractor(DocumentExtractor):
             FileNotFoundException: Se o arquivo não for encontrado
             DocumentExtractionException: Se houver erro na extração
         """
-        logger.info("Iniciando extração para markdown: {}", file_path)
-
         if not file_path.exists():
             raise FileNotFoundException(f"Arquivo não encontrado: {file_path}")
 
         try:
             conv_result = self.converter.convert(str(file_path))
             markdown = conv_result.document.export_to_markdown()
-            logger.info(
-                "Extração markdown concluída. Tamanho: {} caracteres", len(markdown)
-            )
             return markdown
 
         except Exception as e:
@@ -104,8 +94,6 @@ class PDFDoclingExtractor(DocumentExtractor):
             FileNotFoundException: Se o arquivo não for encontrado
             DocumentExtractionException: Se houver erro na extração
         """
-        logger.info("Iniciando extração de dados de imagens: {}", file_path)
-
         try:
             from docling.datamodel.base_models import InputFormat
             from docling.datamodel.pipeline_options import PdfPipelineOptions
@@ -136,10 +124,6 @@ class PDFDoclingExtractor(DocumentExtractor):
                         text.append(item.text)
 
             extracted_text = "\n".join(text)
-            logger.info(
-                "Extração de imagens concluída. Tamanho: {} caracteres",
-                len(extracted_text),
-            )
             return extracted_text
 
         except Exception as e:
@@ -180,17 +164,12 @@ class DOCXDoclingExtractor(DocumentExtractor):
             FileNotFoundException: Se o arquivo não for encontrado
             DocumentExtractionException: Se houver erro na extração
         """
-        logger.info("Iniciando extração de texto: {}", file_path)
-
         if not file_path.exists():
             raise FileNotFoundException(f"Arquivo não encontrado: {file_path}")
 
         try:
             conv_result = self.converter.convert(str(file_path))
             text = ("\n").join(t.text for t in conv_result.document.texts)
-            logger.info(
-                "Extração concluída. Tamanho do texto: {} caracteres", len(text)
-            )
             return text
 
         except Exception as e:
@@ -213,17 +192,12 @@ class DOCXDoclingExtractor(DocumentExtractor):
             FileNotFoundException: Se o arquivo não for encontrado
             DocumentExtractionException: Se houver erro na extração
         """
-        logger.info("Iniciando extração para markdown: {}", file_path)
-
         if not file_path.exists():
             raise FileNotFoundException(f"Arquivo não encontrado: {file_path}")
 
         try:
             conv_result = self.converter.convert(str(file_path))
             markdown = conv_result.document.export_to_markdown()
-            logger.info(
-                "Extração markdown concluída. Tamanho: {} caracteres", len(markdown)
-            )
             return markdown
 
         except Exception as e:
@@ -246,8 +220,6 @@ class DOCXDoclingExtractor(DocumentExtractor):
             FileNotFoundException: Se o arquivo não for encontrado
             DocumentExtractionException: Se houver erro na extração
         """
-        logger.info("Iniciando extração de dados de imagens: {}", file_path)
-
         try:
             from docling.datamodel.base_models import InputFormat
             from docling.datamodel.pipeline_options import PdfPipelineOptions
@@ -278,10 +250,6 @@ class DOCXDoclingExtractor(DocumentExtractor):
                         text.append(item.text)
 
             extracted_text = "\n".join(text)
-            logger.info(
-                "Extração de imagens concluída. Tamanho: {} caracteres",
-                len(extracted_text),
-            )
             return extracted_text
 
         except Exception as e:

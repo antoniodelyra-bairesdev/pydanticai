@@ -33,6 +33,7 @@ from .schema import (
     SupportedFormatsResponse,
 )
 from .service import FileService, LeitorDocumentosService
+from .utils import sanitize_filename
 from .validators import validate_document_file, validate_file_size
 
 router = APIRouter(prefix="/leitor-documentos", tags=["Leitor de Documentos"])
@@ -57,7 +58,6 @@ def get_file_service() -> FileService:
 def _handle_extraction_error(
     error: Exception,
     temp_file_path: Path,
-    background_tasks: BackgroundTasks,
     file_service: FileService,
     operation: str,
 ) -> None:
@@ -72,7 +72,7 @@ def _handle_extraction_error(
     """
     # Limpar arquivo temporário se existir
     if temp_file_path:
-        background_tasks.add_task(file_service.cleanup_temp_file, temp_file_path)
+        file_service.cleanup_temp_file(temp_file_path)
 
     # Mapear exceções para códigos HTTP apropriados
     if isinstance(error, FileValidationException):
@@ -179,7 +179,9 @@ async def extrair_para_markdown(
     Raises:
         DocumentExtractionException: Se houver erro na extração
     """
-    logger.info("Iniciando extração para markdown: {}", file.filename)
+    logger.info(
+        "Iniciando extração para markdown: {}", sanitize_filename(file.filename)
+    )
     temp_file_path = Path()
 
     try:
@@ -202,20 +204,21 @@ async def extrair_para_markdown(
             success=True,
             data=ExtractionResult(**result["extraction_result"]),
             metadata=ConversionMetadata(
-                **{**result["metadata"], "filename": file.filename}
+                **{**result["metadata"], "filename": sanitize_filename(file.filename)}
             ),
         )
 
         # Agendar limpeza do arquivo temporário
         background_tasks.add_task(file_service.cleanup_temp_file, temp_file_path)
 
-        logger.info("Extração markdown concluída com sucesso: {}", file.filename)
+        logger.info(
+            "Extração markdown concluída com sucesso: {}",
+            sanitize_filename(file.filename),
+        )
         return response
 
     except Exception as e:
-        _handle_extraction_error(
-            e, temp_file_path, background_tasks, file_service, "extração markdown"
-        )
+        _handle_extraction_error(e, temp_file_path, file_service, "extração markdown")
 
 
 @router.post("/extrair-dados-brutos")
@@ -240,7 +243,9 @@ async def extrair_dados_brutos(
     Raises:
         DocumentExtractionException: Se houver erro na extração
     """
-    logger.info("Iniciando extração de dados brutos: {}", file.filename)
+    logger.info(
+        "Iniciando extração de dados brutos: {}", sanitize_filename(file.filename)
+    )
     temp_file_path = Path()
 
     try:
@@ -263,21 +268,23 @@ async def extrair_dados_brutos(
             success=True,
             data=ExtractionResult(**result["extraction_result"]),
             metadata=ConversionMetadata(
-                **{**result["metadata"], "filename": file.filename}
+                **{**result["metadata"], "filename": sanitize_filename(file.filename)}
             ),
         )
 
         # Agendar limpeza do arquivo temporário
         background_tasks.add_task(file_service.cleanup_temp_file, temp_file_path)
 
-        logger.info("Extração de dados brutos concluída com sucesso: {}", file.filename)
+        logger.info(
+            "Extração de dados brutos concluída com sucesso: {}",
+            sanitize_filename(file.filename),
+        )
         return response
 
     except Exception as e:
         _handle_extraction_error(
             e,
             temp_file_path,
-            background_tasks,
             file_service,
             "extração de dados brutos",
         )
@@ -305,7 +312,9 @@ async def extrair_imagens(
     Raises:
         DocumentExtractionException: Se houver erro na extração
     """
-    logger.info("Iniciando extração de dados de imagens: {}", file.filename)
+    logger.info(
+        "Iniciando extração de dados de imagens: {}", sanitize_filename(file.filename)
+    )
     temp_file_path = Path()
 
     try:
@@ -328,20 +337,21 @@ async def extrair_imagens(
             success=True,
             data=ExtractionResult(**result["extraction_result"]),
             metadata=ConversionMetadata(
-                **{**result["metadata"], "filename": file.filename}
+                **{**result["metadata"], "filename": sanitize_filename(file.filename)}
             ),
         )
 
         # Agendar limpeza do arquivo temporário
         background_tasks.add_task(file_service.cleanup_temp_file, temp_file_path)
 
-        logger.info("Extração de imagens concluída com sucesso: {}", file.filename)
+        logger.info(
+            "Extração de imagens concluída com sucesso: {}",
+            sanitize_filename(file.filename),
+        )
         return response
 
     except Exception as e:
-        _handle_extraction_error(
-            e, temp_file_path, background_tasks, file_service, "extração de imagens"
-        )
+        _handle_extraction_error(e, temp_file_path, file_service, "extração de imagens")
 
 
 @router.get("/formatos-suportados")

@@ -44,8 +44,6 @@ class PDFPypdfExtractor(DocumentExtractor):
             FileNotFoundException: Se o arquivo não for encontrado
             DocumentExtractionException: Se houver erro na extração
         """
-        logger.info("Iniciando extração de texto bruto: {}", file_path)
-
         if not file_path.exists():
             raise FileNotFoundException(f"Arquivo não encontrado: {file_path}")
 
@@ -55,9 +53,6 @@ class PDFPypdfExtractor(DocumentExtractor):
                 text = "".join(
                     page.extract_text() or "" for page in pdf_reader.pages
                 ).strip()
-                logger.info(
-                    "Extração concluída. Tamanho do texto: {} caracteres", len(text)
-                )
                 return text
 
         except PyPdfError as e:

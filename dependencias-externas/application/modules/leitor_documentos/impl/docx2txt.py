@@ -1,6 +1,7 @@
-import docx2txt
 import sys
 from pathlib import Path
+
+import docx2txt
 
 # Adicionar o diretório raiz ao path para imports
 sys.path.append(str(Path(__file__).parent.parent.parent.parent))
@@ -38,16 +39,11 @@ class DOCXDocx2TxtExtractor(DocumentExtractor):
             FileNotFoundException: Se o arquivo não for encontrado
             DocumentExtractionException: Se houver erro na extração
         """
-        logger.info("Iniciando extração de texto bruto: {}", file_path)
-
         if not file_path.exists():
             raise FileNotFoundException(f"Arquivo não encontrado: {file_path}")
 
         try:
             text = docx2txt.process(str(file_path))
-            logger.info(
-                "Extração concluída. Tamanho do texto: {} caracteres", len(text or "")
-            )
             return text or ""
 
         except Exception as e:

@@ -1,11 +1,14 @@
 # Import extractors to register them with autoregistry
-from .docling import PDFDoclingExtractor, DOCXDoclingExtractor
-from .pypdf import PDFPypdfExtractor
+from .docling import DOCXDoclingExtractor, PDFDoclingExtractor
 from .docx2txt import DOCXDocx2TxtExtractor
+from .llmwhisperer import DOCXLLMWhispererExtractor, PDFLLMWhispererExtractor
+from .pypdf import PDFPypdfExtractor
 
 __all__ = [
     "PDFDoclingExtractor",
-    "DOCXDoclingExtractor", 
+    "DOCXDoclingExtractor",
     "PDFPypdfExtractor",
-    "DOCXDocx2TxtExtractor"
+    "DOCXDocx2TxtExtractor",
+    "PDFLLMWhispererExtractor",
+    "DOCXLLMWhispererExtractor",
 ]
