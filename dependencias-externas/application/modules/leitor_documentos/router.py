@@ -1,34 +1,18 @@
 import sys
+from contextlib import asynccontextmanager
 from pathlib import Path
+from typing import AsyncGenerator
 
 # Adicionar o diretório raiz ao path para imports
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
-from fastapi import (
-    APIRouter,
-    BackgroundTasks,
-    Depends,
-    File,
-    HTTPException,
-    Query,
-    UploadFile,
-    status,
-)
+from fastapi import APIRouter, Depends, File, Query, UploadFile
 from logger import leitor_logger as logger
 
-from .exceptions import (
-    DocumentExtractionException,
-    ExtractorNotFoundException,
-    FileNotFoundException,
-    FileSizeException,
-    FileValidationException,
-    UnsupportedFormatException,
-)
 from .schema import (
     CleanupResponse,
     ConversionMetadata,
     DocumentExtractionResponse,
-    ExtractionResult,
     FerramentaExtracaoEnum,
     SupportedFormatsResponse,
 )
@@ -39,6 +23,42 @@ from .validators import validate_document_file, validate_file_size
 router = APIRouter(prefix="/leitor-documentos", tags=["Leitor de Documentos"])
 
 
+# Context Manager para limpeza automática de arquivos
+@asynccontextmanager
+async def temp_file_manager(
+    file: UploadFile, file_service: FileService
+) -> AsyncGenerator[Path, None]:
+    """
+    Context manager que garante limpeza de arquivo temporário mesmo em caso de erro.
+
+    Args:
+        file: Arquivo enviado via upload
+        file_service: Serviço para gerenciar arquivos
+
+    Yields:
+        Path: Caminho do arquivo temporário salvo
+
+    Ensures:
+        Arquivo temporário é sempre removido, mesmo em caso de exceção
+    """
+    temp_file_path = None
+    try:
+        # Validar e salvar arquivo
+        validate_document_file(file)
+        validate_file_size(file)
+
+        temp_file_path = await file_service.save_upload_file(file)
+        logger.info("Arquivo salvo temporariamente: {}", temp_file_path)
+
+        yield temp_file_path
+
+    finally:
+        # Garantir limpeza mesmo em caso de erro
+        if temp_file_path and temp_file_path.exists():
+            file_service.cleanup_temp_file(temp_file_path)
+
+
+# Factory Functions
 def get_document_service() -> LeitorDocumentosService:
     """
     Factory function para criar uma instância do LeitorDocumentosService.
@@ -55,144 +75,33 @@ def get_file_service() -> FileService:
     return FileService()
 
 
-def _handle_extraction_error(
-    error: Exception,
-    temp_file_path: Path,
-    file_service: FileService,
-    operation: str,
-) -> None:
-    """
-    Função helper para tratar erros de extração de forma consistente.
-
-    Args:
-        error: Exceção capturada
-        temp_file_path: Caminho do arquivo temporário
-        background_tasks: Tarefas em background
-        operation: Nome da operação para log
-    """
-    # Limpar arquivo temporário se existir
-    if temp_file_path:
-        file_service.cleanup_temp_file(temp_file_path)
-
-    # Mapear exceções para códigos HTTP apropriados
-    if isinstance(error, FileValidationException):
-        logger.error("Erro de validação de arquivo: {}", str(error))
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "success": False,
-                "error": error.message,
-                "error_code": error.error_code,
-            },
-        )
-    elif isinstance(error, FileSizeException):
-        logger.error("Arquivo muito grande: {}", str(error))
-        raise HTTPException(
-            status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
-            detail={
-                "success": False,
-                "error": error.message,
-                "error_code": error.error_code,
-            },
-        )
-    elif isinstance(error, UnsupportedFormatException):
-        logger.error("Formato não suportado: {}", str(error))
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "success": False,
-                "error": error.message,
-                "error_code": error.error_code,
-            },
-        )
-    elif isinstance(error, ExtractorNotFoundException):
-        logger.error("Extractor não encontrado: {}", str(error))
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail={
-                "success": False,
-                "error": error.message,
-                "error_code": error.error_code,
-            },
-        )
-    elif isinstance(error, FileNotFoundException):
-        logger.error("Arquivo não encontrado: {}", str(error))
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail={
-                "success": False,
-                "error": error.message,
-                "error_code": error.error_code,
-            },
-        )
-    elif isinstance(error, DocumentExtractionException):
-        logger.error("Erro na {}: {}", operation, str(error))
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={
-                "success": False,
-                "error": error.message,
-                "error_code": error.error_code,
-            },
-        )
-    elif isinstance(error, NotImplementedError):
-        logger.error("Funcionalidade não implementada na {}: {}", operation, str(error))
-        raise HTTPException(
-            status_code=status.HTTP_501_NOT_IMPLEMENTED,
-            detail={
-                "success": False,
-                "error": str(error),
-                "error_code": "NOT_IMPLEMENTED",
-            },
-        )
-    else:
-        logger.error("Erro inesperado na {}: {}", operation, str(error))
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={
-                "success": False,
-                "error": "Erro interno do servidor",
-                "error_code": "INTERNAL_ERROR",
-            },
-        )
-
-
 @router.post("/extrair-markdown")
 async def extrair_para_markdown(
-    background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     ferramenta_extracao: FerramentaExtracaoEnum = Query(None),
     service: LeitorDocumentosService = Depends(get_document_service),
     file_service: FileService = Depends(get_file_service),
 ) -> DocumentExtractionResponse:
     """
-    Extrai conteúdo de um documento e converte para formato markdown.
+    # Extração para Markdown
 
-    Args:
-        background_tasks (BackgroundTasks): Tarefas em background para limpeza
-        file (UploadFile): Arquivo enviado via upload
-        ferramenta_extracao (str, optional): Nome da ferramenta de extração
+    Converte documentos em formato markdown estruturado, preservando formatação e hierarquia.
 
-    Returns:
-        DocumentExtractionResponse: Resposta com conteúdo em markdown e metadados
+    ## Funcionalidades
+    - Extrai texto com formatação (títulos, listas, tabelas)
+    - Preserva estrutura hierárquica do documento
+    - Suporta múltiplos formatos de entrada (PDF, DOCX, etc.)
 
-    Raises:
-        DocumentExtractionException: Se houver erro na extração
+    ## Parâmetros
+    - `file`: Arquivo para processar
+    - `ferramenta_extracao`: Ferramenta específica (opcional)
+
+    ## Retorna
+    Conteúdo em markdown + metadados de processamento
     """
-    logger.info(
-        "Iniciando extração para markdown: {}", sanitize_filename(file.filename)
-    )
-    temp_file_path = Path()
+    logger.info("Iniciando extração para markdown: {}", sanitize_filename(file.filename))
 
-    try:
-        # Validar arquivo enviado
-        validate_document_file(file)
-        validate_file_size(file)
-
-        # Salvar arquivo temporariamente
-        temp_file_path = await file_service.save_upload_file(file)
-        logger.info("Arquivo salvo temporariamente: {}", temp_file_path)
-
+    async with temp_file_manager(file, file_service) as temp_file_path:
         # Realizar extração
         result = service.extract_to_markdown(
             file_path=temp_file_path,
@@ -202,61 +111,45 @@ async def extrair_para_markdown(
         # Preparar resposta
         response = DocumentExtractionResponse(
             success=True,
-            data=ExtractionResult(**result["extraction_result"]),
+            data=result.extraction_result,
             metadata=ConversionMetadata(
-                **{**result["metadata"], "filename": sanitize_filename(file.filename)}
+                **{**result.metadata.model_dump(), "filename": sanitize_filename(file.filename)}
             ),
         )
 
-        # Agendar limpeza do arquivo temporário
-        background_tasks.add_task(file_service.cleanup_temp_file, temp_file_path)
-
         logger.info(
-            "Extração markdown concluída com sucesso: {}",
-            sanitize_filename(file.filename),
+            "Extração markdown concluída com sucesso: {}", sanitize_filename(file.filename)
         )
         return response
-
-    except Exception as e:
-        _handle_extraction_error(e, temp_file_path, file_service, "extração markdown")
 
 
 @router.post("/extrair-dados-brutos")
 async def extrair_dados_brutos(
-    background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     ferramenta_extracao: FerramentaExtracaoEnum = Query(None),
     service: LeitorDocumentosService = Depends(get_document_service),
     file_service: FileService = Depends(get_file_service),
 ) -> DocumentExtractionResponse:
     """
-    Extrai dados brutos (texto) de um documento.
+    # Extração de Dados Brutos
 
-    Args:
-        background_tasks (BackgroundTasks): Tarefas em background para limpeza
-        file (UploadFile): Arquivo enviado via upload
-        ferramenta_extracao (str, optional): Nome da ferramenta de extração
+    Extrai texto puro de documentos, sem formatação ou estrutura.
 
-    Returns:
-        DocumentExtractionResponse: Resposta com dados brutos e metadados
+    ## Funcionalidades
+    - Extrai todo o texto do documento
+    - Remove formatação e elementos visuais
+    - Ideal para processamento de texto (NLP, análise, etc.)
 
-    Raises:
-        DocumentExtractionException: Se houver erro na extração
+    ## Parâmetros
+    - `file`: Arquivo para processar
+    - `ferramenta_extracao`: Ferramenta específica (opcional)
+
+    ## Retorna
+    Texto bruto + metadados de processamento
     """
-    logger.info(
-        "Iniciando extração de dados brutos: {}", sanitize_filename(file.filename)
-    )
-    temp_file_path = Path()
+    logger.info("Iniciando extração de dados brutos: {}", sanitize_filename(file.filename))
 
-    try:
-        # Validar arquivo enviado
-        validate_document_file(file)
-        validate_file_size(file)
-
-        # Salvar arquivo temporariamente
-        temp_file_path = await file_service.save_upload_file(file)
-        logger.info("Arquivo salvo temporariamente: {}", temp_file_path)
-
+    async with temp_file_manager(file, file_service) as temp_file_path:
         # Realizar extração
         result = service.extract_raw_data(
             file_path=temp_file_path,
@@ -266,66 +159,46 @@ async def extrair_dados_brutos(
         # Preparar resposta
         response = DocumentExtractionResponse(
             success=True,
-            data=ExtractionResult(**result["extraction_result"]),
+            data=result.extraction_result,
             metadata=ConversionMetadata(
-                **{**result["metadata"], "filename": sanitize_filename(file.filename)}
+                **{**result.metadata.model_dump(), "filename": sanitize_filename(file.filename)}
             ),
         )
 
-        # Agendar limpeza do arquivo temporário
-        background_tasks.add_task(file_service.cleanup_temp_file, temp_file_path)
-
         logger.info(
-            "Extração de dados brutos concluída com sucesso: {}",
-            sanitize_filename(file.filename),
+            "Extração de dados brutos concluída com sucesso: {}", sanitize_filename(file.filename)
         )
         return response
-
-    except Exception as e:
-        _handle_extraction_error(
-            e,
-            temp_file_path,
-            file_service,
-            "extração de dados brutos",
-        )
 
 
 @router.post("/extrair-dados-imagens")
 async def extrair_imagens(
-    background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     ferramenta_extracao: FerramentaExtracaoEnum = Query(None),
     service: LeitorDocumentosService = Depends(get_document_service),
     file_service: FileService = Depends(get_file_service),
 ) -> DocumentExtractionResponse:
     """
-    Extrai texto de imagens contidas em um documento.
+    # Extração de Texto de Imagens
 
-    Args:
-        background_tasks (BackgroundTasks): Tarefas em background para limpeza
-        file (UploadFile): Arquivo enviado via upload
-        ferramenta_extracao (str, optional): Nome da ferramenta de extração
+    Extrai texto de imagens, gráficos e elementos visuais em documentos.
 
-    Returns:
-        DocumentExtractionResponse: Resposta com texto das imagens e metadados
+    ## Funcionalidades
+    - OCR (Reconhecimento Óptico de Caracteres)
+    - Extrai texto de gráficos, tabelas e diagramas
+    - Suporta múltiplos idiomas
+    - Preserva posicionamento do texto
 
-    Raises:
-        DocumentExtractionException: Se houver erro na extração
+    ## Parâmetros
+    - `file`: Arquivo para processar
+    - `ferramenta_extracao`: Ferramenta específica (opcional)
+
+    ## Retorna
+    Texto extraído de imagens + metadados de processamento
     """
-    logger.info(
-        "Iniciando extração de dados de imagens: {}", sanitize_filename(file.filename)
-    )
-    temp_file_path = Path()
+    logger.info("Iniciando extração de dados de imagens: {}", sanitize_filename(file.filename))
 
-    try:
-        # Validar arquivo enviado
-        validate_document_file(file)
-        validate_file_size(file)
-
-        # Salvar arquivo temporariamente
-        temp_file_path = await file_service.save_upload_file(file)
-        logger.info("Arquivo salvo temporariamente: {}", temp_file_path)
-
+    async with temp_file_manager(file, file_service) as temp_file_path:
         # Realizar extração de imagens
         result = service.extract_image_data(
             file_path=temp_file_path,
@@ -335,23 +208,16 @@ async def extrair_imagens(
         # Preparar resposta
         response = DocumentExtractionResponse(
             success=True,
-            data=ExtractionResult(**result["extraction_result"]),
+            data=result.extraction_result,
             metadata=ConversionMetadata(
-                **{**result["metadata"], "filename": sanitize_filename(file.filename)}
+                **{**result.metadata.model_dump(), "filename": sanitize_filename(file.filename)}
             ),
         )
 
-        # Agendar limpeza do arquivo temporário
-        background_tasks.add_task(file_service.cleanup_temp_file, temp_file_path)
-
         logger.info(
-            "Extração de imagens concluída com sucesso: {}",
-            sanitize_filename(file.filename),
+            "Extração de imagens concluída com sucesso: {}", sanitize_filename(file.filename)
         )
         return response
-
-    except Exception as e:
-        _handle_extraction_error(e, temp_file_path, file_service, "extração de imagens")
 
 
 @router.get("/formatos-suportados")
@@ -360,30 +226,26 @@ async def listar_formatos_suportados(
     service: LeitorDocumentosService = Depends(get_document_service),
 ) -> SupportedFormatsResponse:
     """
-    Lista todos os formatos de arquivo suportados e seus extractors disponíveis.
+    # Formatos Suportados
 
-    Returns:
-        SupportedFormatsResponse: Resposta com formatos suportados
+    Lista formatos de arquivo e ferramentas de extração disponíveis.
 
-    Raises:
-        DocumentExtractionException: Se houver erro ao obter formatos
+    ## Funcionalidades
+    - Consulta formatos suportados por extensão
+    - Lista ferramentas de extração disponíveis
+    - Informa capacidades de cada extractor
+
+    ## Parâmetros
+    - `extensao`: Extensão do arquivo (padrão: "pdf")
+
+    ## Retorna
+    Lista de formatos e extractors disponíveis
     """
     logger.info("Solicitando lista de formatos suportados")
 
-    try:
-        formats = service.get_extractor_names_for_format(extensao)
-        logger.info("Formatos suportados obtidos com sucesso")
-        return SupportedFormatsResponse(success=True, formats=formats)
-    except Exception as e:
-        logger.error("Erro ao obter formatos suportados: {}", str(e))
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={
-                "success": False,
-                "error": "Erro ao obter formatos suportados",
-                "error_code": "INTERNAL_ERROR",
-            },
-        )
+    formats = service.get_extractor_names_for_format(extensao)
+    logger.info("Formatos suportados obtidos com sucesso")
+    return SupportedFormatsResponse(success=True, formats=formats)
 
 
 @router.post("/limpeza")
@@ -392,37 +254,28 @@ async def limpar_arquivos_temporarios(
     file_service: FileService = Depends(get_file_service),
 ) -> CleanupResponse:
     """
-    Remove arquivos temporários antigos do sistema.
+    # Limpeza de Arquivos Temporários
 
-    Args:
-        max_age_hours (int): Idade máxima em horas para manter arquivos (1-168)
+    Remove arquivos temporários antigos para liberar espaço em disco.
 
-    Returns:
-        CleanupResponse: Resposta com número de arquivos removidos
+    ## Funcionalidades
+    - Remove arquivos com mais de X horas
+    - Limpeza automática e segura
+    - Relatório de arquivos removidos
 
-    Raises:
-        DocumentExtractionException: Se houver erro durante a limpeza
+    ## Parâmetros
+    - `max_age_hours`: Idade máxima em horas (1-168, padrão: 24)
+
+    ## Retorna
+    Quantidade de arquivos removidos + relatório
     """
-    logger.info(
-        "Iniciando limpeza de arquivos temporários (max_age: {}h)", max_age_hours
+    logger.info("Iniciando limpeza de arquivos temporários (max_age: {}h)", max_age_hours)
+
+    removed_count = file_service.cleanup_old_files(max_age_hours)
+    logger.info("Limpeza concluída. {} arquivo(s) removido(s)", removed_count)
+
+    return CleanupResponse(
+        success=True,
+        message=f"{removed_count} arquivo(s) removido(s).",
+        removed_count=removed_count,
     )
-
-    try:
-        removed_count = file_service.cleanup_old_files(max_age_hours)
-        logger.info("Limpeza concluída. {} arquivo(s) removido(s)", removed_count)
-
-        return CleanupResponse(
-            success=True,
-            message=f"{removed_count} arquivo(s) removido(s).",
-            removed_count=removed_count,
-        )
-    except Exception as e:
-        logger.error("Erro durante limpeza de arquivos temporários: {}", str(e))
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={
-                "success": False,
-                "error": "Erro durante limpeza de arquivos temporários",
-                "error_code": "INTERNAL_ERROR",
-            },
-        )

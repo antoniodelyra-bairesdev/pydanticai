@@ -3,7 +3,6 @@ import time
 import uuid
 from datetime import datetime
 from pathlib import Path
-from typing import Any
 
 # Adicionar o diretório raiz ao path para imports
 sys.path.append(str(Path(__file__).parent.parent.parent))
@@ -16,7 +15,7 @@ from .exceptions import DocumentExtractionException, ExtractorNotFoundException
 
 # Import extractors to ensure they are registered
 from .impl import *
-from .schema import ConversionMetadata, ExtractionResult
+from .schema import ConversionMetadata, ExtractionResult, ExtractionServiceResponse
 from .utils import format_duration, format_file_size, get_file_extension
 
 
@@ -30,174 +29,106 @@ class LeitorDocumentosService:
 
     def extract_to_markdown(
         self, file_path: Path, tool: str | None = None
-    ) -> dict[str, Any]:
-        """
-        Extrai conteúdo de um arquivo e converte para formato markdown.
-
-        Args:
-            file_path (Path): Caminho para o arquivo a ser processado
-            tool (str, optional): Nome da ferramenta de extração
-
-        Returns:
-            dict: Dicionário contendo extraction_result e metadata
-
-        Raises:
-            DocumentExtractionException: Se houver erro na extração
-            ExtractorNotFoundException: Se a ferramenta de extração não for encontrada
-        """
-        logger.info("Iniciando extração para markdown: {}", file_path.name)
-        start_time = time.time()
-
-        # Identificar extensão do arquivo e selecionar extractor
-        file_extension = get_file_extension(file_path.name)
-        extractor = self._get_extractor(file_extension, tool)
-        logger.info("Usando extractor: {} para arquivo: {}", extractor.name, file_path)
-
-        # Realizar extração
-        content = extractor.extract_to_markdown(file_path)
-        extraction_time = time.time() - start_time
-        file_stats = file_path.stat()
-
-        # Preparar resultado estruturado
-        extraction_result = ExtractionResult(
-            content=content,
-            format="markdown",
-            extractor_used=extractor.name,
+    ) -> ExtractionServiceResponse:
+        """Extrai conteúdo de um arquivo e converte para formato markdown."""
+        return self._extract_content(
+            file_path=file_path,
+            tool=tool,
+            extraction_method="extract_to_markdown",
+            content_format="markdown",
+            operation_name="extração para markdown",
         )
-        metadata = ConversionMetadata(
-            file_size=format_file_size(file_stats.st_size),
-            extraction_time=format_duration(extraction_time),
-            character_count=len(content),
-            extractor_used=extractor.name,
-        )
-
-        logger.info(
-            "Extração markdown concluída. Tempo: {}, Arquivo: {}, Tamanho: {} chars",
-            format_duration(extraction_time),
-            format_file_size(file_stats.st_size),
-            len(content),
-        )
-
-        return {
-            "extraction_result": extraction_result.model_dump(),
-            "metadata": metadata.model_dump(),
-        }
 
     def extract_raw_data(
         self, file_path: Path, tool: str | None = None
-    ) -> dict[str, Any]:
+    ) -> ExtractionServiceResponse:
+        """Extrai dados brutos (texto) de um arquivo."""
+        return self._extract_content(
+            file_path=file_path,
+            tool=tool,
+            extraction_method="extract_raw_data",
+            content_format="raw",
+            operation_name="extração de dados brutos",
+        )
+
+    def extract_image_data(
+        self, file_path: Path, tool: str | None = None
+    ) -> ExtractionServiceResponse:
+        """Extrai texto de imagens contidas em um documento."""
+        return self._extract_content(
+            file_path=file_path,
+            tool=tool,
+            extraction_method="extract_image_data",
+            content_format="images",
+            operation_name="extração de dados de imagens",
+        )
+
+    def _extract_content(
+        self,
+        file_path: Path,
+        tool: str | None,
+        extraction_method: str,
+        content_format: str,
+        operation_name: str,
+    ) -> ExtractionServiceResponse:
         """
-        Extrai dados brutos (texto) de um arquivo.
+        Método central para todas as operações de extração.
 
         Args:
-            file_path (Path): Caminho para o arquivo a ser processado
-            tool (str, optional): Nome da ferramenta de extração
-
-        Returns:
-            dict: Dicionário contendo extraction_result e metadata
-
-        Raises:
-            DocumentExtractionException: Se houver erro na extração
-            ExtractorNotFoundException: Se o extractor preferido não for encontrado
+            file_path: Caminho do arquivo
+            tool: Ferramenta específica (opcional)
+            extraction_method: Nome do método a ser chamado no extractor
+            content_format: Formato do conteúdo extraído
+            operation_name: Nome da operação para logs
         """
-        logger.info("Iniciando extração de dados brutos: {}", file_path.name)
+        logger.info("Iniciando {}: {}", operation_name, file_path.name)
         start_time = time.time()
 
-        # Identificar extensão do arquivo e selecionar extractor
+        # Obter extractor apropriado
         file_extension = get_file_extension(file_path.name)
         extractor = self._get_extractor(file_extension, tool)
         logger.info("Usando extractor: {} para arquivo: {}", extractor.name, file_path)
 
-        # Realizar extração
-        data = extractor.extract_raw_data(file_path)
+        # Executar extração usando o método especificado
+        extraction_func = getattr(extractor, extraction_method)
+        content = extraction_func(file_path)
+
+        # Calcular métricas
         extraction_time = time.time() - start_time
         file_stats = file_path.stat()
+        content_str = str(content)
 
-        # Preparar resultado estruturado
+        # Criar objetos de resposta
         extraction_result = ExtractionResult(
-            content=str(data),
-            format="raw",
+            content=content_str,
+            format=content_format,
             extractor_used=extractor.name,
         )
+
         metadata = ConversionMetadata(
             file_size=format_file_size(file_stats.st_size),
             extraction_time=format_duration(extraction_time),
-            character_count=len(str(data)),
+            character_count=len(content_str),
             extractor_used=extractor.name,
         )
 
         logger.info(
-            "Extração de dados brutos concluída. Tempo: {}, Arquivo: {}, "
-            "Tamanho: {} chars",
+            "{} concluída. Tempo: {}, Arquivo: {}, Tamanho: {} chars",
+            operation_name.capitalize(),
             format_duration(extraction_time),
             format_file_size(file_stats.st_size),
-            len(str(data)),
+            len(content_str),
         )
 
-        return {
-            "extraction_result": extraction_result.model_dump(),
-            "metadata": metadata.model_dump(),
-        }
-
-    def extract_image_data(
-        self, file_path: Path, tool: str | None = None
-    ) -> dict[str, Any]:
-        """
-        Extrai texto de imagens contidas em um documento.
-
-        Args:
-            file_path (Path): Caminho para o arquivo a ser processado
-            tool (str, optional): Nome da ferramenta de extração
-
-        Returns:
-            dict: Dicionário contendo extraction_result e metadata
-
-        Raises:
-            DocumentExtractionException: Se houver erro na extração
-            ExtractorNotFoundException: Se a ferramenta de extração não for encontrada
-        """
-        logger.info("Iniciando extração de dados de imagens: {}", file_path.name)
-        start_time = time.time()
-
-        # Identificar extensão do arquivo e selecionar extractor
-        file_extension = get_file_extension(file_path.name)
-        extractor = self._get_extractor(file_extension, tool)
-        logger.info(
-            "Usando extractor: {} para arquivo: {}", extractor.name, file_path.name
+        return ExtractionServiceResponse(
+            extraction_result=extraction_result,
+            metadata=metadata,
         )
-
-        # Realizar extração de imagens
-        result = extractor.extract_image_data(file_path)
-        extraction_time = time.time() - start_time
-        file_stats = file_path.stat()
-
-        # Preparar resultado estruturado
-        extraction_result = ExtractionResult(
-            content=result,
-            format="images",
-            extractor_used=extractor.name,
-        )
-        metadata = ConversionMetadata(
-            file_size=format_file_size(file_stats.st_size),
-            extraction_time=format_duration(extraction_time),
-            character_count=len(result),
-            extractor_used=extractor.name,
-        )
-
-        logger.info(
-            "Extração de imagens concluída. Tempo: {}, Arquivo: {}, Tamanho: {} chars",
-            format_duration(extraction_time),
-            format_file_size(file_stats.st_size),
-            len(result),
-        )
-
-        return {
-            "extraction_result": extraction_result.model_dump(),
-            "metadata": metadata.model_dump(),
-        }
 
     def _get_extractor(
-        self, file_extension: str, tool: str | None = None
+        self,
+        file_extension: str,
+        tool: str | None = None,
     ) -> DocumentExtractor:
         """
         Obtém o melhor extractor para o formato especificado.
@@ -217,7 +148,9 @@ class LeitorDocumentosService:
             try:
                 return DocumentExtractor.get_extractor(file_extension, tool)
             except KeyError:
-                raise ExtractorNotFoundException(f"Extractor '{tool}' não encontrado")
+                raise ExtractorNotFoundException(
+                    f"Extractor '{tool}' não funciona para o formato '{file_extension}'"
+                )
 
         # Sempre usar docling como padrão
         return DocumentExtractor.get_extractor(file_extension)
@@ -238,10 +171,9 @@ class LeitorDocumentosService:
         for extractor_class in DocumentExtractor.__subclasses__():
             if file_extension in extractor_class().supported_extensions:
                 extractor = extractor_class()
-                extractors_info.append({
-                    "name": extractor.name,
-                    "extensions": extractor.supported_extensions
-                })
+                extractors_info.append(
+                    {"name": extractor.name, "extensions": extractor.supported_extensions}
+                )
 
         return {file_extension: extractors_info}
 

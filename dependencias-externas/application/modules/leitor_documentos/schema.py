@@ -15,9 +15,7 @@ class DocumentUpload(BaseModel):
 class ExtractionResult(BaseModel):
     """Resultado da extração de conteúdo"""
 
-    content: str = Field(
-        ..., min_length=1, description="Conteúdo extraído do documento"
-    )
+    content: str = Field(..., min_length=1, description="Conteúdo extraído do documento")
     format: str = Field(..., description="Formato de saída: 'markdown' ou 'raw'")
     extractor_used: str = Field(..., description="Nome do extractor utilizado")
 
@@ -29,10 +27,15 @@ class ConversionMetadata(BaseModel):
     extraction_time: str = Field(..., description="Tempo de extração formatado")
     character_count: int = Field(..., description="Número de caracteres no conteúdo")
     extractor_used: str = Field(..., description="Nome do extractor utilizado")
-    created_at: datetime = Field(
-        default_factory=datetime.now, description="Data/hora da extração"
-    )
+    created_at: datetime = Field(default_factory=datetime.now, description="Data/hora da extração")
     filename: str | None = Field(None, description="Nome do arquivo")
+
+
+class ExtractionServiceResponse(BaseModel):
+    """Resposta do service de extração com tipagem forte"""
+
+    extraction_result: ExtractionResult = Field(..., description="Resultado da extração")
+    metadata: ConversionMetadata = Field(..., description="Metadados da conversão")
 
 
 class DocumentExtractionResponse(BaseModel):
@@ -40,9 +43,7 @@ class DocumentExtractionResponse(BaseModel):
 
     success: bool = Field(..., description="Indica se a extração foi bem-sucedida")
     data: ExtractionResult | None = Field(None, description="Dados da extração")
-    metadata: ConversionMetadata | None = Field(
-        None, description="Metadados da extração"
-    )
+    metadata: ConversionMetadata | None = Field(None, description="Metadados da extração")
     error: str | None = Field(None, description="Mensagem de erro, se houver")
 
 
@@ -57,9 +58,7 @@ class SupportedFormatsResponse(BaseModel):
     """Lista de formatos suportados"""
 
     success: bool = Field(..., description="Status da operação")
-    formats: dict[str, list[dict]] = Field(
-        ..., description="Formatos e extractors disponíveis"
-    )
+    formats: dict[str, list[dict]] = Field(..., description="Formatos e extractors disponíveis")
 
 
 class CleanupResponse(BaseModel):

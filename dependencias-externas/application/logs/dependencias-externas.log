@@ -1,0 +1,592 @@
+2025-08-01 11:13:41 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:407 | Iniciando limpeza de arquivos temporários (max_age: 1h)
+2025-08-01 11:13:41 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:413 | Limpeza concluída. 0 arquivo(s) removido(s)
+2025-08-01 11:13:49 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:372 | Solicitando lista de formatos suportados
+2025-08-01 11:13:49 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:376 | Formatos suportados obtidos com sucesso
+2025-08-01 11:14:21 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: multi_page.pdf
+2025-08-01 11:14:21 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_111421_165ca6c7-2ee3-4a33-b22d-f7deedde7da0.pdf (Tamanho: 125.3 KB)
+2025-08-01 11:14:21 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_111421_165ca6c7-2ee3-4a33-b22d-f7deedde7da0.pdf
+2025-08-01 11:14:21 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_111421_165ca6c7-2ee3-4a33-b22d-f7deedde7da0.pdf
+2025-08-01 11:14:21 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_pdf para arquivo: files/temp/20250801_111421_165ca6c7-2ee3-4a33-b22d-f7deedde7da0.pdf
+2025-08-01 11:14:33 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 11.8s, Arquivo: 125.3 KB, Tamanho: 9928 chars
+2025-08-01 11:14:33 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: multi_page.pdf
+2025-08-01 11:14:33 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_111421_165ca6c7-2ee3-4a33-b22d-f7deedde7da0.pdf
+2025-08-01 11:14:39 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: multi_page.pdf
+2025-08-01 11:14:39 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_111439_4783adc4-8734-43a2-bfdf-b93f99fddc8c.pdf (Tamanho: 125.3 KB)
+2025-08-01 11:14:39 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_111439_4783adc4-8734-43a2-bfdf-b93f99fddc8c.pdf
+2025-08-01 11:14:39 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_111439_4783adc4-8734-43a2-bfdf-b93f99fddc8c.pdf
+2025-08-01 11:14:39 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: files/temp/20250801_111439_4783adc4-8734-43a2-bfdf-b93f99fddc8c.pdf
+2025-08-01 11:14:40 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 134ms, Arquivo: 125.3 KB, Tamanho: 9319 chars
+2025-08-01 11:14:40 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: multi_page.pdf
+2025-08-01 11:14:40 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_111439_4783adc4-8734-43a2-bfdf-b93f99fddc8c.pdf
+2025-08-01 11:14:47 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: multi_page.pdf
+2025-08-01 11:14:47 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_111447_130a1774-fcee-43f7-a942-48cde27c5009.pdf (Tamanho: 125.3 KB)
+2025-08-01 11:14:47 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_111447_130a1774-fcee-43f7-a942-48cde27c5009.pdf
+2025-08-01 11:14:47 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_111447_130a1774-fcee-43f7-a942-48cde27c5009.pdf
+2025-08-01 11:14:47 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: files/temp/20250801_111447_130a1774-fcee-43f7-a942-48cde27c5009.pdf
+2025-08-01 11:18:36 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 3m 49.0s, Arquivo: 125.3 KB, Tamanho: 9295 chars
+2025-08-01 11:18:36 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: multi_page.pdf
+2025-08-01 11:18:36 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_111447_130a1774-fcee-43f7-a942-48cde27c5009.pdf
+2025-08-01 11:19:01 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: multi_page.pdf
+2025-08-01 11:19:01 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_111901_7cd81338-82bf-4582-b572-0ed46f015950.pdf (Tamanho: 125.3 KB)
+2025-08-01 11:19:01 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_111901_7cd81338-82bf-4582-b572-0ed46f015950.pdf
+2025-08-01 11:19:01 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_111901_7cd81338-82bf-4582-b572-0ed46f015950.pdf
+2025-08-01 11:19:01 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: files/temp/20250801_111901_7cd81338-82bf-4582-b572-0ed46f015950.pdf
+2025-08-01 11:19:20 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 19.1s, Arquivo: 125.3 KB, Tamanho: 9295 chars
+2025-08-01 11:19:20 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: multi_page.pdf
+2025-08-01 11:19:20 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_111901_7cd81338-82bf-4582-b572-0ed46f015950.pdf
+2025-08-01 11:24:31 | ERROR    | modules.leitor_documentos.impl.docling:extract_raw_data:54 | Erro na extração: Erro de conversão
+2025-08-01 11:24:31 | ERROR    | modules.leitor_documentos.impl.pypdf:extract_raw_data:59 | Erro na extração: Erro do pypdf
+2025-08-01 11:24:31 | ERROR    | modules.leitor_documentos.impl.docling:extract_raw_data:54 | Erro na extração: Erro inesperado
+2025-08-01 11:24:31 | ERROR    | modules.leitor_documentos.impl.pypdf:extract_raw_data:63 | Erro na extração: Erro inesperado
+2025-08-01 11:24:31 | ERROR    | modules.leitor_documentos.impl.docx2txt:extract_raw_data:50 | Erro na extração: Erro ao processar DOCX
+2025-08-01 11:24:31 | ERROR    | modules.leitor_documentos.impl.llmwhisperer:extract_raw_data:58 | Erro na extração LLMWhisperer PDF: 'Erro do cliente'
+2025-08-01 11:24:31 | ERROR    | modules.leitor_documentos.impl.llmwhisperer:extract_raw_data:144 | Erro na extração LLMWhisperer DOCX: 'Erro do cliente'
+2025-08-01 11:24:31 | ERROR    | modules.leitor_documentos.impl.llmwhisperer:extract_raw_data:61 | Erro inesperado na extração PDF: Erro inesperado
+2025-08-01 11:24:31 | ERROR    | modules.leitor_documentos.impl.llmwhisperer:extract_raw_data:147 | Erro inesperado na extração DOCX: Erro inesperado
+2025-08-01 11:24:44 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: teste.txt
+2025-08-01 11:24:44 | ERROR    | modules.leitor_documentos.service:cleanup_old_files:279 | Erro ao limpar arquivos antigos: Erro de acesso ao diretório
+2025-08-01 11:24:44 | ERROR    | modules.leitor_documentos.service:cleanup_temp_file:249 | Erro ao remover arquivo temporário: Erro ao remover arquivo
+2025-08-01 11:25:15 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: teste.txt
+2025-08-01 11:25:15 | ERROR    | modules.leitor_documentos.service:cleanup_old_files:279 | Erro ao limpar arquivos antigos: Erro de acesso ao diretório
+2025-08-01 11:25:15 | ERROR    | modules.leitor_documentos.service:cleanup_temp_file:249 | Erro ao remover arquivo temporário: Erro ao remover arquivo
+2025-08-01 11:26:39 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: teste.txt
+2025-08-01 11:26:39 | ERROR    | modules.leitor_documentos.service:cleanup_old_files:279 | Erro ao limpar arquivos antigos: Erro de acesso ao diretório
+2025-08-01 11:26:39 | ERROR    | modules.leitor_documentos.service:cleanup_temp_file:249 | Erro ao remover arquivo temporário: Erro ao remover arquivo
+2025-08-01 11:27:08 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: <Mock name='temp_dir.__truediv__()' id='139866640933104'> (Tamanho: 19 B)
+2025-08-01 11:27:08 | ERROR    | modules.leitor_documentos.service:save_upload_file:229 | Erro ao salvar arquivo: Nome do arquivo não fornecido
+2025-08-01 11:27:08 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: teste.txt
+2025-08-01 11:27:08 | ERROR    | modules.leitor_documentos.service:cleanup_old_files:279 | Erro ao limpar arquivos antigos: Erro de acesso ao diretório
+2025-08-01 11:27:08 | ERROR    | modules.leitor_documentos.service:save_upload_file:229 | Erro ao salvar arquivo: Erro de leitura
+2025-08-01 11:27:08 | ERROR    | modules.leitor_documentos.service:save_upload_file:229 | Erro ao salvar arquivo: Erro de escrita
+2025-08-01 11:27:08 | ERROR    | modules.leitor_documentos.service:cleanup_temp_file:249 | Erro ao remover arquivo temporário: Erro ao remover arquivo
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: exemplo.pdf
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração para markdown concluída. Tempo: 1.5s, Arquivo: 2.0 KB, Tamanho: 18 chars
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: exemplo.pdf
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: exemplo.pdf
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 2.0s, Arquivo: 1.0 KB, Tamanho: 22 chars
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: exemplo.pdf
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: exemplo.pdf
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados de imagens concluída. Tempo: 3.5s, Arquivo: 4.0 KB, Tamanho: 17 chars
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: <Mock name='_get_extractor().name' id='140298242528016'> para arquivo: exemplo.pdf
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: inexistente.pdf
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: <Mock name='_get_extractor().name' id='140298240263520'> para arquivo: inexistente.pdf
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: exemplo.pdf
+2025-08-01 11:27:58 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: <Mock name='_get_extractor().name' id='140298240277296'> para arquivo: exemplo.pdf
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: exemplo.pdf
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração para markdown concluída. Tempo: 1.5s, Arquivo: 2.0 KB, Tamanho: 18 chars
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: exemplo.pdf
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: exemplo.pdf
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 2.0s, Arquivo: 1.0 KB, Tamanho: 22 chars
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: exemplo.pdf
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: exemplo.pdf
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados de imagens concluída. Tempo: 3.5s, Arquivo: 4.0 KB, Tamanho: 17 chars
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: <Mock name='_get_extractor().name' id='140428678165232'> para arquivo: exemplo.pdf
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: inexistente.pdf
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: <Mock name='_get_extractor().name' id='140428678351184'> para arquivo: inexistente.pdf
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: exemplo.pdf
+2025-08-01 11:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: <Mock name='_get_extractor().name' id='140428678356272'> para arquivo: exemplo.pdf
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: exemplo.pdf
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração para markdown concluída. Tempo: 1.5s, Arquivo: 2.0 KB, Tamanho: 18 chars
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: exemplo.pdf
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: exemplo.pdf
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 2.0s, Arquivo: 1.0 KB, Tamanho: 22 chars
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: exemplo.pdf
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: exemplo.pdf
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados de imagens concluída. Tempo: 3.5s, Arquivo: 4.0 KB, Tamanho: 17 chars
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: <Mock name='_get_extractor().name' id='140526629863840'> para arquivo: exemplo.pdf
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: inexistente.pdf
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: <Mock name='_get_extractor().name' id='140526629775136'> para arquivo: inexistente.pdf
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: exemplo.pdf
+2025-08-01 11:31:22 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: <Mock name='_get_extractor().name' id='140526629863504'> para arquivo: exemplo.pdf
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:407 | Iniciando limpeza de arquivos temporários (max_age: 24h)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:413 | Limpeza concluída. 0 arquivo(s) removido(s)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:407 | Iniciando limpeza de arquivos temporários (max_age: 12h)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:413 | Limpeza concluída. 0 arquivo(s) removido(s)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:407 | Iniciando limpeza de arquivos temporários (max_age: 24h)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:413 | Limpeza concluída. 0 arquivo(s) removido(s)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:407 | Iniciando limpeza de arquivos temporários (max_age: 24h)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:413 | Limpeza concluída. 0 arquivo(s) removido(s)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:407 | Iniciando limpeza de arquivos temporários (max_age: 24h)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:413 | Limpeza concluída. 0 arquivo(s) removido(s)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:407 | Iniciando limpeza de arquivos temporários (max_age: 1h)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:413 | Limpeza concluída. 0 arquivo(s) removido(s)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:407 | Iniciando limpeza de arquivos temporários (max_age: 24h)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:413 | Limpeza concluída. 0 arquivo(s) removido(s)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:407 | Iniciando limpeza de arquivos temporários (max_age: 168h)
+2025-08-01 11:32:47 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:413 | Limpeza concluída. 0 arquivo(s) removido(s)
+2025-08-01 13:26:24 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 13:26:24 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132624_526c141b-bdb2-4415-9ff1-9107905d0efe.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:26:24 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_132624_526c141b-bdb2-4415-9ff1-9107905d0efe.pdf
+2025-08-01 13:26:24 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_132624_526c141b-bdb2-4415-9ff1-9107905d0efe.pdf
+2025-08-01 13:26:25 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: files/temp/20250801_132624_526c141b-bdb2-4415-9ff1-9107905d0efe.pdf
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração para markdown concluída. Tempo: 33.8s, Arquivo: 25.2 KB, Tamanho: 92 chars
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:215 | Extração markdown concluída com sucesso: exemplo.pdf
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132624_526c141b-bdb2-4415-9ff1-9107905d0efe.pdf
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132658_2a7b828c-0c59-492e-862a-88a7959d4954.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_132658_2a7b828c-0c59-492e-862a-88a7959d4954.pdf
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_132658_2a7b828c-0c59-492e-862a-88a7959d4954.pdf
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: files/temp/20250801_132658_2a7b828c-0c59-492e-862a-88a7959d4954.pdf
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132658_2a7b828c-0c59-492e-862a-88a7959d4954.pdf
+2025-08-01 13:26:58 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:140 | Funcionalidade não implementada na extração markdown: Conversão para markdown não suportada pelo PypdfExtractor.
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: exemplo.pdf
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132658_74dce5a2-79b3-4bc2-bf1c-7852861c110e.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_132658_74dce5a2-79b3-4bc2-bf1c-7852861c110e.pdf
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_132658_74dce5a2-79b3-4bc2-bf1c-7852861c110e.pdf
+2025-08-01 13:26:58 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: files/temp/20250801_132658_74dce5a2-79b3-4bc2-bf1c-7852861c110e.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 7.7s, Arquivo: 25.2 KB, Tamanho: 88 chars
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: exemplo.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132658_74dce5a2-79b3-4bc2-bf1c-7852861c110e.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: exemplo.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132706_d6e6d689-99c9-45f7-b3eb-8ecc4f563a0e.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_132706_d6e6d689-99c9-45f7-b3eb-8ecc4f563a0e.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_132706_d6e6d689-99c9-45f7-b3eb-8ecc4f563a0e.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: files/temp/20250801_132706_d6e6d689-99c9-45f7-b3eb-8ecc4f563a0e.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 13ms, Arquivo: 25.2 KB, Tamanho: 88 chars
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: exemplo.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132706_d6e6d689-99c9-45f7-b3eb-8ecc4f563a0e.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_imagens:316 | Iniciando extração de dados de imagens: exemplo.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132706_6cdfae44-790d-49fb-bcb3-57b56a5817a7.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_imagens:328 | Arquivo salvo temporariamente: files/temp/20250801_132706_6cdfae44-790d-49fb-bcb3-57b56a5817a7.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: 20250801_132706_6cdfae44-790d-49fb-bcb3-57b56a5817a7.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: files/temp/20250801_132706_6cdfae44-790d-49fb-bcb3-57b56a5817a7.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132706_6cdfae44-790d-49fb-bcb3-57b56a5817a7.pdf
+2025-08-01 13:27:06 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:140 | Funcionalidade não implementada na extração de imagens: Extração de imagens não suportada pelo PypdfExtractor.
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132706_1529413c-65a1-4ce5-ab1d-6123110c546f.docx (Tamanho: 23.6 KB)
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_132706_1529413c-65a1-4ce5-ab1d-6123110c546f.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_132706_1529413c-65a1-4ce5-ab1d-6123110c546f.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_docx para arquivo: files/temp/20250801_132706_1529413c-65a1-4ce5-ab1d-6123110c546f.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração para markdown concluída. Tempo: 114ms, Arquivo: 23.6 KB, Tamanho: 6666 chars
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:215 | Extração markdown concluída com sucesso: exemplo.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132706_1529413c-65a1-4ce5-ab1d-6123110c546f.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132706_930a995c-e894-4f75-aa6e-c3a01b611022.docx (Tamanho: 23.6 KB)
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_132706_930a995c-e894-4f75-aa6e-c3a01b611022.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_132706_930a995c-e894-4f75-aa6e-c3a01b611022.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docx2txt para arquivo: files/temp/20250801_132706_930a995c-e894-4f75-aa6e-c3a01b611022.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132706_930a995c-e894-4f75-aa6e-c3a01b611022.docx
+2025-08-01 13:27:06 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:140 | Funcionalidade não implementada na extração markdown: Conversão para markdown não suportada pelo Docx2TxtExtractor.
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: exemplo.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132706_d4fc83cc-3fd7-4d17-b390-ca66b29675ba.docx (Tamanho: 23.6 KB)
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_132706_d4fc83cc-3fd7-4d17-b390-ca66b29675ba.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_132706_d4fc83cc-3fd7-4d17-b390-ca66b29675ba.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_docx para arquivo: files/temp/20250801_132706_d4fc83cc-3fd7-4d17-b390-ca66b29675ba.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 129ms, Arquivo: 23.6 KB, Tamanho: 5903 chars
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: exemplo.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132706_d4fc83cc-3fd7-4d17-b390-ca66b29675ba.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: exemplo.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132706_ca123ed3-3fa1-441b-aaf6-b2a770108214.docx (Tamanho: 23.6 KB)
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_132706_ca123ed3-3fa1-441b-aaf6-b2a770108214.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_132706_ca123ed3-3fa1-441b-aaf6-b2a770108214.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docx2txt para arquivo: files/temp/20250801_132706_ca123ed3-3fa1-441b-aaf6-b2a770108214.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 15ms, Arquivo: 23.6 KB, Tamanho: 6240 chars
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: exemplo.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132706_ca123ed3-3fa1-441b-aaf6-b2a770108214.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_imagens:316 | Iniciando extração de dados de imagens: exemplo.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132706_c238c761-a529-4f4b-96cf-999ce6a986c4.docx (Tamanho: 23.6 KB)
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_imagens:328 | Arquivo salvo temporariamente: files/temp/20250801_132706_c238c761-a529-4f4b-96cf-999ce6a986c4.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: 20250801_132706_c238c761-a529-4f4b-96cf-999ce6a986c4.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docx2txt para arquivo: files/temp/20250801_132706_c238c761-a529-4f4b-96cf-999ce6a986c4.docx
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132706_c238c761-a529-4f4b-96cf-999ce6a986c4.docx
+2025-08-01 13:27:06 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:140 | Funcionalidade não implementada na extração de imagens: Extração de imagens não suportada pelo Docx2TxtExtractor.
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132706_81269da6-e698-4905-ae93-f273db31ce46.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_132706_81269da6-e698-4905-ae93-f273db31ce46.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_132706_81269da6-e698-4905-ae93-f273db31ce46.pdf
+2025-08-01 13:27:06 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: files/temp/20250801_132706_81269da6-e698-4905-ae93-f273db31ce46.pdf
+2025-08-01 13:27:30 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração para markdown concluída. Tempo: 23.3s, Arquivo: 25.2 KB, Tamanho: 92 chars
+2025-08-01 13:27:30 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:215 | Extração markdown concluída com sucesso: exemplo.pdf
+2025-08-01 13:27:30 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132706_81269da6-e698-4905-ae93-f273db31ce46.pdf
+2025-08-01 13:27:30 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 13:27:30 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132730_e304117c-2c8b-471c-8c2b-f29ff30342aa.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:27:30 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_132730_e304117c-2c8b-471c-8c2b-f29ff30342aa.pdf
+2025-08-01 13:27:30 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_132730_e304117c-2c8b-471c-8c2b-f29ff30342aa.pdf
+2025-08-01 13:27:30 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_pdf para arquivo: files/temp/20250801_132730_e304117c-2c8b-471c-8c2b-f29ff30342aa.pdf
+2025-08-01 13:27:31 | ERROR    | modules.leitor_documentos.impl.llmwhisperer:extract_raw_data:58 | Erro na extração LLMWhisperer PDF: {'message': 'Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.', 'status_code': 401, 'extraction': {}}
+2025-08-01 13:27:31 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132730_e304117c-2c8b-471c-8c2b-f29ff30342aa.pdf
+2025-08-01 13:27:31 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:130 | Erro na extração markdown: Erro ao extrair dados do PDF com LLMWhisperer: {'message': 'Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.', 'status_code': 401, 'extraction': {}}
+2025-08-01 13:27:31 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: exemplo.pdf
+2025-08-01 13:27:31 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132731_1e05e45a-3d0e-40dc-b004-c91f9ce09ece.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:27:31 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_132731_1e05e45a-3d0e-40dc-b004-c91f9ce09ece.pdf
+2025-08-01 13:27:31 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_132731_1e05e45a-3d0e-40dc-b004-c91f9ce09ece.pdf
+2025-08-01 13:27:31 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_pdf para arquivo: files/temp/20250801_132731_1e05e45a-3d0e-40dc-b004-c91f9ce09ece.pdf
+2025-08-01 13:27:31 | ERROR    | modules.leitor_documentos.impl.llmwhisperer:extract_raw_data:58 | Erro na extração LLMWhisperer PDF: {'message': 'Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.', 'status_code': 401, 'extraction': {}}
+2025-08-01 13:27:31 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132731_1e05e45a-3d0e-40dc-b004-c91f9ce09ece.pdf
+2025-08-01 13:27:31 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:130 | Erro na extração de dados brutos: Erro ao extrair dados do PDF com LLMWhisperer: {'message': 'Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.', 'status_code': 401, 'extraction': {}}
+2025-08-01 13:27:31 | INFO     | modules.leitor_documentos.router:extrair_imagens:316 | Iniciando extração de dados de imagens: exemplo.pdf
+2025-08-01 13:27:31 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132731_31b9fc5f-64f5-4763-8b69-0cb66d617f51.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:27:31 | INFO     | modules.leitor_documentos.router:extrair_imagens:328 | Arquivo salvo temporariamente: files/temp/20250801_132731_31b9fc5f-64f5-4763-8b69-0cb66d617f51.pdf
+2025-08-01 13:27:31 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: 20250801_132731_31b9fc5f-64f5-4763-8b69-0cb66d617f51.pdf
+2025-08-01 13:27:31 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_pdf para arquivo: files/temp/20250801_132731_31b9fc5f-64f5-4763-8b69-0cb66d617f51.pdf
+2025-08-01 13:27:31 | ERROR    | modules.leitor_documentos.impl.llmwhisperer:extract_raw_data:58 | Erro na extração LLMWhisperer PDF: {'message': 'Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.', 'status_code': 401, 'extraction': {}}
+2025-08-01 13:27:31 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132731_31b9fc5f-64f5-4763-8b69-0cb66d617f51.pdf
+2025-08-01 13:27:31 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:130 | Erro na extração de imagens: Erro ao extrair dados do PDF com LLMWhisperer: {'message': 'Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.', 'status_code': 401, 'extraction': {}}
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.docx
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132732_a73fdaa7-0885-4b88-b9d0-da04430d9e81.docx (Tamanho: 23.6 KB)
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_132732_a73fdaa7-0885-4b88-b9d0-da04430d9e81.docx
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_132732_a73fdaa7-0885-4b88-b9d0-da04430d9e81.docx
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_docx para arquivo: files/temp/20250801_132732_a73fdaa7-0885-4b88-b9d0-da04430d9e81.docx
+2025-08-01 13:27:32 | ERROR    | modules.leitor_documentos.impl.llmwhisperer:extract_raw_data:144 | Erro na extração LLMWhisperer DOCX: {'message': 'Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.', 'status_code': 401, 'extraction': {}}
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132732_a73fdaa7-0885-4b88-b9d0-da04430d9e81.docx
+2025-08-01 13:27:32 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:130 | Erro na extração markdown: Erro ao extrair dados do DOCX com LLMWhisperer: {'message': 'Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.', 'status_code': 401, 'extraction': {}}
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: exemplo.docx
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132732_04e212fc-9750-498c-862f-fc51e4b10dfd.docx (Tamanho: 23.6 KB)
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_132732_04e212fc-9750-498c-862f-fc51e4b10dfd.docx
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_132732_04e212fc-9750-498c-862f-fc51e4b10dfd.docx
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_docx para arquivo: files/temp/20250801_132732_04e212fc-9750-498c-862f-fc51e4b10dfd.docx
+2025-08-01 13:27:32 | ERROR    | modules.leitor_documentos.impl.llmwhisperer:extract_raw_data:144 | Erro na extração LLMWhisperer DOCX: {'message': 'Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.', 'status_code': 401, 'extraction': {}}
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132732_04e212fc-9750-498c-862f-fc51e4b10dfd.docx
+2025-08-01 13:27:32 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:130 | Erro na extração de dados brutos: Erro ao extrair dados do DOCX com LLMWhisperer: {'message': 'Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.', 'status_code': 401, 'extraction': {}}
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.router:extrair_imagens:316 | Iniciando extração de dados de imagens: exemplo.docx
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132732_20ed82c3-6246-445a-86c2-4ab5f01f0fa3.docx (Tamanho: 23.6 KB)
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.router:extrair_imagens:328 | Arquivo salvo temporariamente: files/temp/20250801_132732_20ed82c3-6246-445a-86c2-4ab5f01f0fa3.docx
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: 20250801_132732_20ed82c3-6246-445a-86c2-4ab5f01f0fa3.docx
+2025-08-01 13:27:32 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_docx para arquivo: files/temp/20250801_132732_20ed82c3-6246-445a-86c2-4ab5f01f0fa3.docx
+2025-08-01 13:27:33 | ERROR    | modules.leitor_documentos.impl.llmwhisperer:extract_raw_data:144 | Erro na extração LLMWhisperer DOCX: {'message': 'Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.', 'status_code': 401, 'extraction': {}}
+2025-08-01 13:27:33 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132732_20ed82c3-6246-445a-86c2-4ab5f01f0fa3.docx
+2025-08-01 13:27:33 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:130 | Erro na extração de imagens: Erro ao extrair dados do DOCX com LLMWhisperer: {'message': 'Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.', 'status_code': 401, 'extraction': {}}
+2025-08-01 13:29:08 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 13:29:08 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132908_feb0c7db-f500-4299-a6bd-96177f866fad.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:29:08 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_132908_feb0c7db-f500-4299-a6bd-96177f866fad.pdf
+2025-08-01 13:29:08 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_132908_feb0c7db-f500-4299-a6bd-96177f866fad.pdf
+2025-08-01 13:29:08 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: files/temp/20250801_132908_feb0c7db-f500-4299-a6bd-96177f866fad.pdf
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração para markdown concluída. Tempo: 19.0s, Arquivo: 25.2 KB, Tamanho: 92 chars
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:215 | Extração markdown concluída com sucesso: exemplo.pdf
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132908_feb0c7db-f500-4299-a6bd-96177f866fad.pdf
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132927_412cde72-ef24-4b31-b32b-1b35dcdce9b8.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_132927_412cde72-ef24-4b31-b32b-1b35dcdce9b8.pdf
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_132927_412cde72-ef24-4b31-b32b-1b35dcdce9b8.pdf
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: files/temp/20250801_132927_412cde72-ef24-4b31-b32b-1b35dcdce9b8.pdf
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132927_412cde72-ef24-4b31-b32b-1b35dcdce9b8.pdf
+2025-08-01 13:29:27 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:140 | Funcionalidade não implementada na extração markdown: Conversão para markdown não suportada pelo PypdfExtractor.
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: exemplo.pdf
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132927_01a22f07-43a5-42a1-803c-95252c7c2215.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_132927_01a22f07-43a5-42a1-803c-95252c7c2215.pdf
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_132927_01a22f07-43a5-42a1-803c-95252c7c2215.pdf
+2025-08-01 13:29:27 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: files/temp/20250801_132927_01a22f07-43a5-42a1-803c-95252c7c2215.pdf
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 8.5s, Arquivo: 25.2 KB, Tamanho: 88 chars
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: exemplo.pdf
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132927_01a22f07-43a5-42a1-803c-95252c7c2215.pdf
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: exemplo.pdf
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132936_28c78248-0aff-4610-811e-a87abb72239d.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_132936_28c78248-0aff-4610-811e-a87abb72239d.pdf
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_132936_28c78248-0aff-4610-811e-a87abb72239d.pdf
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: files/temp/20250801_132936_28c78248-0aff-4610-811e-a87abb72239d.pdf
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 18ms, Arquivo: 25.2 KB, Tamanho: 88 chars
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: exemplo.pdf
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132936_28c78248-0aff-4610-811e-a87abb72239d.pdf
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.router:extrair_imagens:316 | Iniciando extração de dados de imagens: exemplo.pdf
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132936_f54bcc19-bdf3-4409-b665-2906629d7183.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.router:extrair_imagens:328 | Arquivo salvo temporariamente: files/temp/20250801_132936_f54bcc19-bdf3-4409-b665-2906629d7183.pdf
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: 20250801_132936_f54bcc19-bdf3-4409-b665-2906629d7183.pdf
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: files/temp/20250801_132936_f54bcc19-bdf3-4409-b665-2906629d7183.pdf
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132936_f54bcc19-bdf3-4409-b665-2906629d7183.pdf
+2025-08-01 13:29:36 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:140 | Funcionalidade não implementada na extração de imagens: Extração de imagens não suportada pelo PypdfExtractor.
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.docx
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132936_c39bb6a7-e4bd-4e73-bed6-0de4e7cd5931.docx (Tamanho: 23.6 KB)
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_132936_c39bb6a7-e4bd-4e73-bed6-0de4e7cd5931.docx
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_132936_c39bb6a7-e4bd-4e73-bed6-0de4e7cd5931.docx
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_docx para arquivo: files/temp/20250801_132936_c39bb6a7-e4bd-4e73-bed6-0de4e7cd5931.docx
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração para markdown concluída. Tempo: 387ms, Arquivo: 23.6 KB, Tamanho: 6666 chars
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:215 | Extração markdown concluída com sucesso: exemplo.docx
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132936_c39bb6a7-e4bd-4e73-bed6-0de4e7cd5931.docx
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.docx
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132936_5fec0617-7194-4449-ad0c-1c7f8203543c.docx (Tamanho: 23.6 KB)
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_132936_5fec0617-7194-4449-ad0c-1c7f8203543c.docx
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_132936_5fec0617-7194-4449-ad0c-1c7f8203543c.docx
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docx2txt para arquivo: files/temp/20250801_132936_5fec0617-7194-4449-ad0c-1c7f8203543c.docx
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132936_5fec0617-7194-4449-ad0c-1c7f8203543c.docx
+2025-08-01 13:29:36 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:140 | Funcionalidade não implementada na extração markdown: Conversão para markdown não suportada pelo Docx2TxtExtractor.
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: exemplo.docx
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132936_541ec331-1c39-4b02-b81a-f00b9162e27f.docx (Tamanho: 23.6 KB)
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_132936_541ec331-1c39-4b02-b81a-f00b9162e27f.docx
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_132936_541ec331-1c39-4b02-b81a-f00b9162e27f.docx
+2025-08-01 13:29:36 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_docx para arquivo: files/temp/20250801_132936_541ec331-1c39-4b02-b81a-f00b9162e27f.docx
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 178ms, Arquivo: 23.6 KB, Tamanho: 5903 chars
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: exemplo.docx
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132936_541ec331-1c39-4b02-b81a-f00b9162e27f.docx
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: exemplo.docx
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132937_27587d92-164e-4683-808b-4a6ceec9d154.docx (Tamanho: 23.6 KB)
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_132937_27587d92-164e-4683-808b-4a6ceec9d154.docx
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_132937_27587d92-164e-4683-808b-4a6ceec9d154.docx
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docx2txt para arquivo: files/temp/20250801_132937_27587d92-164e-4683-808b-4a6ceec9d154.docx
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 17ms, Arquivo: 23.6 KB, Tamanho: 6240 chars
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: exemplo.docx
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132937_27587d92-164e-4683-808b-4a6ceec9d154.docx
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.router:extrair_imagens:316 | Iniciando extração de dados de imagens: exemplo.docx
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132937_7673b1d6-5f0c-494e-be53-f9729a3772e5.docx (Tamanho: 23.6 KB)
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.router:extrair_imagens:328 | Arquivo salvo temporariamente: files/temp/20250801_132937_7673b1d6-5f0c-494e-be53-f9729a3772e5.docx
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: 20250801_132937_7673b1d6-5f0c-494e-be53-f9729a3772e5.docx
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docx2txt para arquivo: files/temp/20250801_132937_7673b1d6-5f0c-494e-be53-f9729a3772e5.docx
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132937_7673b1d6-5f0c-494e-be53-f9729a3772e5.docx
+2025-08-01 13:29:37 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:140 | Funcionalidade não implementada na extração de imagens: Extração de imagens não suportada pelo Docx2TxtExtractor.
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132937_d856c1b2-6093-4baa-a443-c97127ef92cd.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_132937_d856c1b2-6093-4baa-a443-c97127ef92cd.pdf
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_132937_d856c1b2-6093-4baa-a443-c97127ef92cd.pdf
+2025-08-01 13:29:37 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: files/temp/20250801_132937_d856c1b2-6093-4baa-a443-c97127ef92cd.pdf
+2025-08-01 13:29:47 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração para markdown concluída. Tempo: 10.1s, Arquivo: 25.2 KB, Tamanho: 92 chars
+2025-08-01 13:29:47 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:215 | Extração markdown concluída com sucesso: exemplo.pdf
+2025-08-01 13:29:47 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132937_d856c1b2-6093-4baa-a443-c97127ef92cd.pdf
+2025-08-01 13:29:47 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.pdf
+2025-08-01 13:29:47 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132947_201e739d-c9df-4bac-b7ea-7ed5f69123b7.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:29:47 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_132947_201e739d-c9df-4bac-b7ea-7ed5f69123b7.pdf
+2025-08-01 13:29:47 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_132947_201e739d-c9df-4bac-b7ea-7ed5f69123b7.pdf
+2025-08-01 13:29:47 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_pdf para arquivo: files/temp/20250801_132947_201e739d-c9df-4bac-b7ea-7ed5f69123b7.pdf
+2025-08-01 13:29:53 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração para markdown concluída. Tempo: 6.7s, Arquivo: 25.2 KB, Tamanho: 98 chars
+2025-08-01 13:29:53 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:215 | Extração markdown concluída com sucesso: exemplo.pdf
+2025-08-01 13:29:53 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132947_201e739d-c9df-4bac-b7ea-7ed5f69123b7.pdf
+2025-08-01 13:29:54 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: exemplo.pdf
+2025-08-01 13:29:54 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_132954_65764a8c-246e-48c8-89e2-82e288028d5b.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:29:54 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_132954_65764a8c-246e-48c8-89e2-82e288028d5b.pdf
+2025-08-01 13:29:54 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_132954_65764a8c-246e-48c8-89e2-82e288028d5b.pdf
+2025-08-01 13:29:54 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_pdf para arquivo: files/temp/20250801_132954_65764a8c-246e-48c8-89e2-82e288028d5b.pdf
+2025-08-01 13:30:00 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 6.7s, Arquivo: 25.2 KB, Tamanho: 98 chars
+2025-08-01 13:30:00 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: exemplo.pdf
+2025-08-01 13:30:00 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_132954_65764a8c-246e-48c8-89e2-82e288028d5b.pdf
+2025-08-01 13:30:00 | INFO     | modules.leitor_documentos.router:extrair_imagens:316 | Iniciando extração de dados de imagens: exemplo.pdf
+2025-08-01 13:30:00 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_133000_70fc8156-26ad-41a3-b2ec-828a8668b2c4.pdf (Tamanho: 25.2 KB)
+2025-08-01 13:30:00 | INFO     | modules.leitor_documentos.router:extrair_imagens:328 | Arquivo salvo temporariamente: files/temp/20250801_133000_70fc8156-26ad-41a3-b2ec-828a8668b2c4.pdf
+2025-08-01 13:30:00 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: 20250801_133000_70fc8156-26ad-41a3-b2ec-828a8668b2c4.pdf
+2025-08-01 13:30:00 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_pdf para arquivo: files/temp/20250801_133000_70fc8156-26ad-41a3-b2ec-828a8668b2c4.pdf
+2025-08-01 13:30:07 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados de imagens concluída. Tempo: 6.4s, Arquivo: 25.2 KB, Tamanho: 98 chars
+2025-08-01 13:30:07 | INFO     | modules.leitor_documentos.router:extrair_imagens:348 | Extração de imagens concluída com sucesso: exemplo.pdf
+2025-08-01 13:30:07 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_133000_70fc8156-26ad-41a3-b2ec-828a8668b2c4.pdf
+2025-08-01 13:30:07 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: exemplo.docx
+2025-08-01 13:30:07 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_133007_03b9e683-38fc-4174-8209-aa01fb31ee90.docx (Tamanho: 23.6 KB)
+2025-08-01 13:30:07 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_133007_03b9e683-38fc-4174-8209-aa01fb31ee90.docx
+2025-08-01 13:30:07 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_133007_03b9e683-38fc-4174-8209-aa01fb31ee90.docx
+2025-08-01 13:30:07 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_docx para arquivo: files/temp/20250801_133007_03b9e683-38fc-4174-8209-aa01fb31ee90.docx
+2025-08-01 13:30:18 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração para markdown concluída. Tempo: 11.7s, Arquivo: 23.6 KB, Tamanho: 6967 chars
+2025-08-01 13:30:18 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:215 | Extração markdown concluída com sucesso: exemplo.docx
+2025-08-01 13:30:18 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_133007_03b9e683-38fc-4174-8209-aa01fb31ee90.docx
+2025-08-01 13:30:18 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: exemplo.docx
+2025-08-01 13:30:18 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_133018_d68789ab-9b4c-4a97-bde3-0461d57420b9.docx (Tamanho: 23.6 KB)
+2025-08-01 13:30:18 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_133018_d68789ab-9b4c-4a97-bde3-0461d57420b9.docx
+2025-08-01 13:30:18 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_133018_d68789ab-9b4c-4a97-bde3-0461d57420b9.docx
+2025-08-01 13:30:18 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_docx para arquivo: files/temp/20250801_133018_d68789ab-9b4c-4a97-bde3-0461d57420b9.docx
+2025-08-01 13:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 11.6s, Arquivo: 23.6 KB, Tamanho: 6967 chars
+2025-08-01 13:30:30 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: exemplo.docx
+2025-08-01 13:30:30 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_133018_d68789ab-9b4c-4a97-bde3-0461d57420b9.docx
+2025-08-01 13:30:30 | INFO     | modules.leitor_documentos.router:extrair_imagens:316 | Iniciando extração de dados de imagens: exemplo.docx
+2025-08-01 13:30:30 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_133030_d065b6c9-5284-4fa9-bce5-886f9512b43c.docx (Tamanho: 23.6 KB)
+2025-08-01 13:30:30 | INFO     | modules.leitor_documentos.router:extrair_imagens:328 | Arquivo salvo temporariamente: files/temp/20250801_133030_d065b6c9-5284-4fa9-bce5-886f9512b43c.docx
+2025-08-01 13:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: 20250801_133030_d065b6c9-5284-4fa9-bce5-886f9512b43c.docx
+2025-08-01 13:30:30 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_docx para arquivo: files/temp/20250801_133030_d065b6c9-5284-4fa9-bce5-886f9512b43c.docx
+2025-08-01 13:30:37 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados de imagens concluída. Tempo: 7.0s, Arquivo: 23.6 KB, Tamanho: 6967 chars
+2025-08-01 13:30:37 | INFO     | modules.leitor_documentos.router:extrair_imagens:348 | Extração de imagens concluída com sucesso: exemplo.docx
+2025-08-01 13:30:37 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_133030_d065b6c9-5284-4fa9-bce5-886f9512b43c.docx
+2025-08-01 13:30:59 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:372 | Solicitando lista de formatos suportados
+2025-08-01 13:30:59 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:376 | Formatos suportados obtidos com sucesso
+2025-08-01 13:30:59 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:372 | Solicitando lista de formatos suportados
+2025-08-01 13:30:59 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:376 | Formatos suportados obtidos com sucesso
+2025-08-01 13:30:59 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:372 | Solicitando lista de formatos suportados
+2025-08-01 13:30:59 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:376 | Formatos suportados obtidos com sucesso
+2025-08-01 13:30:59 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:372 | Solicitando lista de formatos suportados
+2025-08-01 13:30:59 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:376 | Formatos suportados obtidos com sucesso
+2025-08-01 13:30:59 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:372 | Solicitando lista de formatos suportados
+2025-08-01 13:30:59 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:376 | Formatos suportados obtidos com sucesso
+2025-08-01 13:30:59 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:372 | Solicitando lista de formatos suportados
+2025-08-01 13:30:59 | INFO     | modules.leitor_documentos.router:listar_formatos_suportados:376 | Formatos suportados obtidos com sucesso
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: documento.txt
+2025-08-01 13:31:13 | ERROR    | modules.leitor_documentos.service:cleanup_temp_file:249 | Erro ao remover arquivo temporário: [Errno 21] Is a directory: '.'
+2025-08-01 13:31:13 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:80 | Erro de validação de arquivo: Extensão 'txt' não permitida para 'documento.txt'. Permitidas: ['pdf', 'docx']
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: documento_grande.pdf
+2025-08-01 13:31:13 | ERROR    | modules.leitor_documentos.service:cleanup_temp_file:249 | Erro ao remover arquivo temporário: [Errno 21] Is a directory: '.'
+2025-08-01 13:31:13 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:90 | Arquivo muito grande: Arquivo 'documento_grande.pdf' muito grande (51.0 MB). Tamanho máximo: 50.0 MB
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: vazio.pdf
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_133113_49759b3a-b3f8-4a6d-83b7-8bdcff4fea79.pdf (Tamanho: 0 B)
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_133113_49759b3a-b3f8-4a6d-83b7-8bdcff4fea79.pdf
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_133113_49759b3a-b3f8-4a6d-83b7-8bdcff4fea79.pdf
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: files/temp/20250801_133113_49759b3a-b3f8-4a6d-83b7-8bdcff4fea79.pdf
+2025-08-01 13:31:13 | ERROR    | modules.leitor_documentos.impl.docling:extract_to_markdown:80 | Erro na extração markdown: Input document 20250801_133113_49759b3a-b3f8-4a6d-83b7-8bdcff4fea79.pdf is not valid.
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_133113_49759b3a-b3f8-4a6d-83b7-8bdcff4fea79.pdf
+2025-08-01 13:31:13 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:130 | Erro na extração markdown: Erro ao extrair dados do PDF: Input document 20250801_133113_49759b3a-b3f8-4a6d-83b7-8bdcff4fea79.pdf is not valid.
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: malformado.pdf
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_133113_aad01f47-5315-4d27-8d71-056298b4734c.pdf (Tamanho: 24 B)
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_133113_aad01f47-5315-4d27-8d71-056298b4734c.pdf
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_133113_aad01f47-5315-4d27-8d71-056298b4734c.pdf
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: files/temp/20250801_133113_aad01f47-5315-4d27-8d71-056298b4734c.pdf
+2025-08-01 13:31:13 | ERROR    | modules.leitor_documentos.impl.docling:extract_to_markdown:80 | Erro na extração markdown: Input document 20250801_133113_aad01f47-5315-4d27-8d71-056298b4734c.pdf is not valid.
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_133113_aad01f47-5315-4d27-8d71-056298b4734c.pdf
+2025-08-01 13:31:13 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:130 | Erro na extração markdown: Erro ao extrair dados do PDF: Input document 20250801_133113_aad01f47-5315-4d27-8d71-056298b4734c.pdf is not valid.
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: arquivo.txt
+2025-08-01 13:31:13 | ERROR    | modules.leitor_documentos.service:cleanup_temp_file:249 | Erro ao remover arquivo temporário: [Errno 21] Is a directory: '.'
+2025-08-01 13:31:13 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:80 | Erro de validação de arquivo: Extensão 'txt' não permitida para 'arquivo.txt'. Permitidas: ['pdf', 'docx']
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:183 | Iniciando extração para markdown: documento_çom_açentos_中文.pdf
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_133113_239826e7-6f7e-41b5-9033-820a94221a12.pdf (Tamanho: 8 B)
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:195 | Arquivo salvo temporariamente: files/temp/20250801_133113_239826e7-6f7e-41b5-9033-820a94221a12.pdf
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_133113_239826e7-6f7e-41b5-9033-820a94221a12.pdf
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: files/temp/20250801_133113_239826e7-6f7e-41b5-9033-820a94221a12.pdf
+2025-08-01 13:31:13 | ERROR    | modules.leitor_documentos.impl.docling:extract_to_markdown:80 | Erro na extração markdown: Input document 20250801_133113_239826e7-6f7e-41b5-9033-820a94221a12.pdf is not valid.
+2025-08-01 13:31:13 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_133113_239826e7-6f7e-41b5-9033-820a94221a12.pdf
+2025-08-01 13:31:13 | ERROR    | modules.leitor_documentos.router:_handle_extraction_error:130 | Erro na extração markdown: Erro ao extrair dados do PDF: Input document 20250801_133113_239826e7-6f7e-41b5-9033-820a94221a12.pdf is not valid.
+2025-08-01 13:56:01 | INFO     | modules.leitor_documentos.router:_process_file_extraction:111 | Iniciando extração de dados brutos: multi_page.pdf
+2025-08-01 13:56:01 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_135601_dfe30390-1946-4f05-b69a-bbd20138a47f.pdf (Tamanho: 125.3 KB)
+2025-08-01 13:56:01 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_135601_dfe30390-1946-4f05-b69a-bbd20138a47f.pdf
+2025-08-01 13:56:01 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: files/temp/20250801_135601_dfe30390-1946-4f05-b69a-bbd20138a47f.pdf
+2025-08-01 13:56:02 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 859ms, Arquivo: 125.3 KB, Tamanho: 9319 chars
+2025-08-01 13:56:02 | INFO     | modules.leitor_documentos.router:_process_file_extraction:138 | Extração de dados brutos concluída com sucesso: multi_page.pdf
+2025-08-01 13:56:02 | INFO     | modules.leitor_documentos.router:_cleanup_temp_files:70 | Limpando arquivo temporário: files/temp/20250801_135601_dfe30390-1946-4f05-b69a-bbd20138a47f.pdf
+2025-08-01 13:56:02 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_135601_dfe30390-1946-4f05-b69a-bbd20138a47f.pdf
+2025-08-01 14:44:34 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:247 | Iniciando extração de dados brutos: multi_page.pdf
+2025-08-01 14:44:34 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_144434_33a73386-d276-4c52-aa8a-933fe30744db.pdf (Tamanho: 125.3 KB)
+2025-08-01 14:44:34 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:259 | Arquivo salvo temporariamente: files/temp/20250801_144434_33a73386-d276-4c52-aa8a-933fe30744db.pdf
+2025-08-01 14:44:34 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_144434_33a73386-d276-4c52-aa8a-933fe30744db.pdf
+2025-08-01 14:44:34 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: files/temp/20250801_144434_33a73386-d276-4c52-aa8a-933fe30744db.pdf
+2025-08-01 14:44:34 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 317ms, Arquivo: 125.3 KB, Tamanho: 9319 chars
+2025-08-01 14:44:34 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:279 | Extração de dados brutos concluída com sucesso: multi_page.pdf
+2025-08-01 14:44:34 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_144434_33a73386-d276-4c52-aa8a-933fe30744db.pdf
+2025-08-01 15:54:19 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:291 | Iniciando limpeza de arquivos temporários (max_age: 1h)
+2025-08-01 15:54:19 | INFO     | modules.leitor_documentos.router:limpar_arquivos_temporarios:295 | Limpeza concluída. 0 arquivo(s) removido(s)
+2025-08-01 15:54:36 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:188 | Iniciando extração de dados brutos: multi_page.pdf
+2025-08-01 15:54:36 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_155436_6f98d399-4d2b-4f5c-bd40-30f19b06cb13.pdf (Tamanho: 125.3 KB)
+2025-08-01 15:54:36 | INFO     | modules.leitor_documentos.router:temp_file_manager:124 | Arquivo salvo temporariamente: files/temp/20250801_155436_6f98d399-4d2b-4f5c-bd40-30f19b06cb13.pdf
+2025-08-01 15:54:36 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_155436_6f98d399-4d2b-4f5c-bd40-30f19b06cb13.pdf
+2025-08-01 15:54:36 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: files/temp/20250801_155436_6f98d399-4d2b-4f5c-bd40-30f19b06cb13.pdf
+2025-08-01 15:54:36 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 263ms, Arquivo: 125.3 KB, Tamanho: 9319 chars
+2025-08-01 15:54:36 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:206 | Extração de dados brutos concluída com sucesso: multi_page.pdf
+2025-08-01 15:54:36 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_155436_6f98d399-4d2b-4f5c-bd40-30f19b06cb13.pdf
+2025-08-01 15:59:57 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:219 | Iniciando extração de dados brutos: multi_page.pdf
+2025-08-01 15:59:57 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_155957_879554eb-46f8-430f-b43b-987efb71186e.pdf (Tamanho: 125.3 KB)
+2025-08-01 15:59:57 | INFO     | modules.leitor_documentos.router:temp_file_manager:124 | Arquivo salvo temporariamente: files/temp/20250801_155957_879554eb-46f8-430f-b43b-987efb71186e.pdf
+2025-08-01 15:59:57 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_155957_879554eb-46f8-430f-b43b-987efb71186e.pdf
+2025-08-01 15:59:57 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: files/temp/20250801_155957_879554eb-46f8-430f-b43b-987efb71186e.pdf
+2025-08-01 15:59:58 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 359ms, Arquivo: 125.3 KB, Tamanho: 9319 chars
+2025-08-01 15:59:58 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:237 | Extração de dados brutos concluída com sucesso: multi_page.pdf
+2025-08-01 15:59:58 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_155957_879554eb-46f8-430f-b43b-987efb71186e.pdf
+2025-08-01 16:00:41 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:219 | Iniciando extração de dados brutos: multi_page.pdf
+2025-08-01 16:00:41 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_160041_ee3af12f-5f7f-4fad-81b9-a6a83007730f.pdf (Tamanho: 125.3 KB)
+2025-08-01 16:00:41 | INFO     | modules.leitor_documentos.router:temp_file_manager:124 | Arquivo salvo temporariamente: files/temp/20250801_160041_ee3af12f-5f7f-4fad-81b9-a6a83007730f.pdf
+2025-08-01 16:00:41 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_160041_ee3af12f-5f7f-4fad-81b9-a6a83007730f.pdf
+2025-08-01 16:00:41 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: files/temp/20250801_160041_ee3af12f-5f7f-4fad-81b9-a6a83007730f.pdf
+2025-08-01 16:00:42 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 335ms, Arquivo: 125.3 KB, Tamanho: 9319 chars
+2025-08-01 16:00:42 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:237 | Extração de dados brutos concluída com sucesso: multi_page.pdf
+2025-08-01 16:00:42 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_160041_ee3af12f-5f7f-4fad-81b9-a6a83007730f.pdf
+2025-08-01 16:01:59 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:243 | Iniciando extração de dados brutos: multi_page.pdf
+2025-08-01 16:01:59 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_160159_a3e430a1-e23b-4c3b-9306-201c19c37197.pdf (Tamanho: 125.3 KB)
+2025-08-01 16:01:59 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:253 | Arquivo salvo temporariamente: files/temp/20250801_160159_a3e430a1-e23b-4c3b-9306-201c19c37197.pdf
+2025-08-01 16:01:59 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_160159_a3e430a1-e23b-4c3b-9306-201c19c37197.pdf
+2025-08-01 16:01:59 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: pypdf para arquivo: files/temp/20250801_160159_a3e430a1-e23b-4c3b-9306-201c19c37197.pdf
+2025-08-01 16:01:59 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 194ms, Arquivo: 125.3 KB, Tamanho: 9319 chars
+2025-08-01 16:01:59 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:273 | Extração de dados brutos concluída com sucesso: multi_page.pdf
+2025-08-01 16:01:59 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_160159_a3e430a1-e23b-4c3b-9306-201c19c37197.pdf
+2025-08-01 16:25:22 | INFO     | modules.leitor_documentos.router:register_exception_handlers:140 | Exception handlers do módulo leitor_documentos registrados
+2025-08-01 16:27:47 | INFO     | modules.leitor_documentos.router:register_exception_handlers:140 | Exception handlers do módulo leitor_documentos registrados
+2025-08-01 16:28:19 | INFO     | modules.leitor_documentos.router:register_exception_handlers:140 | Exception handlers do módulo leitor_documentos registrados
+2025-08-01 16:40:17 | INFO     | modules.leitor_documentos.router:register_exception_handlers:140 | Exception handlers do módulo leitor_documentos registrados
+2025-08-01 16:40:50 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:198 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:41:08 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:198 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:41:38 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:198 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:43:48 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:198 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:44:25 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:168 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:44:35 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:167 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:45:11 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:156 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:45:21 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:156 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:46:01 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:46:59 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:47:16 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:49:32 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:50:52 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:51:00 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:51:07 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:51:14 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:51:24 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:52:03 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:53:32 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:53:40 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:53:48 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:53:55 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:54:04 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:54:19 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:55:04 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:55:13 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:56:40 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 16:56:59 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 17:08:12 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:102 | Iniciando extração para markdown: sample.pdf
+2025-08-01 17:08:12 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_170812_6dd0772a-887c-4704-902c-a21d12bf81e1.pdf (Tamanho: 25.2 KB)
+2025-08-01 17:08:12 | INFO     | modules.leitor_documentos.router:temp_file_manager:51 | Arquivo salvo temporariamente: files/temp/20250801_170812_6dd0772a-887c-4704-902c-a21d12bf81e1.pdf
+2025-08-01 17:08:12 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_170812_6dd0772a-887c-4704-902c-a21d12bf81e1.pdf
+2025-08-01 17:08:12 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_170812_6dd0772a-887c-4704-902c-a21d12bf81e1.pdf
+2025-08-01 17:08:12 | ERROR    | modules.leitor_documentos.handlers:extractor_not_found_exception_handler:69 | Extractor não encontrado na rota /leitor-documentos/extrair-markdown: Extractor 'docx2txt' não encontrado
+2025-08-01 17:08:51 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:102 | Iniciando extração para markdown: exemplo.docx
+2025-08-01 17:08:51 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_170851_073af4e0-1c52-499c-9651-b10c3e40b799.docx (Tamanho: 23.6 KB)
+2025-08-01 17:08:51 | INFO     | modules.leitor_documentos.router:temp_file_manager:51 | Arquivo salvo temporariamente: files/temp/20250801_170851_073af4e0-1c52-499c-9651-b10c3e40b799.docx
+2025-08-01 17:08:51 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_170851_073af4e0-1c52-499c-9651-b10c3e40b799.docx
+2025-08-01 17:08:51 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docx2txt para arquivo: files/temp/20250801_170851_073af4e0-1c52-499c-9651-b10c3e40b799.docx
+2025-08-01 17:08:51 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_170851_073af4e0-1c52-499c-9651-b10c3e40b799.docx
+2025-08-01 17:08:51 | ERROR    | modules.leitor_documentos.handlers:not_implemented_exception_handler:114 | Funcionalidade não implementada na rota /leitor-documentos/extrair-markdown: Conversão para markdown não suportada pelo Docx2TxtExtractor.
+2025-08-01 17:09:22 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:150 | Iniciando extração de dados brutos: exemplo.docx
+2025-08-01 17:09:22 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_170922_dcb0d34c-df03-4d81-b3b8-c5e7a0e5cb22.docx (Tamanho: 23.6 KB)
+2025-08-01 17:09:22 | INFO     | modules.leitor_documentos.router:temp_file_manager:51 | Arquivo salvo temporariamente: files/temp/20250801_170922_dcb0d34c-df03-4d81-b3b8-c5e7a0e5cb22.docx
+2025-08-01 17:09:22 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_170922_dcb0d34c-df03-4d81-b3b8-c5e7a0e5cb22.docx
+2025-08-01 17:09:22 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docx2txt para arquivo: files/temp/20250801_170922_dcb0d34c-df03-4d81-b3b8-c5e7a0e5cb22.docx
+2025-08-01 17:09:22 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 21ms, Arquivo: 23.6 KB, Tamanho: 6240 chars
+2025-08-01 17:09:22 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:168 | Extração de dados brutos concluída com sucesso: exemplo.docx
+2025-08-01 17:09:22 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_170922_dcb0d34c-df03-4d81-b3b8-c5e7a0e5cb22.docx
+2025-08-01 17:09:31 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:150 | Iniciando extração de dados brutos: exemplo.docx
+2025-08-01 17:09:31 | INFO     | modules.leitor_documentos.service:save_upload_file:221 | Arquivo salvo temporariamente: files/temp/20250801_170931_86fe9edc-badd-4bd6-9f0b-00b97004ad4e.docx (Tamanho: 23.6 KB)
+2025-08-01 17:09:31 | INFO     | modules.leitor_documentos.router:temp_file_manager:51 | Arquivo salvo temporariamente: files/temp/20250801_170931_86fe9edc-badd-4bd6-9f0b-00b97004ad4e.docx
+2025-08-01 17:09:31 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_170931_86fe9edc-badd-4bd6-9f0b-00b97004ad4e.docx
+2025-08-01 17:09:31 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:245 | Arquivo temporário removido: files/temp/20250801_170931_86fe9edc-badd-4bd6-9f0b-00b97004ad4e.docx
+2025-08-01 17:09:31 | ERROR    | modules.leitor_documentos.handlers:extractor_not_found_exception_handler:69 | Extractor não encontrado na rota /leitor-documentos/extrair-dados-brutos: Extractor 'pypdf' não encontrado
+2025-08-01 17:12:43 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 17:12:54 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 17:14:51 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 17:14:54 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:150 | Iniciando extração de dados brutos: exemplo.docx
+2025-08-01 17:14:54 | INFO     | modules.leitor_documentos.service:save_upload_file:223 | Arquivo salvo temporariamente: files/temp/20250801_171454_d051cd9e-a554-45f5-b78e-83be4e515ad3.docx (Tamanho: 23.6 KB)
+2025-08-01 17:14:54 | INFO     | modules.leitor_documentos.router:temp_file_manager:51 | Arquivo salvo temporariamente: files/temp/20250801_171454_d051cd9e-a554-45f5-b78e-83be4e515ad3.docx
+2025-08-01 17:14:54 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_171454_d051cd9e-a554-45f5-b78e-83be4e515ad3.docx
+2025-08-01 17:14:54 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:247 | Arquivo temporário removido: files/temp/20250801_171454_d051cd9e-a554-45f5-b78e-83be4e515ad3.docx
+2025-08-01 17:14:54 | ERROR    | modules.leitor_documentos.handlers:extractor_not_found_exception_handler:69 | Extractor não encontrado na rota /leitor-documentos/extrair-dados-brutos: Extractor 'pypdf' não funciona para o formato docx
+2025-08-01 17:15:11 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 17:15:11 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:150 | Iniciando extração de dados brutos: exemplo.docx
+2025-08-01 17:15:11 | INFO     | modules.leitor_documentos.service:save_upload_file:223 | Arquivo salvo temporariamente: files/temp/20250801_171511_1fc6a35b-9801-427a-8a26-116a1a2cd5d7.docx (Tamanho: 23.6 KB)
+2025-08-01 17:15:11 | INFO     | modules.leitor_documentos.router:temp_file_manager:51 | Arquivo salvo temporariamente: files/temp/20250801_171511_1fc6a35b-9801-427a-8a26-116a1a2cd5d7.docx
+2025-08-01 17:15:11 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_171511_1fc6a35b-9801-427a-8a26-116a1a2cd5d7.docx
+2025-08-01 17:15:11 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:247 | Arquivo temporário removido: files/temp/20250801_171511_1fc6a35b-9801-427a-8a26-116a1a2cd5d7.docx
+2025-08-01 17:15:11 | ERROR    | modules.leitor_documentos.handlers:extractor_not_found_exception_handler:69 | Extractor não encontrado na rota /leitor-documentos/extrair-dados-brutos: Extractor 'pypdf' não funciona para o formato 'docx'
+2025-08-01 17:15:38 | INFO     | modules.leitor_documentos.router:extrair_para_markdown:102 | Iniciando extração para markdown: exemplo.docx
+2025-08-01 17:15:38 | INFO     | modules.leitor_documentos.service:save_upload_file:223 | Arquivo salvo temporariamente: files/temp/20250801_171538_a80a37e5-bc09-4865-a308-e50499163117.docx (Tamanho: 23.6 KB)
+2025-08-01 17:15:38 | INFO     | modules.leitor_documentos.router:temp_file_manager:51 | Arquivo salvo temporariamente: files/temp/20250801_171538_a80a37e5-bc09-4865-a308-e50499163117.docx
+2025-08-01 17:15:38 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração para markdown: 20250801_171538_a80a37e5-bc09-4865-a308-e50499163117.docx
+2025-08-01 17:15:38 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docx2txt para arquivo: files/temp/20250801_171538_a80a37e5-bc09-4865-a308-e50499163117.docx
+2025-08-01 17:15:38 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:247 | Arquivo temporário removido: files/temp/20250801_171538_a80a37e5-bc09-4865-a308-e50499163117.docx
+2025-08-01 17:15:38 | ERROR    | modules.leitor_documentos.handlers:not_implemented_exception_handler:114 | Funcionalidade não implementada na rota /leitor-documentos/extrair-markdown: Conversão para markdown não suportada pelo Docx2TxtExtractor.
+2025-08-01 17:16:16 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 17:16:18 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 17:16:28 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 17:16:32 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers
+2025-08-01 17:40:18 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:150 | Iniciando extração de dados brutos: exemplo.docx
+2025-08-01 17:40:18 | INFO     | modules.leitor_documentos.service:save_upload_file:223 | Arquivo salvo temporariamente: files/temp/20250801_174018_be63b249-f08d-4636-b518-b816615b9ab7.docx (Tamanho: 23.6 KB)
+2025-08-01 17:40:18 | INFO     | modules.leitor_documentos.router:temp_file_manager:51 | Arquivo salvo temporariamente: files/temp/20250801_174018_be63b249-f08d-4636-b518-b816615b9ab7.docx
+2025-08-01 17:40:18 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados brutos: 20250801_174018_be63b249-f08d-4636-b518-b816615b9ab7.docx
+2025-08-01 17:40:18 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docx2txt para arquivo: files/temp/20250801_174018_be63b249-f08d-4636-b518-b816615b9ab7.docx
+2025-08-01 17:40:18 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados brutos concluída. Tempo: 8ms, Arquivo: 23.6 KB, Tamanho: 6240 chars
+2025-08-01 17:40:18 | INFO     | modules.leitor_documentos.router:extrair_dados_brutos:168 | Extração de dados brutos concluída com sucesso: exemplo.docx
+2025-08-01 17:40:18 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:247 | Arquivo temporário removido: files/temp/20250801_174018_be63b249-f08d-4636-b518-b816615b9ab7.docx
+2025-08-01 17:43:09 | INFO     | modules.leitor_documentos.router:extrair_imagens:200 | Iniciando extração de dados de imagens: FIDC_Somacred_2025_04.pdf
+2025-08-01 17:43:09 | INFO     | modules.leitor_documentos.service:save_upload_file:223 | Arquivo salvo temporariamente: files/temp/20250801_174309_1fcfb874-3108-4bbd-8a05-c5c7c6bc2c01.pdf (Tamanho: 287.0 KB)
+2025-08-01 17:43:09 | INFO     | modules.leitor_documentos.router:temp_file_manager:51 | Arquivo salvo temporariamente: files/temp/20250801_174309_1fcfb874-3108-4bbd-8a05-c5c7c6bc2c01.pdf
+2025-08-01 17:43:09 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: 20250801_174309_1fcfb874-3108-4bbd-8a05-c5c7c6bc2c01.pdf
+2025-08-01 17:43:09 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: docling_pdf para arquivo: files/temp/20250801_174309_1fcfb874-3108-4bbd-8a05-c5c7c6bc2c01.pdf
+2025-08-01 17:45:17 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados de imagens concluída. Tempo: 2m 8.4s, Arquivo: 287.0 KB, Tamanho: 3196 chars
+2025-08-01 17:45:17 | INFO     | modules.leitor_documentos.router:extrair_imagens:218 | Extração de imagens concluída com sucesso: FIDC_Somacred_2025_04.pdf
+2025-08-01 17:45:17 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:247 | Arquivo temporário removido: files/temp/20250801_174309_1fcfb874-3108-4bbd-8a05-c5c7c6bc2c01.pdf
+2025-08-01 17:45:39 | INFO     | modules.leitor_documentos.router:extrair_imagens:200 | Iniciando extração de dados de imagens: FIDC_Somacred_2025_04.pdf
+2025-08-01 17:45:39 | INFO     | modules.leitor_documentos.service:save_upload_file:223 | Arquivo salvo temporariamente: files/temp/20250801_174539_45799c67-5676-47b3-a10c-3efbfb1c01ad.pdf (Tamanho: 287.0 KB)
+2025-08-01 17:45:39 | INFO     | modules.leitor_documentos.router:temp_file_manager:51 | Arquivo salvo temporariamente: files/temp/20250801_174539_45799c67-5676-47b3-a10c-3efbfb1c01ad.pdf
+2025-08-01 17:45:39 | INFO     | modules.leitor_documentos.service:_extract_content:84 | Iniciando extração de dados de imagens: 20250801_174539_45799c67-5676-47b3-a10c-3efbfb1c01ad.pdf
+2025-08-01 17:45:39 | INFO     | modules.leitor_documentos.service:_extract_content:90 | Usando extractor: llmwhisperer_pdf para arquivo: files/temp/20250801_174539_45799c67-5676-47b3-a10c-3efbfb1c01ad.pdf
+2025-08-01 17:45:50 | INFO     | modules.leitor_documentos.service:_extract_content:115 | Extração de dados de imagens concluída. Tempo: 11.5s, Arquivo: 287.0 KB, Tamanho: 31510 chars
+2025-08-01 17:45:50 | INFO     | modules.leitor_documentos.router:extrair_imagens:218 | Extração de imagens concluída com sucesso: FIDC_Somacred_2025_04.pdf
+2025-08-01 17:45:50 | INFO     | modules.leitor_documentos.service:cleanup_temp_file:247 | Arquivo temporário removido: files/temp/20250801_174539_45799c67-5676-47b3-a10c-3efbfb1c01ad.pdf
+2025-08-04 10:04:30 | INFO     | modules.leitor_documentos.handlers:register_exception_handlers:154 | Exception handlers do módulo leitor_documentos registrados: 7 handlers

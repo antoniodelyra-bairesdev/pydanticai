@@ -6,7 +6,7 @@ from fastapi.responses import FileResponse
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s:\t%(message)s")
 
-
+from modules.leitor_documentos.handlers import register_exception_handlers
 from modules.leitor_documentos.router import router as leitor_documentos_router
 from modules.navegador.impl.playwright import NavegadorPlaywright
 from modules.navegador.service import NavegadorService
@@ -19,6 +19,9 @@ description = f"""
 """
 
 app = FastAPI(description=description, title="Home")
+
+# Registrar exception handlers do módulo leitor_documentos
+register_exception_handlers(app)
 
 # Incluir routers dos módulos
 app.include_router(leitor_documentos_router)
