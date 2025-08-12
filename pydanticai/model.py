@@ -200,3 +200,9 @@ class FIDCDadosCadastrais(Model, SchemaIcatu):
     valor: Mapped[str] = mapped_column(Text)
 
     indicador: Mapped["IndicadorFIDC"] = relationship(back_populates="dados_cadastrais")
+
+    __table_args__ = (
+        UniqueConstraint(
+            "ativo_codigo", "indicador_fidc_id", name="fidc_dados_cadastrais_un"
+        ),
+    )

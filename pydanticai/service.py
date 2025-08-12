@@ -15,18 +15,22 @@ Funcionalidades:
     - Integração opcional com repositório para listagem de modelos
     - Estimativa de uso de tokens
     - Tratamento de erros e retry automático
+    - Processamento de documentos via API externa
 """
 
 from abc import ABC, abstractmethod
 from time import time
-from typing import Optional
 
 from dotenv import load_dotenv
+from fastapi import UploadFile
+from modules.integrations.connectors_factories import DocumentConnectorFactory
+from modules.integrations.enums import FerramentaExtracaoEnum, FontesDadosEnum, TipoExtracaoEnum
+from modules.util.string import format_duration
 from pydantic_ai import Agent, RunContext
 
+from .enum_modules import ModelSchemaEnum
 from .repository import PydanticAIRepository
 from .schema.api import ConsultaResponseSchema, ModeloDisponivelSchema
-from .enum_modules import ModelSchemaEnum
 
 # Carregar variáveis de ambiente do arquivo .env
 load_dotenv()
@@ -45,9 +49,26 @@ class PydanticAIService(ABC):
         max_tokens: int = 1440,
         temperature: float = 0.1,
         schema_name: str = "default",
-        doc: Optional[str] = "",
+        doc: str | None = None,
     ) -> ConsultaResponseSchema:
         """Executa uma consulta usando PydanticAI."""
+        raise NotImplementedError
+
+    @abstractmethod
+    async def executar_consulta_com_arquivo(
+        self,
+        user_prompt: str,
+        arquivo: UploadFile,
+        ferramenta_extracao: FerramentaExtracaoEnum | None,
+        tipo_extracao: TipoExtracaoEnum,
+        model: str = "groq:llama-3.3-70b-versatile",
+        system_prompt: str = "Seja preciso e direto nas respostas.",
+        retries: int = 2,
+        max_tokens: int = 1440,
+        temperature: float = 0.1,
+        schema_name: str = "default",
+    ) -> ConsultaResponseSchema:
+        """Executa uma consulta com arquivo usando PydanticAI."""
         raise NotImplementedError
 
     @abstractmethod
@@ -59,7 +80,7 @@ class PydanticAIService(ABC):
 class PydanticAIServiceImpl(PydanticAIService):
     """Implementação do serviço PydanticAI."""
 
-    def __init__(self, repository: Optional[PydanticAIRepository] = None):
+    def __init__(self, repository: PydanticAIRepository | None = None):
         self.__repository = repository
 
     def _estimate_tokens(self, prompt: str, response: str) -> int:
@@ -81,13 +102,13 @@ class PydanticAIServiceImpl(PydanticAIService):
     async def executar_consulta(
         self,
         user_prompt: str,
-        model: str = ("google-gla:gemini-2.5-flash-preview-05-20"),
+        model: str = "groq:llama-3.3-70b-versatile",
         system_prompt: str = "Seja preciso e direto nas respostas.",
         retries: int = 2,
         max_tokens: int = 1440,
         temperature: float = 0.1,
         schema_name: str = "default",
-        doc: Optional[str] = "",
+        doc: str | None = None,
     ) -> ConsultaResponseSchema:
         """
         Executa uma consulta usando PydanticAI.
@@ -118,80 +139,9 @@ class PydanticAIServiceImpl(PydanticAIService):
         # Iniciar cronômetro
         start_time = time()
 
-        try:
-            # Executar consulta
-            if doc:
-                # Criar agente com dependências para documento
-                agent = Agent(
-                    model=model,
-                    deps_type=str,
-                    output_type=schema_class,
-                    system_prompt=system_prompt,
-                    output_retries=retries,
-                    model_settings={"temperature": temperature, "max_tokens": max_tokens},
-                )
-
-                @agent.system_prompt
-                async def adicionar_documento_deps(ctx: RunContext[str]) -> str:
-                    return f"Documento a ser analisado: <doc>{ctx.deps}</doc>"
-
-                resultado = await agent.run(user_prompt, deps=doc)
-            else:
-                # Criar agente sem dependências para consulta simples
-                agent = Agent(
-                    model=model,
-                    output_type=schema_class,
-                    system_prompt=system_prompt,
-                    output_retries=retries,
-                    model_settings={"temperature": temperature, "max_tokens": max_tokens},
-                )
-                resultado = await agent.run(user_prompt)
-
-            # Calcular tempo de execução
-            tempo_execucao = time() - start_time
-
-            # Estimar tokens utilizados
-            response_text = str(resultado.output)
-            tokens_estimados = self._estimate_tokens(user_prompt, response_text)
-
-            return ConsultaResponseSchema(
-                resultado=resultado.output,
-                tempo_execucao=tempo_execucao,
-                tokens_utilizados=tokens_estimados,
-                modelo_utilizado=model,
-                schema_utilizado=schema_name,
-            )
-
-        except Exception as e:
-            raise Exception(f"Erro ao executar consulta: {str(e)}")
-
-    def _create_agent(
-        self,
-        model: str,
-        system_prompt: str,
-        retries: int,
-        max_tokens: int,
-        temperature: float,
-        schema_class: type,
-        doc: Optional[str] = "",
-    ):
-        """
-        Cria um agente PydanticAI configurado.
-
-        Args:
-            model: Modelo de IA
-            system_prompt: Prompt do sistema
-            retries: Número de tentativas
-            max_tokens: Máximo de tokens
-            temperature: Criatividade
-            schema_class: Classe do schema de resposta
-            doc: Documento para contexto
-
-        Returns:
-            Agent: Agente configurado
-        """
+        # Executar consulta
         if doc:
-            # Agente com dependências para documento
+            # Criar agente com dependências para documento
             agent = Agent(
                 model=model,
                 deps_type=str,
@@ -203,18 +153,96 @@ class PydanticAIServiceImpl(PydanticAIService):
 
             @agent.system_prompt
             async def adicionar_documento_deps(ctx: RunContext[str]) -> str:
-                return f"{system_prompt}\n\nDocumento a ser analisado: <doc>{ctx.deps}</doc>"
+                return f"Documento a ser analisado: <doc>{ctx.deps}</doc>"
 
-            return agent
+            resultado = await agent.run(user_prompt, deps=doc)
         else:
-            # Agente simples sem dependências
-            return Agent(
+            # Criar agente sem dependências para consulta simples
+            agent = Agent(
                 model=model,
                 output_type=schema_class,
                 system_prompt=system_prompt,
                 output_retries=retries,
                 model_settings={"temperature": temperature, "max_tokens": max_tokens},
             )
+            resultado = await agent.run(user_prompt)
+
+        # Calcular tempo de execução
+        tempo_execucao = time() - start_time
+
+        # Estimar tokens utilizados
+        response_text = str(resultado.output)
+        tokens_estimados = self._estimate_tokens(user_prompt, response_text)
+
+        return ConsultaResponseSchema(
+            resultado=resultado.output,
+            tempo_execucao=format_duration(tempo_execucao),
+            tokens_utilizados=tokens_estimados,
+            modelo_utilizado=model,
+            schema_utilizado=schema_name,
+        )
+
+    async def executar_consulta_com_arquivo(
+        self,
+        user_prompt: str,
+        arquivo: UploadFile,
+        ferramenta_extracao: FerramentaExtracaoEnum | None,
+        tipo_extracao: TipoExtracaoEnum,
+        model: str = "groq:llama-3.3-70b-versatile",
+        system_prompt: str = "Seja preciso e direto nas respostas.",
+        retries: int = 2,
+        max_tokens: int = 1440,
+        temperature: float = 0.1,
+        schema_name: str = "default",
+    ) -> ConsultaResponseSchema:
+        """
+        Executa uma consulta com arquivo usando PydanticAI.
+
+        Args:
+            user_prompt: Prompt do usuário
+            arquivo: Arquivo a ser processado
+            ferramenta_extracao: Ferramenta para extração (opcional)
+            tipo_extracao: Tipo de extração
+            model: Modelo de IA a ser utilizado
+            system_prompt: Prompt do sistema
+            retries: Número de tentativas
+            max_tokens: Máximo de tokens
+            temperature: Criatividade da resposta
+            schema_name: Nome do schema de resposta
+
+        Returns:
+            ConsultaResponseSchema: Resultado da consulta
+
+        Raises:
+            ValueError: Se parâmetros inválidos
+            Exception: Para outros erros
+        """
+        # Se ferramenta_extracao não foi fornecida, usar DOCLING como padrão
+        if ferramenta_extracao is None:
+            ferramenta_extracao = FerramentaExtracaoEnum.DOCLING
+
+        # Criar connector para extrair conteúdo do documento
+        factory = DocumentConnectorFactory()
+        connector = factory.create(FontesDadosEnum.DEPENDENCIAS_EXTERNAS)
+
+        # Extrair conteúdo do arquivo
+        conteudo_extraido = await connector.extract_document_content(
+            arquivo=arquivo,
+            ferramenta_extracao=ferramenta_extracao,
+            tipo_extracao=tipo_extracao,
+        )
+
+        # Executar consulta normal com o conteúdo extraído como doc
+        return await self.executar_consulta(
+            user_prompt=user_prompt,
+            model=model,
+            system_prompt=system_prompt,
+            retries=retries,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            schema_name=schema_name,
+            doc=conteudo_extraido,
+        )
 
     async def listar_modelos_disponiveis(self) -> list[ModeloDisponivelSchema]:
         """
