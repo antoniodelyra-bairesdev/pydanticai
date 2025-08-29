@@ -1,0 +1,20 @@
+FROM crvanguarda.azurecr.io/iv-front-sistema-v2-lib:latest
+
+WORKDIR /home/node/app
+
+USER root
+
+RUN apt update
+RUN apt -y install \
+    xorg openbox libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+
+RUN npx cypress install
+
+USER node
+
+ENV TZ='America/Sao_Paulo'
+
+ENTRYPOINT \
+    rm -rf ./node_modules; \
+    cp -R /tmp/node/node_modules .; \
+    npm run dev
