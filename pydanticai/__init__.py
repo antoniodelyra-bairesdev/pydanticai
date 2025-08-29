@@ -4,6 +4,7 @@ Módulo PydanticAI para integração com agentes de IA estruturados.
 
 from .entity import ClientIa, ClientModel, ModelSchema, Prompt
 from .schema import ConsultaRequestSchema, ConsultaResponseSchema, ModeloDisponivelSchema
+from .service import ModelFactory
 
 __all__ = [
     "ConsultaRequestSchema",
@@ -13,4 +14,5 @@ __all__ = [
     "ClientModel",
     "ModelSchema",
     "Prompt",
+    "ModelFactory",
 ]

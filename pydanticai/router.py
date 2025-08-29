@@ -9,6 +9,7 @@ Endpoints:
     POST /pydantic-ai/consulta-com-arquivo: Executa consulta com processamento de arquivo
     GET /pydantic-ai/schemas-disponiveis: Lista schemas disponíveis
     GET /pydantic-ai/modelos-disponiveis: Lista modelos de IA cadastrados
+    POST /pydantic-ai/prompts: Cadastra novo prompt no sistema
 
 Funcionalidades:
     - Execução de consultas de IA com diferentes modelos e schemas
@@ -17,6 +18,7 @@ Funcionalidades:
     - Validação de entrada e tratamento de erros
     - Dependency injection para serviços
     - Integração opcional com repositório de dados
+    - Cadastro de prompts
 """
 
 from config.swagger import token_field
@@ -26,8 +28,15 @@ from modules.repository import BaseRepositoryImpl
 from modules.util.request import db
 
 from .entity import ClientModel, ModelSchema, Prompt
+from .enum_modules import ModelSchemaEnum
 from .repository import PydanticAIRepository
-from .schema import ConsultaRequestSchema, ConsultaResponseSchema, ModeloDisponivelSchema
+from .schema import (
+    ConsultaRequestSchema,
+    ConsultaResponseSchema,
+    ModeloDisponivelSchema,
+    PromptCadastroSchema,
+    PromptResponseSchema,
+)
 from .service import PydanticAIService, PydanticAIServiceImpl
 
 router = APIRouter(prefix="/pydantic-ai", tags=["PydanticAI"], dependencies=[token_field])
@@ -136,7 +145,10 @@ async def executar_consulta_ia(
 
         return resultado
     except ValueError:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Parâmetros inválidos")
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Parâmetros inválidos"
+        )
 
 
 @router.post("/consulta-com-arquivo")
@@ -148,7 +160,7 @@ async def executar_consulta_com_arquivo(
     model: str = Form(default="groq:llama-3.3-70b-versatile"),
     system_prompt: str = Form(default="Seja preciso e direto nas respostas."),
     retries: int = Form(default=2, ge=1, le=5),
-    max_tokens: int = Form(default=1440, ge=1, le=8000),
+    max_tokens: int = Form(default=2400, ge=1, le=8000),
     temperature: float = Form(default=0.1, ge=0.0, le=2.0),
     schema_name: str = Form(default="default"),
     service: PydanticAIService = Depends(get_service),
@@ -207,8 +219,6 @@ async def listar_schemas_disponiveis() -> list[str]:
     Returns:
         list[str]: Lista de schemas disponíveis
     """
-    from .enum_modules import ModelSchemaEnum
-
     return ModelSchemaEnum.get_available_schemas()
 
 
@@ -232,4 +242,44 @@ async def listar_modelos_disponiveis(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Erro ao buscar modelos",
+        )
+
+
+@router.post("/prompts")
+async def cadastrar_prompt(
+    dados: PromptCadastroSchema,
+    service: PydanticAIService = Depends(get_service_with_database),
+) -> PromptResponseSchema:
+    """
+    # Cadastrar Novo Prompt
+
+    Cadastra um novo prompt no sistema, resolvendo automaticamente os IDs 
+    a partir dos nomes fornecidos.
+
+    ## Parâmetros Principais
+
+    - **model_name** (string, obrigatório): Nome do modelo
+    - **codigo_ativo** (string, obrigatório): Código do ativo
+    - **prompt_usuario** (string, obrigatório): Prompt principal
+    - **client_name** (string, padrão: "Open AI"): Nome do cliente
+    - **mesa_nome** (string, padrão: "Crédito Privado"): Nome da mesa
+    - **model_schema_name** (string, padrão: "default"): Schema de resposta
+    - **temperatura** (float, padrão: 0.1): Criatividade (0.0-2.0)
+    - **max_tokens** (integer, padrão: 2400): Máximo de tokens
+    - **prompt_sistema** (string, padrão: "Seja preciso e direto nas respostas"): Instruções
+    - **is_image** (boolean, padrão: false): Para processamento de imagens
+    - **descricao** (string, opcional): Descrição adicional
+
+    ## Códigos de Erro
+
+    - **400 Bad Request**: Dados inválidos ou não encontrados
+    - **409 Conflict**: Erro de constraint no banco
+    """
+    try:
+        resultado = await service.cadastrar_prompt(dados)
+        return resultado
+    except ValueError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Dados inválidos fornecidos"
         )

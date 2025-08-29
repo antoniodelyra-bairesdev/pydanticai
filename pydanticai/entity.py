@@ -6,6 +6,7 @@ from sqlalchemy import (
     Boolean,
     Float,
     ForeignKey,
+    Index,
     Integer,
     String,
     Text,
@@ -44,7 +45,7 @@ class ClientModel(Model, SchemaIcatu):
 
     client_model_id: Mapped[int] = mapped_column(primary_key=True)
 
-    client_id: Mapped[int] = mapped_column(ForeignKey("icatu.client_ia_tb.client_id"))
+    client_id: Mapped[int] = mapped_column(ForeignKey("icatu.client_ia_tb.client_id"), index=True)
 
     model_nm: Mapped[str] = mapped_column(String(200), unique=True)
     descricao: Mapped[str | None] = mapped_column(Text)
@@ -90,9 +91,7 @@ class Prompt(Model, SchemaIcatu):
     )
 
     mesa_id: Mapped[int] = mapped_column(ForeignKey("icatu.mesas.id"))
-    codigo_ativo: Mapped[str] = mapped_column(
-        String(11), ForeignKey("icatu.ativos.codigo")
-    )
+    codigo_ativo: Mapped[str] = mapped_column(String(11), ForeignKey("icatu.ativos.codigo"))
 
     temperatura: Mapped[float] = mapped_column(Float)
     max_tokens: Mapped[int] = mapped_column(Integer)
@@ -116,8 +115,7 @@ class Prompt(Model, SchemaIcatu):
     # Define a restrição de unicidade composta.
     __table_args__ = (
         UniqueConstraint("client_model_id", "codigo_ativo", "data_criacao", name="prompt_un"),
+        # Índice composto nas FKs para otimizar JOINs
+        Index("idx_prompt_fks", "model_schema_id", "client_model_id"),
         {"schema": "icatu", "extend_existing": True},
     )
-
-
-
