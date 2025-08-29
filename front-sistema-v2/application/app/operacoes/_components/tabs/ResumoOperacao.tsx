@@ -1,0 +1,37 @@
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Button,
+  Checkbox,
+  Divider,
+  HStack,
+  Icon,
+  Input,
+  Progress,
+  Radio,
+  StackDivider,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Table,
+  TableContainer,
+  Tabs,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
+  Tooltip,
+  Tr,
+  VStack,
+  useDisclosure,
+} from "@chakra-ui/react";
+
+export default function ResumoOperacao() {
+  return <HStack></HStack>;
+}
