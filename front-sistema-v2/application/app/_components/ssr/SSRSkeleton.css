@@ -1,0 +1,9 @@
+@keyframes ssr-skeleton {
+  0% {
+    background-color: var(--color-start);
+  }
+
+  100% {
+    background-color: var(--color-end);
+  }
+}

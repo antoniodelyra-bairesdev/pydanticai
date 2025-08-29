@@ -1,0 +1,29 @@
+pre {
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid #cccccc7f;
+  border-radius: 4px;
+  padding: 4px;
+  white-space: break-spaces;
+  color: #1b3157;
+}
+
+.string {
+  color: #5ebb47;
+}
+
+.number {
+  color: #f58b2e;
+}
+
+.boolean {
+  color: #f04f6f;
+}
+
+.null {
+  color: #963b82;
+}
+
+.key {
+  color: #0d6696;
+}

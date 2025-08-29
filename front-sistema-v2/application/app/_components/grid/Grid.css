@@ -1,0 +1,138 @@
+.ag-theme-alpine,
+.ag-theme-alpine-dark {
+  --ag-border-color: none;
+  --ag-row-border-color: none;
+  --ag-font-size: 12px;
+}
+
+.ag-theme-alpine,
+.ag-theme-alpine-dark {
+  --ag-border-color: none;
+  --ag-row-border-color: none;
+  --ag-font-size: 12px;
+}
+
+.ag-theme-alpine .ag-cell,
+.ag-theme-alpine-dark .ag-cell {
+  padding: 0;
+  overflow: visible;
+}
+
+.ag-theme-alpine {
+  --ag-data-color: var(--chakra-colors-cinza-800);
+  --ag-background-color: white;
+  --ag-odd-row-background-color: white;
+
+  --ag-header-foreground-color: white;
+  --ag-header-background-color: var(--chakra-colors-azul_1-700);
+}
+
+.ag-theme-alpine-dark {
+  --ag-data-color: var(--chakra-colors-cinza-300);
+  --ag-background-color: var(--chakra-colors-gray-700);
+  --ag-odd-row-background-color: var(--chakra-colors-gray-700);
+
+  --ag-header-foreground-color: black;
+  --ag-header-background-color: var(--chakra-colors-azul_1-200);
+}
+
+.ag-theme-alpine-dark .ag-menu {
+  color: white;
+  background-color: var(--chakra-colors-gray-700);
+  box-shadow: 0 0px 10px #0000007f;
+}
+
+.ag-theme-alpine .ag-header-icon {
+  color: white;
+}
+
+.ag-theme-alpine-dark .ag-header-icon {
+  color: black;
+}
+
+.ag-theme-alpine-dark input[class^="ag-"] {
+  background-color: var(--chakra-colors-gray-600);
+}
+
+.ag-theme-alpine-dark .ag-picker-field-wrapper {
+  border-color: var(--chakra-colors-gray-500);
+  background-color: var(--chakra-colors-gray-600);
+}
+
+.ag-theme-alpine-dark .ag-paging-row-summary-panel,
+.ag-theme-alpine-dark .ag-paging-page-summary-panel,
+.ag-theme-alpine-dark .ag-button {
+  color: white;
+}
+
+.ag-theme-alpine .ag-paging-row-summary-panel,
+.ag-theme-alpine .ag-paging-page-summary-panel,
+.ag-theme-alpine .ag-button {
+  color: var(--chakra-colors-azul_1-main);
+}
+
+.ag-theme-alpine .ag-button:not(.ag-disabled):hover {
+  color: var(--chakra-colors-verde-main);
+}
+
+.ag-theme-alpine-dark .ag-button:not(.ag-disabled):hover {
+  color: var(--chakra-colors-verde-main);
+}
+
+.ag-theme-alpine .ag-disabled {
+  color: var(--chakra-colors-cinza-200);
+}
+
+.ag-theme-alpine-dark .ag-disabled {
+  color: var(--chakra-colors-cinza-800);
+}
+
+.ag-theme-alpine .ag-paging-panel,
+.ag-theme-alpine-dark .ag-paging-panel {
+  border-top: none;
+}
+
+.ag-theme-alpine .ag-header-cell-menu-button:hover,
+.ag-theme-alpine .ag-side-button-button:hover,
+.ag-theme-alpine .ag-tab:hover,
+.ag-theme-alpine .ag-panel-title-bar-button:hover,
+.ag-theme-alpine .ag-header-expand-icon:hover,
+.ag-theme-alpine .ag-column-group-icons:hover,
+.ag-theme-alpine .ag-set-filter-group-icons:hover,
+.ag-theme-alpine .ag-group-expanded .ag-icon:hover,
+.ag-theme-alpine .ag-group-contracted .ag-icon:hover,
+.ag-theme-alpine .ag-chart-settings-prev:hover,
+.ag-theme-alpine .ag-chart-settings-next:hover,
+.ag-theme-alpine .ag-group-title-bar-icon:hover,
+.ag-theme-alpine .ag-column-select-header-icon:hover,
+.ag-theme-alpine .ag-floating-filter-button-button:hover,
+.ag-theme-alpine .ag-filter-toolpanel-expand:hover,
+.ag-theme-alpine .ag-chart-menu-icon:hover,
+.ag-theme-alpine .ag-chart-menu-close:hover,
+.ag-theme-alpine-dark .ag-header-cell-menu-button:hover,
+.ag-theme-alpine-dark .ag-side-button-button:hover,
+.ag-theme-alpine-dark .ag-tab:hover,
+.ag-theme-alpine-dark .ag-panel-title-bar-button:hover,
+.ag-theme-alpine-dark .ag-header-expand-icon:hover,
+.ag-theme-alpine-dark .ag-column-group-icons:hover,
+.ag-theme-alpine-dark .ag-set-filter-group-icons:hover,
+.ag-theme-alpine-dark .ag-group-expanded .ag-icon:hover,
+.ag-theme-alpine-dark .ag-group-contracted .ag-icon:hover,
+.ag-theme-alpine-dark .ag-chart-settings-prev:hover,
+.ag-theme-alpine-dark .ag-chart-settings-next:hover,
+.ag-theme-alpine-dark .ag-group-title-bar-icon:hover,
+.ag-theme-alpine-dark .ag-column-select-header-icon:hover,
+.ag-theme-alpine-dark .ag-floating-filter-button-button:hover,
+.ag-theme-alpine-dark .ag-filter-toolpanel-expand:hover,
+.ag-theme-alpine-dark .ag-chart-menu-icon:hover,
+.ag-theme-alpine-dark .ag-chart-menu-close:hover {
+  color: var(--chakra-colors-verde-main);
+}
+
+.ag-cell-wrapper.ag-row-group {
+  align-items: center !important;
+}
+
+.ag-group-value {
+  display: flex;
+}

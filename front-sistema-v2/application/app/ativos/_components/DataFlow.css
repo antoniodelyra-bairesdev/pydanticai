@@ -1,0 +1,42 @@
+@keyframes ltr {
+  0% {
+    opacity: 0%;
+    right: 0px;
+  }
+
+  50% {
+    opacity: 100%;
+    right: -48px;
+  }
+
+  100% {
+    opacity: 0%;
+    right: -80px;
+  }
+}
+
+@keyframes rtl {
+  0% {
+    opacity: 0%;
+    right: -80px;
+  }
+
+  50% {
+    opacity: 100%;
+    right: -48px;
+  }
+
+  100% {
+    opacity: 0%;
+    right: 0px;
+  }
+}
+
+.ltr {
+  animation: ltr 0.75s linear 0.5s infinite normal;
+}
+
+.rtl {
+  animation: rtl 0.75s linear 0.5s infinite normal;
+  transform: rotate(180deg);
+}
