@@ -21,11 +21,14 @@ Funcionalidades:
     - Cadastro de prompts
 """
 
+from typing import Annotated
+
 from config.swagger import token_field
 from fastapi import APIRouter, Depends, Form, HTTPException, Request, UploadFile, status
 from modules.integrations.enums import FerramentaExtracaoEnum, TipoExtracaoEnum
 from modules.repository import BaseRepositoryImpl
 from modules.util.request import db
+from pydantic import Field
 
 from .entity import ClientModel, ModelSchema, Prompt
 from .enum_modules import ModelSchemaEnum
@@ -36,6 +39,8 @@ from .schema import (
     ModeloDisponivelSchema,
     PromptCadastroSchema,
     PromptResponseSchema,
+    PromptStatusResponseSchema,
+    PromptStatusUpdateSchema,
 )
 from .service import PydanticAIService, PydanticAIServiceImpl
 
@@ -145,10 +150,7 @@ async def executar_consulta_ia(
 
         return resultado
     except ValueError:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Parâmetros inválidos"
-        )
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Parâmetros inválidos")
 
 
 @router.post("/consulta-com-arquivo")
@@ -253,7 +255,7 @@ async def cadastrar_prompt(
     """
     # Cadastrar Novo Prompt
 
-    Cadastra um novo prompt no sistema, resolvendo automaticamente os IDs 
+    Cadastra um novo prompt no sistema, resolvendo automaticamente os IDs
     a partir dos nomes fornecidos.
 
     ## Parâmetros Principais
@@ -280,6 +282,46 @@ async def cadastrar_prompt(
         return resultado
     except ValueError:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Dados inválidos fornecidos"
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Dados inválidos fornecidos"
         )
+
+
+@router.patch("/prompts/{prompt_id}/status")
+async def atualizar_status_prompt(
+    prompt_id: Annotated[int, Field(..., description="ID do prompt a ser atualizado", ge=1)],
+    body: PromptStatusUpdateSchema,
+    service: PydanticAIService = Depends(get_service_with_database),
+) -> PromptStatusResponseSchema:
+    """
+    Atualiza o status de ativação/desativação de um prompt.
+
+    ## Parâmetros
+    - **prompt_id**: ID do prompt no banco de dados
+    - **status**: "enabled" para ativar ou "disabled" para desativar
+
+    ## Códigos de Erro
+    - **400**: Parâmetros inválidos
+    - **404**: Prompt não encontrado
+    - **409**: Prompt já está no status desejado
+    """
+    try:
+        resultado = await service.atualizar_status_prompt(prompt_id=prompt_id, status=body.status)
+
+        return resultado
+
+    except ValueError as e:
+        error_message = str(e)
+
+        # Tratar erro de prompt não encontrado
+        if "não encontrado" in error_message.lower():
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Prompt com ID {prompt_id} não encontrado",
+            )
+
+        # Tratar erro de status já está no valor desejado
+        if "já está com status" in error_message.lower():
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=error_message)
+
+        # Outros erros de validação
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error_message)

@@ -14,7 +14,7 @@ Schemas incluídos:
 """
 
 from datetime import datetime
-from typing import Any
+from typing import Annotated, Any, Literal
 
 from fastapi import UploadFile
 from modules.integrations.enums import FerramentaExtracaoEnum, TipoExtracaoEnum
@@ -324,3 +324,33 @@ class PromptResponseSchema(Schema):
     data_criacao: datetime = Field(..., description="Data e hora da criação")
     ativo: bool = Field(..., description="Status de ativação do prompt")
     descricao: str | None = Field(..., description="Descrição do prompt")
+
+
+class PromptStatusUpdateSchema(Schema):
+    """
+    Schema para atualização do status de um prompt.
+
+    Permite ativar ou desativar um prompt existente através do campo 'ativo'.
+    """
+
+    status: Annotated[
+        Literal["enabled", "disabled"],
+        Field(
+            ..., description="Status do prompt: 'enabled' para ativar ou 'disabled' para desativar"
+        ),
+    ]
+
+
+class PromptStatusResponseSchema(Schema):
+    """
+    Schema para resposta da atualização de status do prompt.
+
+    Retorna informações sobre a operação realizada, incluindo o novo status
+    e timestamp da atualização.
+    """
+
+    prompt_id: int = Field(..., description="ID do prompt atualizado")
+    status: str = Field(..., description="Novo status do prompt (enabled/disabled)")
+    message: str = Field(..., description="Mensagem de confirmação da operação")
+    updated_at: datetime = Field(..., description="Data e hora da atualização")
+    previous_status: str = Field(..., description="Status anterior do prompt")

@@ -208,6 +208,7 @@ class PydanticAIRepository:
         if mesa_nome not in cache:
             # Tentar buscar no banco caso o cache esteja desatualizado
             from modules.mesas.model import Mesa
+
             query = select(Mesa.id).where(Mesa.nome == mesa_nome)
             result = await self.__base_repository_prompt.get_db_session().execute(query)
             mesa_id = result.scalar_one_or_none()
@@ -265,17 +266,6 @@ class PydanticAIRepository:
         result = await self.__base_repository_prompt.get_db_session().execute(query)
         return result.unique().scalar_one_or_none()
 
-    async def desativar_prompt(self, prompt_id: int) -> None:
-        """
-        Desativa um prompt existente.
-
-        Args:
-            prompt_id: ID do prompt a ser desativado
-        """
-        query = update(Prompt).where(Prompt.prompt_id == prompt_id).values(ativo=False)
-
-        await self.__base_repository_prompt.get_db_session().execute(query)
-
     async def criar_prompt(self, dados: dict) -> Prompt:
         """
         Cria um novo prompt no banco de dados.
@@ -294,6 +284,21 @@ class PydanticAIRepository:
         await session.refresh(novo_prompt)
 
         return novo_prompt
+
+    async def buscar_prompt_por_id(self, prompt_id: int) -> Prompt | None:
+        """
+        Busca prompt por ID sem carregar relacionamentos.
+
+        Args:
+            prompt_id: ID do prompt
+
+        Returns:
+            Prompt | None: Prompt encontrado ou None
+        """
+        query = select(Prompt).where(Prompt.prompt_id == prompt_id)
+
+        result = await self.__base_repository_prompt.get_db_session().execute(query)
+        return result.unique().scalar_one_or_none()
 
     async def buscar_prompt_completo_por_id(self, prompt_id: int) -> Prompt | None:
         """
@@ -315,6 +320,43 @@ class PydanticAIRepository:
 
         result = await self.__base_repository_prompt.get_db_session().execute(query)
         return result.unique().scalar_one_or_none()
+
+    async def atualizar_status_prompt(self, prompt_id: int, ativo: bool) -> Prompt | None:
+        """
+        Atualiza o status ativo/inativo de um prompt.
+
+        Args:
+            prompt_id: ID do prompt a ser atualizado
+            ativo: True para ativar, False para desativar
+
+        Returns:
+            Prompt | None: Prompt atualizado ou None se não encontrado
+
+        Raises:
+            ValueError: Se o prompt não for encontrado, já estiver no status desejado,
+                       ou não puder ser atualizado
+        """
+        # Buscar prompt existente (sem relacionamentos para performance)
+        prompt_existente = await self.buscar_prompt_por_id(prompt_id)
+
+        if not prompt_existente:
+            raise ValueError(f"Prompt com ID {prompt_id} não encontrado")
+
+        # Verificar se já está no status desejado
+        if prompt_existente.ativo == ativo:
+            raise ValueError(f"Prompt já está com status {'ativo' if ativo else 'inativo'}")
+
+        # Atualizar o status
+        query = update(Prompt).where(Prompt.prompt_id == prompt_id).values(ativo=ativo)
+
+        result = await self.__base_repository_prompt.get_db_session().execute(query)
+
+        # Verificar se a atualização foi bem-sucedida
+        if result.rowcount == 0:
+            raise ValueError(f"Não foi possível atualizar o prompt {prompt_id}")
+
+        # Retornar o prompt atualizado
+        return await self.buscar_prompt_por_id(prompt_id)
 
     def clear_cache(self) -> None:
         """Limpa todo o cache interno."""

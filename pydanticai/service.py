@@ -22,6 +22,7 @@ Funcionalidades:
 """
 
 from abc import ABC, abstractmethod
+from datetime import datetime
 from time import time
 
 from dotenv import load_dotenv
@@ -43,6 +44,7 @@ from .schema import (
     ModeloDisponivelSchema,
     PromptCadastroSchema,
     PromptResponseSchema,
+    PromptStatusResponseSchema,
 )
 
 # Carregar variáveis de ambiente do arquivo .env
@@ -182,6 +184,11 @@ class PydanticAIService(ABC):
     @abstractmethod
     async def cadastrar_prompt(self, dados: PromptCadastroSchema) -> PromptResponseSchema:
         """Cadastra um novo prompt no sistema."""
+        raise NotImplementedError
+
+    @abstractmethod
+    async def atualizar_status_prompt(self, prompt_id: int, status: str) -> PromptStatusResponseSchema:
+        """Atualiza o status (ativo/inativo) de um prompt existente."""
         raise NotImplementedError
 
 
@@ -465,7 +472,7 @@ class PydanticAIServiceImpl(PydanticAIService):
 
             # 3. Se existe, desativar o anterior
             if prompt_existente:
-                await self.__repository.desativar_prompt(prompt_existente.prompt_id)
+                await self.__repository.atualizar_status_prompt(prompt_existente.prompt_id, False)
 
             # 4. Criar novo prompt
             dados_prompt = {
@@ -516,3 +523,53 @@ class PydanticAIServiceImpl(PydanticAIService):
         except Exception as e:
             # Log do erro e re-raise como ValueError genérico
             raise ValueError(f"Erro interno ao cadastrar prompt: {str(e)}")
+
+    async def atualizar_status_prompt(self, prompt_id: int, status: str) -> PromptStatusResponseSchema:
+        """
+        Atualiza o status (ativo/inativo) de um prompt existente.
+
+        Args:
+            prompt_id: ID do prompt a ser atualizado
+            status: Status desejado ("enabled" ou "disabled")
+
+        Returns:
+            PromptStatusResponseSchema: Informações sobre a atualização realizada
+
+        Raises:
+            ValueError: Se prompt não encontrado ou status inválido
+        """
+        if self.__repository is None:
+            raise ValueError("Repositório não disponível para esta operação")
+
+        # Validar status
+        if status not in ["enabled", "disabled"]:
+            raise ValueError("Status deve ser 'enabled' ou 'disabled'")
+
+        # Converter status para boolean
+        novo_status = status == "enabled"
+
+        # Buscar prompt atual para verificar se existe e obter status anterior
+        prompt_atual = await self.__repository.buscar_prompt_por_id(prompt_id)
+
+        if not prompt_atual:
+            raise ValueError(f"Prompt com ID {prompt_id} não encontrado")
+
+        # Verificar se já está no status desejado
+        status_atual = "enabled" if prompt_atual.ativo else "disabled"
+        if status_atual == status:
+            raise ValueError(f"Prompt já está com status '{status}'")
+
+        # Atualizar status
+        prompt_atualizado = await self.__repository.atualizar_status_prompt(prompt_id, novo_status)
+
+        if not prompt_atualizado:
+            raise ValueError(f"Erro ao atualizar status do prompt {prompt_id}")
+
+        # Montar resposta
+        return PromptStatusResponseSchema(
+            prompt_id=prompt_id,
+            status=status,
+            message=f"Status do prompt atualizado com sucesso para '{status}'",
+            updated_at=datetime.now(),
+            previous_status=status_atual
+        )
